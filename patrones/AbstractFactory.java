@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Objetos;
+package patrones;
 
 /**
  *
  * @author kevv87
  */
-public class Dragon {
+public abstract class AbstractFactory {
+    
+    abstract Colors getColor(String color);
+    abstract Shape getShape(String shapeType);
     
 }
