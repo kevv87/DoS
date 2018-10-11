@@ -5,6 +5,10 @@
  */
 package Actors.factories.dragons;
 
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
+
 /**
  *
  * @author kevv87
@@ -23,6 +27,10 @@ public class DragonA extends Dragon{
         this.edad = 1; // Podria estar en un rango de 1 a 200
         this.resistencia = 1;
         this.tipo = "A";
+        alive = true;
+        this.Hitbox = new Rectangle(x,y,size,size);
+        this.Hitbox.setFill(Color.BLUE);
+        
     }   
     
 }

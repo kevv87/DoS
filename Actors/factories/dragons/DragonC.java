@@ -5,6 +5,9 @@
  */
 package Actors.factories.dragons;
 
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
 /**
  *
  * @author kevv87
@@ -23,6 +26,9 @@ public class DragonC extends Dragon{
         this.edad = 701; // Podria estar en un rango de 701 a 1000
         this.resistencia = 3;
         this.tipo = "C";
+        alive = true;
+        this.Hitbox = new Rectangle(x,y,size,size);
+        this.Hitbox.setFill(Color.RED);
     }   
     
 }
