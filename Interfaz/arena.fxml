@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.Arena">
+   <children>
+      <Pane fx:id="mainPane" layoutX="-1.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Arc fx:id="pacMan" fill="DODGERBLUE" layoutX="479.0" layoutY="90.0" length="270.0" radiusX="26.0" radiusY="23.0" startAngle="-135.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+            <Circle fx:id="ball" fill="DODGERBLUE" layoutX="67.0" layoutY="96.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
