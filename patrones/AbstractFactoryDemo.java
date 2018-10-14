@@ -43,7 +43,7 @@ public class AbstractFactoryDemo {
       color1.fill();
 
       //get an object of Color Green
-      Colors color2 = colorFactory.getColor("Green");
+      Colors color2 = colorFactory.getColor("GREEN");
 
       //call fill method of Green
       color2.fill();
