@@ -14,13 +14,13 @@ public class Main extends Application{
     //Screen
     private  HashMap<KeyCode, Boolean> keys = new HashMap<>();
     static Pane root = new Pane();
-    Scene scene;
-    Image BGImage = new Image(getClass().getResourceAsStream("background24.jpg"));
-    ImageView Background = new ImageView(BGImage);
+    private Scene scene;
+    private Image BGImage = new Image(getClass().getResourceAsStream("background24.jpg"));
+    private ImageView Background = new ImageView(BGImage);
     //Player
-    Hero player = new Hero();
+    private Hero player = new Hero();
     //Enemies
-    DragonHorde Enemies;
+    private DragonHorde Enemies;
 
     //       _______________
     //______/New game screen
@@ -31,7 +31,7 @@ public class Main extends Application{
         root.getChildren().add(Background);
         player.setTranslateY(250);
         root.getChildren().add(player);
-        Enemies = new DragonHorde(9, root);
+        Enemies = new DragonHorde(root,3,3,3,3,Background.getFitHeight());
         enemyMovement.start();
         scene = new Scene(root);
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
