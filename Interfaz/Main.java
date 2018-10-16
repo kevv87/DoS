@@ -15,7 +15,7 @@ import javafx.util.Duration;
 public class Main extends Application {
 
     Stage window;
-    private  int dX = 10;
+    private  int dX = 100;
 
     public static void main(String[] args) {
         launch(args);
@@ -28,10 +28,6 @@ public class Main extends Application {
         Parent mainParent = loader.load();
 
         ArenaController controller = loader.getController();
-
-
-
-
 
         window = primaryStage;
 

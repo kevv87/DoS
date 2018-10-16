@@ -1,5 +1,6 @@
 package Movement;
 
+import Actors.factories.dragons.Dragon;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -9,6 +10,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.scene.Node;
 
 public class Main extends Application{
     //Screen
@@ -47,7 +52,7 @@ public class Main extends Application{
         return keys.getOrDefault(key, false);
     }
 
-    public void movePlayer(){
+    public void movePlayer() throws InterruptedException{
         if ((isPressed(KeyCode.W) || isPressed(KeyCode.UP)) && player.getPosY()>-250){
             player.moveY(-2);
             player.setPosY(player.getPosY()-2);
@@ -63,6 +68,41 @@ public class Main extends Application{
         if ((isPressed(KeyCode.A) || isPressed(KeyCode.LEFT)) && player.getPosX()>0){
             player.moveX(-2);
             player.setPosX(player.getPosX()-2);
+        }
+        if(isPressed(KeyCode.F)){
+            Thread fire = new Thread(){
+                Fire fire; 
+                @Override
+                public void run(){
+                    fire = new Fire(player.getPosX()+300, player.getPosY()+250);
+                    addToPane(fire);
+                    while(fire.getPosX()<Background.getFitWidth()){
+                        fire.move();
+                        for(Dragon enemy:Enemies.getHorde()){
+                            boolean interseccion = fire.getBoundsInParent().intersects(enemy.getBoundsInParent());
+                            if(interseccion){
+                                remove(enemy);
+                                remove(fire);
+                                return;
+                            }
+                        }
+                        try {
+                            sleep(10);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    try {
+                        sleep(2000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                
+            };
+            fire.start();
+            System.out.println("Fire");
+            Thread.sleep(100);
         }
     }
 
@@ -87,7 +127,11 @@ public class Main extends Application{
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                movePlayer();
+                try {
+                    movePlayer();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         };
         timer.start();
@@ -98,5 +142,38 @@ public class Main extends Application{
 
     public static  void  main(String[] args){
         launch(args);
+    }
+    
+    public void addToPane(Fire toad){
+        
+        Platform.runLater(new Runnable(){
+           
+            @Override public void run(){
+                
+                root.getChildren().addAll(toad);
+            }
+            
+        });   
+    }
+    
+    
+    
+    public void remove(Dragon dragon){
+        Platform.runLater(new Runnable(){
+           
+            @Override public void run(){
+                root.getChildren().remove(dragon);
+            }
+            
+        });  
+    }
+    public void remove(Fire fire){
+        Platform.runLater(new Runnable(){
+           
+            @Override public void run(){
+                root.getChildren().remove(fire);
+            }
+            
+        });  
     }
 }
