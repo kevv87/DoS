@@ -28,11 +28,6 @@ public class Main extends Application {
         Parent mainParent = loader.load();
 
         ArenaController controller = loader.getController();
-
-
-
-
-
         window = primaryStage;
 
         window.setTitle("GoS");
