@@ -1,4 +1,4 @@
-package Objetos;
+package Actors;
 
 public class Caballero {
 
@@ -48,6 +48,5 @@ public class Caballero {
     public void setResistencia(int resistencia) {
         this.resistencia = resistencia;
     }
-
 
 }
