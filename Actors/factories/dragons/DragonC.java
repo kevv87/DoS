@@ -16,7 +16,7 @@ public class DragonC extends Dragon{
      * @param x Posicion en x en la pantalla
      * @param y Posicion en y en la pantalla
      * @param nombre Nombre
-     * @param padre Dragon padre, null si no tiene
+     * @param padre BolaFuego padre, null si no tiene
      */
     public DragonC(double x, double y, String nombre, Dragon padre){
         this.velocidad_recarga = 10;  // Podria estar en un rango de 10 a 43

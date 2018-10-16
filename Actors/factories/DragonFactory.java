@@ -23,8 +23,8 @@ public class DragonFactory {
      * @param x Posicion del dragon en x en la pantalla
      * @param y Posicion del dragon en y en la patanlla
      * @param nombre Nombre del dragon a generar
-     * @param padre Dragon padre del dragon a generar
-     * @return Dragon generado
+     * @param padre BolaFuego padre del dragon a generar
+     * @return BolaFuego generado
      */
     public static Dragon getDragon(String type, double x, double y, String nombre, Dragon padre){
         switch(type){

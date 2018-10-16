@@ -1,6 +1,6 @@
-package Objetos;
+package logic;
 
-public class Dragon {
+public class BolaFuego extends Sprite{
 
     //Atributos
     private double x;
@@ -10,20 +10,20 @@ public class Dragon {
     private int resistencia;
     private String nombre;
     private String clase;
-    private Dragon padre;
-    private Dragon hijo1;
-    private Dragon hijo2;
+    private BolaFuego padre;
+    private BolaFuego hijo1;
+    private BolaFuego hijo2;
 
     /**
      * Constructor por defecto
      */
-    public Dragon(){
+    public BolaFuego(){
         x = 0;
         y = 0;
         velocidadRecarga = 1;
         edad = 1;
         resistencia = 3;
-        nombre = "Dragon";
+        nombre = "BolaFuego";
         clase = "infateria";
         padre = null;
         hijo1 = null;
@@ -60,15 +60,15 @@ public class Dragon {
         return clase;
     }
 
-    public Dragon getPadre() {
+    public BolaFuego getPadre() {
         return padre;
     }
 
-    public Dragon getHijo1() {
+    public BolaFuego getHijo1() {
         return hijo1;
     }
 
-    public Dragon getHijo2() {
+    public BolaFuego getHijo2() {
         return hijo2;
     }
 
@@ -102,15 +102,20 @@ public class Dragon {
         this.clase = clase;
     }
 
-    public void setPadre(Dragon padre) {
+    public void setPadre(BolaFuego padre) {
         this.padre = padre;
     }
 
-    public void setHijo1(Dragon hijo1) {
+    public void setHijo1(BolaFuego hijo1) {
         this.hijo1 = hijo1;
     }
 
-    public void setHijo2(Dragon hijo2) {
+    public void setHijo2(BolaFuego hijo2) {
         this.hijo2 = hijo2;
+    }
+
+    @Override
+    public void update() {
+
     }
 }
