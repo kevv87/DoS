@@ -29,6 +29,7 @@ public class ArenaController {
 
     private int movX= 3;
     private int disX = 200;
+    private int disY = 250;
 
     public void initialize(){
 
@@ -38,8 +39,8 @@ public class ArenaController {
             Image image = new Image("/imgs/potato.jpg");
             ImageView image2 = new ImageView(image);
             image2.setX(image2.getX()+disX);
-            image2.setY(45);
-
+            image2.setY(disY);
+            disY -= 50;
             disX += 150;
             images.getChildren().add(image2);
             System.out.println(i);
@@ -52,9 +53,10 @@ public class ArenaController {
                     pepa.setX(pepa.getX()+movX);
                     int cont=0;
                     while(cont<images.getChildren().size()){
-                        if (pepa.getBoundsInParent().intersects(images.getChildren().get(0).getBoundsInParent())){
+                        if (pepa.getBoundsInParent().intersects(images.getChildren().get(cont).getBoundsInParent())){
                             movX = -movX;
-                            images.getChildren().remove(0);
+                            System.out.println("cont" + cont);
+                            images.getChildren().remove(cont);
                     }
                     cont++;
                     }
