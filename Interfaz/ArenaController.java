@@ -27,9 +27,11 @@ public class ArenaController {
 
     private Group images = new Group();
 
+
     private int movX= 3;
     private int disX = 200;
     private int disY = 250;
+
 
     public void initialize(){
 
