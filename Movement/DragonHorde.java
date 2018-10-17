@@ -5,6 +5,7 @@ import Actors.factories.dragons.Dragon;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class DragonHorde{
     private int SpawningPointX = 1290;
@@ -12,7 +13,6 @@ public class DragonHorde{
     private int PosX = 1290;
     private ArrayList<Actors.factories.dragons.Dragon> Horde = new ArrayList<>();
 
-    
     /**
      * Constructor principal de la clase
      * @param pane Contenedor donde se pondran los dragones

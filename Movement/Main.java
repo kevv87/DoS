@@ -28,6 +28,8 @@ public class Main extends Application{
     private Hero player = new Hero();
     //Enemies
     private DragonHorde Enemies;
+    private static FireManager fireManager;
+    private int threadID = 0;
 
     //       _______________
     //______/New game screen
@@ -39,7 +41,9 @@ public class Main extends Application{
         player.setTranslateY(250);
         root.getChildren().add(player);
         Enemies = new DragonHorde(root,3,3,3,3,Background.getFitHeight());
-        enemyMovement.start();
+        enemyMovement.start(); //THREAD
+        fireManager = new FireManager(root, Background.getFitWidth(), Enemies);
+        fireMovement.start(); // THREAD
         scene = new Scene(root);
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> {
@@ -72,42 +76,15 @@ public class Main extends Application{
             player.setPosX(player.getPosX()-2);
         }
         if(isPressed(KeyCode.F)){
-            TimeUnit.MILLISECONDS.sleep(50);
-            Thread fire = new Thread(){
-                Fire fire; 
-                @Override
-                public void run(){
-                    fire = new Fire(player.getPosX()+300, player.getPosY()+250);
-                    addToPane(fire);
-                    while(fire.getPosX()<Background.getFitWidth()){
-                        fire.move();
-                        for(Dragon enemy:Enemies.getHorde()){
-                            boolean interseccion = fire.getBoundsInParent().intersects(enemy.getBoundsInParent());
-                            if(interseccion){
-                                Enemies.getHorde().remove(enemy);
-                                remove(enemy);
 
-                                return;
-                            }
-                        }
-                        try {
-                            sleep(10);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    try {
-                        sleep(2000);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                
-            };
-            fire.start();
-            System.out.println("Fire");
-            Thread.sleep(1000);
+            Fire fire = new Fire(player.getPosX()+300, player.getPosY()+250);
+            addToPane(fire);
+            fireManager.getFriendlyFireList().add(fire);
+            Thread.sleep(60);
+
         }
+
+
     }
 
     Thread enemyMovement = new Thread(){
@@ -124,6 +101,26 @@ public class Main extends Application{
             }
         }
     };
+
+    Thread fireMovement = new Thread(){
+        @Override
+
+
+        public void run() {
+
+            while (true){
+                try{
+                    sleep(10);
+                    FireManager.moveFire();
+                }
+                catch (Exception E){
+
+                }
+            }
+        }
+    };
+
+
 
     @Override
     public void start(Stage primaryStage) throws  Exception{
@@ -164,22 +161,5 @@ public class Main extends Application{
     
     
     
-    public void remove(Dragon dragon){
-        Platform.runLater(new Runnable(){
-           
-            @Override public void run(){
-                root.getChildren().remove(dragon);
-            }
-            
-        });  
-    }
-    public void remove(Fire fire){
-        Platform.runLater(new Runnable(){
-           
-            @Override public void run(){
-                root.getChildren().remove(fire);
-            }
-            
-        });  
-    }
+
 }
