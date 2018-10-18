@@ -29,7 +29,6 @@ public class Main extends Application{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("interfaz/Juego.fxml"));
         Parent root = loader.load();
         JuegoController controller = loader.getController();
-        
         window = primaryStage;
         window.setScene(new Scene(root));
         window.setResizable(false);

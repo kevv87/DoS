@@ -5,13 +5,17 @@
  */
 package Actors.factories.dragons;
 
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
 /**
  * Clase base de cada dragon.
  * @author kevv87
  */
-public abstract class Dragon {
+public abstract class Dragon extends Pane{
     protected String name;
     protected int velocidad_recarga;
     protected int edad;
@@ -22,12 +26,12 @@ public abstract class Dragon {
     protected double y;
     protected Rectangle Hitbox;
     protected String image_url;
-    protected boolean alive;
-    protected static int size =35;
+    protected boolean alive;protected int width;
+    protected int height;
+    protected Image dragon = new Image(getClass().getResourceAsStream("Dragon.gif"));
+    protected ImageView dragonIV = new ImageView(dragon);
 
-    public static int getSize() {
-        return size;
-    }
+ 
 
     public boolean isAlive() {
         return alive;
@@ -117,6 +121,21 @@ public abstract class Dragon {
     public void setHitbox(Rectangle Hitbox) {
         this.Hitbox = Hitbox;
     }
+
     
+    public double getPosX(){
+        return x;
+    }
     
+    public double getPosY(){
+        return y;
+    }
+    
+    public void setPosX(double x){
+        this.x = x;
+    }
+    
+    public void setPosY(double y){
+        this.y = y;
+    }
 }

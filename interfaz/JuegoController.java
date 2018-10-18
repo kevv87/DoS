@@ -37,7 +37,6 @@ public class JuegoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb){
         gamePane.getChildren().add(dragonHitboxGroup);
-        
     }    
     
     /**
@@ -61,10 +60,9 @@ public class JuegoController implements Initializable {
         int filas = total/columnas;
         Dragon nuevoDragon;
         int j;
-        double size = Dragon.getSize();
         
         height = window.getHeight();
-        while((yo+size+espacio)*filas>height){  // Verifica que no se pase del alto de la pantalla
+        while((yo+espacio)*filas>height){  // Verifica que no se pase del alto de la pantalla
             columnas++;
             filas = total/columnas;
         }
@@ -75,7 +73,6 @@ public class JuegoController implements Initializable {
             for(j=0;j<columnas;j++){
                 if(cantidadA!=0){
                     nuevoDragon = DragonFactory.getDragon("A", x, y, "NombrePrueba", null);
-                    
                     cantidadA--;
                 }else if(cantidadB!=0){
                     nuevoDragon = DragonFactory.getDragon("B",x,y,"NombrePrueba", null);
