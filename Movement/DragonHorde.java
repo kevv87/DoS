@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import logic.AsignadorParametros;
 
 public class DragonHorde{
     private int SpawningPointX = 1290;
@@ -55,13 +56,16 @@ public class DragonHorde{
             SpawningPointY=0;
             SpawningPointX+=76; 
         }
+            AsignadorParametros asignador = new AsignadorParametros(Horde);
+            asignador.asignaEdad();
         }
     }
 
     public void moveHorde(){
         for(int i=0; i<Horde.size(); i++){
-            System.out.println("entre: " + i);
             Dragon TMP = Horde.get(i);
+            System.out.println("CANTIDAD: " + Horde.size());
+            System.out.println("ID: "+i+" Edad: " +Horde.get(i).getEdad());
             TMP.setPosX(TMP.getPosX()-2);
             TMP.setTranslateX(TMP.getPosX());
         }
@@ -83,5 +87,7 @@ public class DragonHorde{
     public ArrayList<Dragon> getHorde() {
         return Horde;
     }
+
+    public void setHorde(ArrayList<Dragon> Horde) {this.Horde=Horde; }
 
 }

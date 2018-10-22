@@ -4,6 +4,7 @@ import Actors.factories.DragonFactory;
 import Actors.factories.dragons.Dragon;
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
+import logic.Sorter;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ public class FireManager {
     private static Pane pane;
     private double screenWidth;
     private static DragonHorde Enemies;
+    private static int idAlineacion = 0;
+    private static Sorter sorter = new Sorter();
 
     /**
      * Constructor principal de la clase
@@ -46,11 +49,17 @@ public class FireManager {
             for(Dragon enemy:Enemies.getHorde()){
                 boolean interseccion = fire.getBoundsInParent().intersects(enemy.getBoundsInParent());
                 if(interseccion){
-                    Enemies.getHorde().remove(enemy);
-                    remove(enemy);
-                    remove(fire);
-                    friendlyFireList.remove(fire);
-                    return;
+                    if (idAlineacion%5==0) { //primer Caso de eliminacion
+                        Enemies.getHorde().remove(enemy); //remover de ArrayList
+                        remove(enemy);//remover enemigo del Pane
+                        remove(fire);//remover fuego del Pane
+                        friendlyFireList.remove(fire);
+
+                        ArrayList<Dragon> listaActual = Enemies.getHorde();
+                        Enemies.setHorde(sorter.quickSortAscendente(listaActual));
+
+                        return;
+                    }
                 }
             }
         }
@@ -75,6 +84,5 @@ public class FireManager {
     public static void remove(Fire fire){
         Platform.runLater(() -> pane.getChildren().remove(fire));
     }
-
-
+    
 }

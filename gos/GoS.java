@@ -16,6 +16,11 @@ public class GoS {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+
+
+        int[] a = new int[10];
+        System.out.println("valor 1: " + a[0] + " valor 2: " + a[9]);
+
     }
     
 }

@@ -8,7 +8,7 @@ package Actors.factories.dragons;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
+import java.util.Random;
 /**
  * Clase base de cada dragon.
  * @author kevv87
@@ -26,7 +26,8 @@ public abstract class Dragon extends Pane{
     protected int height;
     protected Image dragon = new Image(getClass().getResourceAsStream("Dragon.gif"));
     protected ImageView dragonIV = new ImageView(dragon);
-    
+    protected Random random = new Random();
+
     public double getPosX(){
         return x;
     }
@@ -42,4 +43,8 @@ public abstract class Dragon extends Pane{
     public void setPosY(double y){
         this.y = y;
     }
+
+    public int getEdad() {return edad;}
+
+    public void setEdad(int edad){ this.edad = edad; }
 }
