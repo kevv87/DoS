@@ -17,6 +17,7 @@ public class FireManager {
     private static Pane pane;
     private double screenWidth;
     private static DragonHorde Enemies;
+    private static ArrayList<Dragon> listaDragonPos = new ArrayList<>(); //Para obtener posiciones invariables
     private static int idAlineacion = 0;
     private static Sorter sorter = new Sorter();
 
@@ -28,13 +29,14 @@ public class FireManager {
         this.pane = pane;
         this.screenWidth = width;
         this.Enemies = Enemies;
+
     }
 
     public FireManager(){
 
     }
 
-    public static void moveFire() {
+    public static void moveFire () throws Exception {
 
         for (Fire fire : friendlyFireList) { // movimiento de fuegos amigos
             fire.setPosX(fire.getPosX() + 2);
@@ -50,19 +52,36 @@ public class FireManager {
                 boolean interseccion = fire.getBoundsInParent().intersects(enemy.getBoundsInParent());
                 if(interseccion){
                     if (idAlineacion%5==0) { //primer Caso de eliminacion
+
+                        listaDragonPos.clear();
+                        listaDragonPos.addAll(Enemies.getHorde()); //OBTIENE POSICION DE DRAGONES
+
                         Enemies.getHorde().remove(enemy); //remover de ArrayList
                         remove(enemy);//remover enemigo del Pane
                         remove(fire);//remover fuego del Pane
-                        friendlyFireList.remove(fire);
+                        friendlyFireList.remove(fire); // Elimina de la lista fuegos
 
-                        ArrayList<Dragon> listaActual = Enemies.getHorde();
-                        Enemies.setHorde(sorter.quickSortAscendente(listaActual));
+                        //Acomodo por QUICKSORT
+                        Enemies.setHorde(sorter.quickSortAscendente(Enemies.getHorde()));
+
+                        listaDragonPos.remove(Enemies.getHorde().size()); //ELIMINA ULTIMO DRAGON
+
+                        Enemies.setExitDragonMov(true);
+
+                        Thread.sleep(2000);
+                        System.out.println("pasé");
+
+                        Enemies.setExitDragonMov(false);
+                        //Acomodo VISUAL
+
+
 
                         return;
                     }
                 }
             }
         }
+
 
         for (Fire fire : foeFireList) { // Movimiento de fuegos enemigos
             fire.setPosX(fire.getPosX() - 2);

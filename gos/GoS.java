@@ -5,6 +5,8 @@
  */
 package gos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author kevv87
@@ -20,7 +22,10 @@ public class GoS {
 
         int[] a = new int[10];
         System.out.println("valor 1: " + a[0] + " valor 2: " + a[9]);
-
+        ArrayList lista = new ArrayList();
+        lista.add(1);
+        lista.add(2);
+        System.out.println("posicion 2: ");
     }
     
 }

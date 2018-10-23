@@ -13,7 +13,7 @@ public class DragonHorde{
     private int SpawningPointY = 0;
     private int PosX = 1290;
     private ArrayList<Actors.factories.dragons.Dragon> Horde = new ArrayList<>();
-
+    private volatile boolean exitDragonMov = false;
     /**
      * Constructor principal de la clase
      * @param pane Contenedor donde se pondran los dragones
@@ -89,5 +89,10 @@ public class DragonHorde{
     }
 
     public void setHorde(ArrayList<Dragon> Horde) {this.Horde=Horde; }
+
+    public boolean getExitDragonMov(){return exitDragonMov; }
+
+    public void setExitDragonMov(boolean exitDragonMov) { this.exitDragonMov = exitDragonMov; }
+
 
 }

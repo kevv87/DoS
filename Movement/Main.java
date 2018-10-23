@@ -31,6 +31,7 @@ public class Main extends Application{
     private static FireManager fireManager;
     private int threadID = 0;
 
+
     //       _______________
     //______/New game screen
     public void newGame(){
@@ -90,7 +91,7 @@ public class Main extends Application{
     Thread enemyMovement = new Thread(){
         @Override
         public void run() {
-            while (Enemies.getPosX()>-76){
+            while (Enemies.getPosX()>-76 && Enemies.getExitDragonMov()==false){ //PUEDE SER EL LAG DEL THREAD
                 try{
                     sleep(50);
                     Enemies.moveHorde();
