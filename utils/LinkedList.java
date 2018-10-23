@@ -5,12 +5,17 @@
  */
 package utils;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+
 /**
  *  Clase encargada de crear listas de datos genéricas
  * @author Sebastián
  */
+@XmlRootElement
 public class LinkedList<T>{ //Lista para nodos genericos
-    
+
     private Nodo<T> Inicio;
     private Nodo<T> Ultimo;
     private int Tamanio;

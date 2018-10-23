@@ -3,6 +3,7 @@ import Actors.factories.DragonFactory;
 import Actors.factories.dragons.Dragon;
 import Actors.factories.dragons.DragonToSend;
 
+import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.net.URL;
@@ -10,16 +11,13 @@ import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.net.MalformedURLException;
 import java.net.URLEncoder;
-import java.io.IOException;
-import java.io.DataOutputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.File;
-import java.io.StringWriter;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+
+import utils.LinkedList;
 
 /**
  * Clase encargada de manejar las peticiones con el servidor
@@ -31,7 +29,11 @@ class Cliente {
     private static final String url = "http://localhost:9080/Server1_war_exploded/Servlet";
 
     public static void main(String[ ] args) {
-        String dragon_string = jaxbObjectToXML(DragonFactory.getDragon(DragonFactory.getDragon("A",0,0,"nom",null)));
+        LinkedList<DragonToSend> dragones = new LinkedList<>();
+        dragones.add(DragonFactory.getDragon(DragonFactory.getDragon("A",0,0,"nom",null)));
+        dragones.add(DragonFactory.getDragon(DragonFactory.getDragon("B",0,0,"nom",null)));
+        dragones.add(DragonFactory.getDragon(DragonFactory.getDragon("C",0,0,"nom",null)));
+        String dragon_string = jaxbObjectToXML(dragones);
         new Cliente().send_requests(dragon_string);
     }
 
@@ -47,8 +49,9 @@ class Cliente {
 
             // Send the request
             conn = get_connection(url, "POST");
-            conn.setRequestProperty("accept", "text/xml");
+            conn.setRequestProperty("accept", "text/plain");
             DataOutputStream out = new DataOutputStream(conn.getOutputStream());
+            //System.out.println(data);
             out.writeBytes(payload);
             out.flush();
             get_response(conn);
@@ -62,7 +65,7 @@ class Cliente {
 
 
         }
-        catch(IOException | NullPointerException e) { System.err.println(e); }
+        catch(IOException | NullPointerException | JAXBException e) { System.err.println(e); }
     }
 
     private HttpURLConnection get_connection(String url_string, String verb) {
@@ -76,25 +79,35 @@ class Cliente {
         } catch(IOException e) { System.err.println(e); }
         return conn;
     }
-    private void get_response(HttpURLConnection conn) {
+    private void get_response(HttpURLConnection conn) throws JAXBException {
         try {
             String xml = "";
             BufferedReader reader =
                     new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String next = null;
-            while ((next = reader.readLine()) != null)
-                xml += next;
-            System.out.println("The response:\n" + xml);
+            boolean add = true;
+            while ((next = reader.readLine()) != null){
+                if(next.startsWith(" <string>")){
+                    add = true;
+                    next = next.substring(0,1);
+                }else if(next.startsWith("</string>")){
+                    add=true;
+                }
+                if(add) xml += next;
+            }
+
+
+            System.out.println("The response:\n" + xmlToObject(xml).getInicio().getElemento().getTipo());
         }
         catch(IOException e) { System.err.println(e); }
     }
 
-    private static String jaxbObjectToXML(DragonToSend dragon)
+    private static String jaxbObjectToXML(LinkedList<DragonToSend> dragon)
     {
         try
         {
             //Create JAXB Context
-            JAXBContext jaxbContext = JAXBContext.newInstance(DragonToSend.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(LinkedList.class);
 
             //Create Marshaller
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -117,4 +130,17 @@ class Cliente {
             return null;
         }
     }
+
+    public LinkedList<DragonToSend> xmlToObject(String xml) throws JAXBException {
+        System.out.println(xml);
+        JAXBContext jaxbContext = JAXBContext.newInstance(LinkedList.class);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+        StringReader reader = new StringReader(xml);
+        LinkedList<DragonToSend> result = (LinkedList<DragonToSend>) unmarshaller.unmarshal(reader);
+
+        return result;
+
+    }
+
 }
