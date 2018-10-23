@@ -11,6 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 /**
  * Clase base de cada dragon.
  * @author kevv87
@@ -24,7 +26,6 @@ public abstract class Dragon extends Pane{
     protected Dragon padre;
     protected double x;
     protected double y;
-    protected Rectangle Hitbox;
     protected String image_url;
     protected boolean alive;protected int width;
     protected int height;
@@ -82,9 +83,7 @@ public abstract class Dragon extends Pane{
         return y;
     }
 
-    public Rectangle getHitbox() {
-        return Hitbox;
-    }
+
 
     public void setName(String name) {
         this.name = name;
@@ -118,9 +117,7 @@ public abstract class Dragon extends Pane{
         this.y = y;
     }
 
-    public void setHitbox(Rectangle Hitbox) {
-        this.Hitbox = Hitbox;
-    }
+
 
     
     public double getPosX(){
