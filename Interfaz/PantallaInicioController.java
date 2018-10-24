@@ -6,6 +6,7 @@
 package Interfaz;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -16,6 +17,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
+import javax.xml.bind.JAXBException;
+
 /**
  * FXML Controller class
  *
@@ -38,6 +43,14 @@ public class PantallaInicioController implements Initializable {
     private void mostrar_pant_juego(ActionEvent event) throws Exception {
         InterfazJuego accionar = new InterfazJuego();
         Stage cierre = (Stage) iniciar.getScene().getWindow();
+        /*
+        cierre.setOnCloseRequest((WindowEvent event1) -> {
+            try {
+                InterfazJuego.finish();
+            } catch (JAXBException | UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        });*/
         accionar.start(cierre);
         cierre.close();
         

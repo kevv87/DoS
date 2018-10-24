@@ -48,7 +48,10 @@ public class Cliente {
 
         String payload = URLEncoder.encode("message","UTF-8") + "=" + URLEncoder.encode(message,"UTF-8");
 
+        System.out.println(payload);
+
         send_requests(payload, conn);
+        get_response(conn);
 
 
 

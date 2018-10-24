@@ -14,8 +14,11 @@ import java.io.IOException;
 
 
 import static java.lang.Thread.sleep;
+
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
+import com.sun.security.ntlm.Client;
 import conectividad.Cliente;
 import com.sun.security.ntlm.NTLMException;
 import javafx.animation.AnimationTimer;
@@ -35,6 +38,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import logger.Logging;
 import utils.LinkedList;
 
@@ -58,16 +62,31 @@ public class InterfazJuego extends Application {
     double width;
     double height;
 
+
+
+
+
+
     public InterfazJuego() throws NTLMException {
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
+        primaryStage.setOnCloseRequest((WindowEvent event1) -> {
+            try {
+                finish();
+            } catch (JAXBException | UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        });
+
         client.sendMessage("Start");
         Logging.log("info","Iniciando juego");
         FXMLLoader inicio =  new FXMLLoader(getClass().getResource("PantallaJuego.fxml"));
         Parent padre = inicio.load();
+
+
         this.foo = (AnchorPane)inicio.getNamespace().get("paneljuego");
         this.scene = new Scene(padre);
         newGame();
@@ -180,6 +199,16 @@ public class InterfazJuego extends Application {
             }
 
         });
+    }
+
+    /**
+     * Finaliza el juego
+     * */
+    public static void finish() throws JAXBException, UnsupportedEncodingException, NTLMException {
+        Cliente client = new Client();
+        client.sendMessage("end");
+        Logging.log("info","Juego terminado");
+        System.exit(0);
     }
 
     /**

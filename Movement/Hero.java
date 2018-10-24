@@ -14,6 +14,7 @@ public class Hero extends Pane{
     private int height = 198;    //size of sprite
     private int PosX = 0;  //Player position X
     private int PosY = 0;  //Player position Y
+    private int resistencia = 3;
 
     public Hero(){
         HeroIV.setViewport(new Rectangle2D(0,0, width, height));
@@ -48,7 +49,16 @@ public class Hero extends Pane{
         PosX = posX;
     }
 
-    public void setPosY(int posY) {
+    public void setPosY(int posY)
+    {
         PosY = posY;
+    }
+
+    public int getResistencia() {
+        return resistencia;
+    }
+
+    public void setResistencia(int resistencia) {
+        this.resistencia = resistencia;
     }
 }
