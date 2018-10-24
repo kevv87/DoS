@@ -39,4 +39,6 @@ public class Fire extends Pane{
     public double getPosX(){
         return x;
     }
+
+    public void setPosX(double x) { this.x = x;}
 }

@@ -22,7 +22,7 @@ public class DragonA extends Dragon{
      */
     public DragonA(double x, double y, String nombre, Dragon padre){
         this.velocidad_recarga = 77;  // Podria estar en un rango de 77 a 100
-        this.edad = 1; // Podria estar en un rango de 1 a 200
+        this.edad = 1; // Podria estar en un rango de 1 a 1000
         this.resistencia = 1;
         this.tipo = "A";
 
@@ -32,6 +32,7 @@ public class DragonA extends Dragon{
         height = 76;
         dragonIV.setViewport(new Rectangle2D(0,0, width, height));
         getChildren().addAll(dragonIV);
+
     }   
     public void moveX(int x){
         boolean right = x>0;
@@ -47,7 +48,5 @@ public class DragonA extends Dragon{
             if(right) this.setTranslateY(this.getTranslateY() +1);
             else this.setTranslateY(this.getTranslateY() -1);
         }
-        
     }
-    
 }
