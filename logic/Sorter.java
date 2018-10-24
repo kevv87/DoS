@@ -111,6 +111,60 @@ public class Sorter {
         }
 
 
+    /**
+     *
+     * @param listaDragones
+     * @return linkedList con dragones ordenados por edad mediante SelectionSort
+     */
+    public static LinkedList<Dragon> insertionSort(LinkedList<Dragon> listaDragones){
+
+        int aleatorio = random.nextInt(10);
+
+        int tamanoListaDragones = listaDragones.size();
+        int[] arregloVelocidades = new int[tamanoListaDragones];
+        int cont = 0;
+        LinkedList<Dragon> nuevaLista = new LinkedList<>();
+
+        if (tamanoListaDragones > 0){
+            for (Dragon dragon: listaDragones){
+                arregloVelocidades[cont] = dragon.getVelocidad_recarga();
+                cont++;
+            }
+
+            //Ordenamiento Aleatorio por insertionSort
+
+            if (aleatorio % 2 == 0){
+                insertionSortAscendente(arregloVelocidades);
+                System.out.println("Insertion: Menor a mayor");
+            }
+
+            else if (aleatorio % 2 == 1){
+                selectionSortAscendente(arregloVelocidades);
+                System.out.println("Insertion: Mayor a menor");
+            }
+
+
+            //Nueva lista ordenada
+            cont = 0;
+            while (cont < tamanoListaDragones){
+
+                for (Dragon dragon : listaDragones) {
+                    if (dragon.getVelocidad_recarga()==arregloVelocidades[cont]){
+                        nuevaLista.add(dragon);
+                        break;
+                    }
+                }
+                cont++;
+            }
+        }
+
+        return nuevaLista;
+
+    }
+
+
+
+
         //FUNCIONES SECUNDARIAS
 
         /** Funcion que ejecuta Quicksort
@@ -226,7 +280,7 @@ public class Sorter {
 
     //////////SELECTION SORT
 
-    public static void selectionSortAscendente(int arr[])
+    private static void selectionSortAscendente(int arr[])
     {
         int n = arr.length;
         // One by one move boundary of unsorted subarray
@@ -246,7 +300,7 @@ public class Sorter {
         }
     }
 
-    public static void selectionSortDescendiente(int arr[])
+    private static void selectionSortDescendiente(int arr[])
     {
         int n = arr.length;
         // One by one move boundary of unsorted subarray
@@ -263,6 +317,47 @@ public class Sorter {
             int temp = arr[min_idx];
             arr[min_idx] = arr[i];
             arr[i] = temp;
+        }
+    }
+
+
+    public static void insertionSortAscendente(int arr[])
+    {
+        int n = arr.length;
+        for (int i=1; i<n; ++i)
+        {
+            int key = arr[i];
+            int j = i-1;
+
+            /* Move elements of arr[0..i-1], that are
+               greater than key, to one position ahead
+               of their current position */
+            while (j>=0 && arr[j] > key)
+            {
+                arr[j+1] = arr[j];
+                j = j-1;
+            }
+            arr[j+1] = key;
+        }
+    }
+
+    public static void insertionSortDescendente(int arr[])
+    {
+        int n = arr.length;
+        for (int i=1; i<n; ++i)
+        {
+            int key = arr[i];
+            int j = i-1;
+
+            /* Move elements of arr[0..i-1], that are
+               greater than key, to one position ahead
+               of their current position */
+            while (j>=0 && arr[j] < key)
+            {
+                arr[j+1] = arr[j];
+                j = j-1;
+            }
+            arr[j+1] = key;
         }
     }
 

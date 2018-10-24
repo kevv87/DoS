@@ -45,7 +45,7 @@ public class GoS {
         array[10] = 54;
         array[11] = 72;
 
-        Sorter.selectionSortDescendiente(array);
+        Sorter.insertionSortDescendente(array);
         System.out.println(array[0] + " " +
         array[1] + " " +
         array[2] + " " +
