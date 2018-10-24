@@ -78,10 +78,12 @@ public class Main extends Application{
         }
         if(isPressed(KeyCode.F)){
 
+
             Fire fire = new Fire(player.getPosX()+300, player.getPosY()+250);
             addToPane(fire);
             fireManager.getFriendlyFireList().add(fire);
             Thread.sleep(60);
+
 
         }
 
