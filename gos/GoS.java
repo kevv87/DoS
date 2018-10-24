@@ -26,6 +26,9 @@ public class GoS {
         lista.add(1);
         lista.add(2);
         System.out.println("posicion 2: ");
+        if (-7.1>-14.0){
+            System.out.println("true");
+        }
     }
     
 }

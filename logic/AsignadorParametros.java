@@ -2,14 +2,13 @@ package logic;
 
 
 import Actors.factories.dragons.Dragon;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
 public class AsignadorParametros {
 
     private int[] arregloEdades;
-    private ArrayList<Actors.factories.dragons.Dragon> Horde = new ArrayList<>();
+    private LinkedList<Dragon> Horde = new LinkedList<>();
     private Random random;
 
     /**
@@ -25,7 +24,7 @@ public class AsignadorParametros {
      * Constructor de acuerdo a la lista con elementos de tipo Dragon, provista
      * @param Horde
      */
-    public AsignadorParametros(ArrayList<Dragon> Horde){
+    public AsignadorParametros(LinkedList<Dragon> Horde){
         arregloEdades = new int[Horde.size()];
         this.Horde = Horde;
         this.random = new Random();
@@ -38,7 +37,7 @@ public class AsignadorParametros {
         generarArregloEdades();
         int cont = 0;
 
-        for(Dragon dragon:Horde){
+        for(Dragon dragon: Horde){
             dragon.setEdad(arregloEdades[cont]);
             cont++;
         }
@@ -79,13 +78,8 @@ public class AsignadorParametros {
                     arregloEdades[cont] = edad;
                     cont++;
                 }
-
             }
         }
 
     }
-
-
-
-
 }

@@ -5,11 +5,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.util.Duration;
+import javafx.event.ActionEvent;
 
 public class Main extends Application {
 
@@ -37,6 +39,8 @@ public class Main extends Application {
             e.consume();
             closeRequest();
         });
+
+
         window.setScene(new Scene(mainParent, 800, 600));
         window.show();
     }

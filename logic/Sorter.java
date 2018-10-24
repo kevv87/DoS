@@ -1,5 +1,6 @@
 package logic;
 
+import Actors.factories.DragonFactory;
 import Actors.factories.dragons.Dragon;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -9,28 +10,26 @@ public class Sorter {
 
 
 
-        public static ArrayList<Dragon> quickSortAscendente(ArrayList<Actors.factories.dragons.Dragon> listaDragones){
+        public static LinkedList<Dragon> quickSortAscendente(LinkedList<Dragon> listaDragones){
 
             int tamanoListaDragones = listaDragones.size();
             int[] arregloEdades = new int[tamanoListaDragones];
             int cont = 0;
-            ArrayList<Dragon> nuevaLista = new ArrayList<>();
-            // Lista Dragones -> Array de Edades
+            LinkedList<Dragon> nuevaLista = new LinkedList<>();
+
             if (tamanoListaDragones > 0){
                 for (Dragon dragon: listaDragones){
                     arregloEdades[cont] = dragon.getEdad();
                     cont++;
                 }
-
                 //Ordenamiento por QuickSort
                 quicksort(arregloEdades,0, tamanoListaDragones-1);
 
                 //Nueva lista ordenada
                 cont = 0;
                 while (cont < tamanoListaDragones){
-
-                    for (Dragon dragon : listaDragones)
-                    {
+                    Dragon dragon1 = DragonFactory.getDragon("A",0, 0, "probe", null);
+                    for (Dragon dragon : listaDragones) {
                         if (dragon.getEdad()==arregloEdades[cont]){
                             nuevaLista.add(dragon);
                             break;

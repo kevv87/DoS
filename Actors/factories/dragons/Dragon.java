@@ -5,6 +5,7 @@
  */
 package Actors.factories.dragons;
 
+import Actors.factories.DragonFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -47,4 +48,22 @@ public abstract class Dragon extends Pane{
     public int getEdad() {return edad;}
 
     public void setEdad(int edad){ this.edad = edad; }
+
+    public Dragon copy(Dragon dragon){
+        Dragon dragon1 = DragonFactory.getDragon("A",0, 0, "probe", null);
+        dragon1.edad = dragon.edad;
+        dragon1.name = dragon.name;
+        dragon1.velocidad_recarga = dragon.velocidad_recarga;
+        dragon1.resistencia = dragon.resistencia;
+        dragon1.tipo = dragon.tipo;
+        dragon1.padre = dragon.padre;
+        dragon1.x = dragon.x;
+        dragon1.y = dragon.y;
+        dragon1.width = dragon.width;
+        dragon1.height = dragon.height;
+
+        return dragon1;
+
+    };
+
 }
