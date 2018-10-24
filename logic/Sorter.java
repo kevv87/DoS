@@ -29,12 +29,12 @@ public class Sorter {
 
                 if (aleatorio % 2 == 0){
                     quicksortMenorMayor(arregloEdades,0, tamanoListaDragones-1);
-                    System.out.println("Menor a mayor");
+                    System.out.println("QuickSort: Menor a mayor");
                 }
 
                 else if (aleatorio % 2 == 1){
                     quicksortMayorMenor(arregloEdades,0, tamanoListaDragones-1);
-                    System.out.println("Mayor a menor");
+                    System.out.println("QuickSort: Mayor a menor");
                 }
 
 
@@ -57,57 +57,58 @@ public class Sorter {
 
         }
 
-    /**
-     *
-     * @param listaDragones
-     * @return linkedList con dragones ordenados por edad mediante SelectionSort
-     */
-    public static LinkedList<Dragon> selectionSort(LinkedList<Dragon> listaDragones){
 
-        int aleatorio = random.nextInt(10);
+        /**
+         *
+         * @param listaDragones
+         * @return linkedList con dragones ordenados por edad mediante SelectionSort
+         */
+        public static LinkedList<Dragon> selectionSort(LinkedList<Dragon> listaDragones){
 
-        int tamanoListaDragones = listaDragones.size();
-        int[] arregloEdades = new int[tamanoListaDragones];
-        int cont = 0;
-        LinkedList<Dragon> nuevaLista = new LinkedList<>();
+            int aleatorio = random.nextInt(10);
 
-        if (tamanoListaDragones > 0){
-            for (Dragon dragon: listaDragones){
-                arregloEdades[cont] = dragon.getEdad();
-                cont++;
-            }
+            int tamanoListaDragones = listaDragones.size();
+            int[] arregloEdades = new int[tamanoListaDragones];
+            int cont = 0;
+            LinkedList<Dragon> nuevaLista = new LinkedList<>();
 
-            //Ordenamiento Aleatorio por SelectionSort
-
-            if (aleatorio % 2 == 0){
-                selectionSortAscendente(arregloEdades);
-                System.out.println("Menor a mayor");
-            }
-
-            else if (aleatorio % 2 == 1){
-                selectionSortDescendiente(arregloEdades);
-                System.out.println("Mayor a menor");
-            }
-
-
-            //Nueva lista ordenada
-            cont = 0;
-            while (cont < tamanoListaDragones){
-                Dragon dragon1 = DragonFactory.getDragon("A",0, 0, "probe", null);
-                for (Dragon dragon : listaDragones) {
-                    if (dragon.getEdad()==arregloEdades[cont]){
-                        nuevaLista.add(dragon);
-                        break;
-                    }
+            if (tamanoListaDragones > 0){
+                for (Dragon dragon: listaDragones){
+                    arregloEdades[cont] = dragon.getEdad();
+                    cont++;
                 }
-                cont++;
+
+                //Ordenamiento Aleatorio por SelectionSort
+
+                if (aleatorio % 2 == 0){
+                    selectionSortAscendente(arregloEdades);
+                    System.out.println("Selection: Menor a mayor");
+                }
+
+                else if (aleatorio % 2 == 1){
+                    selectionSortDescendiente(arregloEdades);
+                    System.out.println("Selection: Mayor a menor");
+                }
+
+
+                //Nueva lista ordenada
+                cont = 0;
+                while (cont < tamanoListaDragones){
+                    Dragon dragon1 = DragonFactory.getDragon("A",0, 0, "probe", null);
+                    for (Dragon dragon : listaDragones) {
+                        if (dragon.getEdad()==arregloEdades[cont]){
+                            nuevaLista.add(dragon);
+                            break;
+                        }
+                    }
+                    cont++;
+                }
+
             }
+
+            return nuevaLista;
 
         }
-
-        return nuevaLista;
-
-    }
 
 
         //FUNCIONES SECUNDARIAS

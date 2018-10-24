@@ -53,7 +53,7 @@ public class FireManager {
                 boolean interseccion = fire.getBoundsInParent().intersects(enemy.getBoundsInParent());
                 if(interseccion){
 
-                    if ( idAlineacion%5 == 0) { //primer Caso de eliminacion
+                    if (idAlineacion%2 == 0) { //primer Caso de eliminacion
 
                         listaDragonPos.clear();
                         listaDragonPos.addAll(Enemies.copyHorde(Enemies.getHorde())); //OBTIENE POSICION DE DRAGONES
@@ -68,7 +68,7 @@ public class FireManager {
 
                         Enemies.setExitDragonMov(true);
 
-                        Thread.sleep(2000);
+                        Thread.sleep(1000);
                         //Acomodo VISUAL
 
                         boolean bool = false;
@@ -77,6 +77,35 @@ public class FireManager {
 
                         //Vuelve a correr el Thread del movimiento de la Horde
                         Enemies.setExitDragonMov(false);
+                        idAlineacion+=1;
+                        return;
+                    }
+
+                    else if (idAlineacion%2 == 1) { //segundo Caso de eliminacion
+
+                        listaDragonPos.clear();
+                        listaDragonPos.addAll(Enemies.copyHorde(Enemies.getHorde())); //OBTIENE POSICION DE DRAGONES
+
+                        Enemies.getHorde().remove(enemy); //remover de ArrayList
+                        remove(enemy);//remover enemigo del Pane
+                        remove(fire);//remover fuego del Pane
+                        friendlyFireList.remove(fire); // Elimina de la lista fuegos
+
+                        //Acomodo por QUICKSORT
+                        Enemies.setHorde(sorter.selectionSort(Enemies.getHorde()));
+
+                        Enemies.setExitDragonMov(true);
+
+                        Thread.sleep(1000);
+                        //Acomodo VISUAL
+
+                        boolean bool = false;
+                        int cont = 0;
+                        SorterDisplayer.acomodoVisualSort(Enemies,listaDragonPos,cont,bool);
+
+                        //Vuelve a correr el Thread del movimiento de la Horde
+                        Enemies.setExitDragonMov(false);
+                        idAlineacion+=1;
                         return;
                     }
                 }
