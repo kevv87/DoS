@@ -21,8 +21,8 @@ public class Caballero {
         this.x = 0;
         this.y = 0;
         this.resistencia = 3;
-
     }
+
     //SETTERS AND GETTERS
 
     public double isX() {
@@ -49,5 +49,4 @@ public class Caballero {
         this.resistencia = resistencia;
     }
 
-    
 }
