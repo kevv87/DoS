@@ -7,6 +7,8 @@ package utils;
 
 import Actors.factories.dragons.DragonToSend;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
@@ -18,7 +20,9 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 @XmlRootElement
 @XmlSeeAlso(DragonToSend.class)
 public class Nodo<T> {  //Nodo generico para usar con distintos elementos
+    @XmlElement
     private T Elemento;
+    @XmlElement
     private Nodo Siguiente;
     
     /**

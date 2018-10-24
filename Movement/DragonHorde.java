@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.util.LinkedList;
 import logic.AsignadorParametros;
+import utils.Nodo;
 
 public class DragonHorde{
     private int SpawningPointX = 1290;
@@ -37,7 +38,6 @@ public class DragonHorde{
                 columnas++;
                 dragonsPerColumn = total/columnas;
             }
-            System.out.println(columnas);
             for(int j = 0; j<columnas;j++){
             for (int i = 0; i<dragonsPerColumn; i++){
                 Actors.factories.dragons.Dragon newDragon;
@@ -64,6 +64,26 @@ public class DragonHorde{
             AsignadorParametros asignador = new AsignadorParametros(Horde);
             asignador.asignaEdad();
         }
+    }
+
+    /**
+     * Constructor basado en una lista de dragones ya hecha
+     * @param dragons Lista de dragones hecha.
+     * */
+    public DragonHorde(Pane pane, utils.LinkedList<Dragon> dragons){
+        System.out.println(dragons.getTamanio());
+        Nodo aux = dragons.getInicio();
+        Dragon newDragon;
+        while(aux!=null){
+            newDragon = (Dragon)aux.getElemento();
+            Horde.add(newDragon);
+            newDragon.setTranslateX(newDragon.getPosX());
+            newDragon.setTranslateY(newDragon.getPosY());
+            pane.getChildren().add(newDragon);
+            aux = aux.getSiguiente();
+        }
+        AsignadorParametros asignador = new AsignadorParametros(Horde);
+        asignador.asignaEdad();
     }
 
     public void moveHorde(){

@@ -5,6 +5,9 @@
  */
 package utils;
 
+import Actors.factories.dragons.Dragon;
+import Actors.factories.dragons.DragonToSend;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -116,6 +119,14 @@ public class LinkedList<T>{ //Lista para nodos genericos
                 aux.setSiguiente(aux.getSiguiente().getSiguiente());
             }
             Tamanio--;
+        }
+    }
+
+    public void mostrar(){
+        Nodo aux = Inicio;
+        while(aux!=null){
+            System.out.println(((DragonToSend)aux.getElemento()).getTipo());
+            aux = aux.getSiguiente();
         }
     }
     
