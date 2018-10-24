@@ -5,6 +5,7 @@
  */
 package Interfaz;
 
+import Actors.factories.dragons.Dragon;
 import Movement.DragonHorde;
 import Movement.Fire;
 import Movement.FireManager;
@@ -14,6 +15,9 @@ import java.io.IOException;
 
 import static java.lang.Thread.sleep;
 import java.util.HashMap;
+
+import conectividad.Cliente;
+import com.sun.security.ntlm.NTLMException;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -31,6 +35,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import utils.LinkedList;
+
+import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -39,23 +46,29 @@ import javafx.stage.Stage;
 public class InterfazJuego extends Application {
     private  HashMap<KeyCode, Boolean> keys = new HashMap<>();
     Scene scene;
-     @FXML
-     AnchorPane foo;
+    @FXML
+    AnchorPane foo;
     //Player
     Hero player = new Hero();
     //Enemies
     DragonHorde Enemies;
     private static FireManager fireManager;
+    private Cliente client = new Cliente();
     double width;
     double height;
+
+    public InterfazJuego() throws NTLMException {
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        
+
+        client.sendMessage("Start");
         FXMLLoader inicio =  new FXMLLoader(getClass().getResource("PantallaJuego.fxml"));
-        Parent hola = inicio.load();
+        Parent padre = inicio.load();
         this.foo = (AnchorPane)inicio.getNamespace().get("paneljuego");
-        this.scene = new Scene(hola);
-          newGame();
+        this.scene = new Scene(padre);
+        newGame();
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -73,11 +86,10 @@ public class InterfazJuego extends Application {
         primaryStage.show();
     }
 
-    public void newGame() throws IOException{
+    public void newGame() throws IOException, JAXBException {
         player.setTranslateY(250);
         foo.getChildren().add(player);
-        System.out.println(foo.getWidth());
-        Enemies = new DragonHorde(foo,3,3,3,3,973);
+        Enemies = new DragonHorde(foo, client.getDragons());
         enemyMovement.start(); //THREAD
         fireManager = new FireManager(foo, width, Enemies);
         fireMovement.start(); // THREAD

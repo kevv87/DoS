@@ -48,5 +48,13 @@ public class DragonFactory {
         }
         return new DragonToSend(dragon.getName(),dragon.getVelocidad_recarga(),dragon.getEdad(),dragon.getResistencia(),dragon.getTipo(),DragonFactory.getDragon(dragon.getPadre()),dragon.getPosX(),dragon.getPosY(),dragon.getImage_url(),dragon.isAlive());
     }
+
+
+    public static Dragon getDragon(DragonToSend dragon){
+        if(dragon == null){
+            return null;
+        }
+        return getDragon(dragon.getTipo(), dragon.getX(), dragon.getY(), dragon.getName(), getDragon(dragon.getPadre()));
+    }
     
 }
