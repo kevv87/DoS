@@ -30,7 +30,6 @@ public class Main extends Application {
 
         ArenaController controller = loader.getController();
 
-
         window = primaryStage;
 
         window.setTitle("GoS");

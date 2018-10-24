@@ -37,7 +37,6 @@ public class DragonToSend {
         this.y = y;
         this.image_url = image_url;
         this.alive = alive;
-
     }
 
     public DragonToSend(){
