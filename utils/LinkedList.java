@@ -8,6 +8,10 @@ package utils;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
+import java.util.Iterator;
+import java.util.Optional;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
 /**
  *  Clase encargada de crear listas de datos genéricas
@@ -146,4 +150,7 @@ public class LinkedList<T>{ //Lista para nodos genericos
         Inicio = null;
         Tamanio = 0;
     }
+
+
+
 }
