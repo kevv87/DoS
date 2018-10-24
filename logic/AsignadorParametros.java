@@ -8,6 +8,7 @@ import java.util.Random;
 public class AsignadorParametros {
 
     private int[] arregloEdades;
+    private int[] arregloVelocidades;
     private LinkedList<Dragon> Horde = new LinkedList<>();
     private Random random;
 
@@ -26,6 +27,7 @@ public class AsignadorParametros {
      */
     public AsignadorParametros(LinkedList<Dragon> Horde){
         arregloEdades = new int[Horde.size()];
+        arregloVelocidades = new int[Horde.size()];
         this.Horde = Horde;
         this.random = new Random();
     }
@@ -39,6 +41,18 @@ public class AsignadorParametros {
 
         for(Dragon dragon: Horde){
             dragon.setEdad(arregloEdades[cont]);
+            cont++;
+        }
+
+    }
+
+    public void asignaVelocidad(){
+
+        generarArregloVelocidades();
+        int cont = 0;
+
+        for (Dragon dragon: Horde){
+            dragon.setVelocidad_recarga(arregloVelocidades[cont]);
             cont++;
         }
 
@@ -80,6 +94,44 @@ public class AsignadorParametros {
                 }
             }
         }
+    }
+
+    public void generarArregloVelocidades(){
+        int cont = 0;
+        for(Dragon dragon: Horde){
+            if (dragon.getTipo().equals("A")){
+                int velocidad = random.nextInt(21);
+                while (velocidad == 0) {
+                    velocidad = random.nextInt(21);
+                }
+
+                arregloVelocidades[cont]=velocidad;
+                cont++;
+            }
+
+            else if (dragon.getTipo().equals("B")){
+                int velocidad = random.nextInt(61);
+                while (velocidad == 0 || velocidad < 21) {
+                    velocidad = random.nextInt(61);
+                }
+                arregloVelocidades[cont]=velocidad;
+                cont++;
+            }
+
+            else if ((dragon.getTipo().equals("C"))){
+                int velocidad = random.nextInt(101);
+                while (velocidad == 0 || velocidad < 61) {
+                    velocidad = random.nextInt(101);
+                }
+                arregloVelocidades[cont]=velocidad;
+                cont++;
+            }
+        }
+
+
 
     }
+
+
+
 }

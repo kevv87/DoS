@@ -59,6 +59,7 @@ public class DragonHorde{
         }
             AsignadorParametros asignador = new AsignadorParametros(Horde);
             asignador.asignaEdad();
+            asignador.asignaVelocidad();
         }
     }
 
@@ -102,6 +103,5 @@ public class DragonHorde{
     public boolean getExitDragonMov(){return exitDragonMov; }
 
     public void setExitDragonMov(boolean exitDragonMov) { this.exitDragonMov = exitDragonMov; }
-
 
 }
