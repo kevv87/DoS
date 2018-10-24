@@ -69,8 +69,6 @@ public class DragonHorde{
     public void moveHorde(){
         for(int i=0; i<Horde.size(); i++){
             Dragon TMP = Horde.get(i);
-            System.out.println("CANTIDAD: " + Horde.size());
-            System.out.println("ID: "+i+" Edad: " +Horde.get(i).getEdad());
             TMP.setPosX(TMP.getPosX()-2);
             TMP.setTranslateX(TMP.getPosX());
         }

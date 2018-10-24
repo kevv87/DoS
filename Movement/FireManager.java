@@ -68,7 +68,7 @@ public class FireManager {
 
                         Enemies.setExitDragonMov(true);
 
-                        Thread.sleep(2000);
+                        //Thread.sleep(2000);
                         System.out.println("pasé");
 
                         Enemies.setExitDragonMov(false);
