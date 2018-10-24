@@ -5,6 +5,9 @@ import Actors.factories.dragons.Dragon;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import java.util.ArrayList;
+
+import javafx.scene.layout.AnchorPane;
+
 import java.util.LinkedList;
 import logic.AsignadorParametros;
 
@@ -12,7 +15,8 @@ public class DragonHorde{
     private int SpawningPointX = 1290;
     private int SpawningPointY = 0;
     private int PosX = 1290;
-    private ArrayList<Actors.factories.dragons.Dragon> Horde = new ArrayList<>();
+    private ArrayList<Dragon> Horde = new ArrayList<>();
+    
     private volatile boolean exitDragonMov = false;
     /**
      * Constructor principal de la clase
@@ -24,6 +28,7 @@ public class DragonHorde{
      * @param windowH Altura de la ventana de juego
      */
     public DragonHorde(Pane pane,int A, int B, int C, int columnas, double windowH){
+
         if(Horde.isEmpty()) {
             int total = A+B+C;
             int dragonsPerColumn = total/columnas;

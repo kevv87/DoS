@@ -12,18 +12,28 @@ import javafx.stage.Stage;
 import java.util.concurrent.TimeUnit;
 import java.sql.Time;
 import java.util.HashMap;
+
+import javafx.scene.layout.AnchorPane;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.Node;
 
+
 public class Main extends Application{
     //Screen
-    private  HashMap<KeyCode, Boolean> keys = new HashMap<>();
+
+    static AnchorPane root = new AnchorPane();
+    Scene scene;
+    Image BGImage = new Image(getClass().getResourceAsStream("background24.jpg"));
+    ImageView Background = new ImageView(BGImage);
+
     static Pane root = new Pane();
     private Scene scene;
     private Image BGImage = new Image(getClass().getResourceAsStream("background24.jpg"));
     private ImageView Background = new ImageView(BGImage);
+
     //Player
     private Hero player = new Hero();
     //Enemies
@@ -38,13 +48,22 @@ public class Main extends Application{
         root.setPrefSize(1366, 768);
         Background.setFitWidth(1366);
         Background.setFitHeight(768);
+        System.out.println(root);
+        System.out.println(root.getChildren());
         root.getChildren().add(Background);
+         System.out.println(root.getChildren());
         player.setTranslateY(250);
         root.getChildren().add(player);
+
+         System.out.println(root.getChildren());
+        Enemies = new DragonHorde(9, (AnchorPane) root);
+        enemyMovement.start();
+
         Enemies = new DragonHorde(root,3,3,3,3,Background.getFitHeight());
         enemyMovement.start(); //THREAD
         fireManager = new FireManager(root, Background.getFitWidth(), Enemies);
         fireMovement.start(); // THREAD
+
         scene = new Scene(root);
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> {
