@@ -5,12 +5,22 @@
  */
 package Interfaz;
 
+import Movement.DragonHorde;
+import Movement.Hero;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import static jdk.nashorn.internal.objects.NativeDebug.getClass;
 
 /**
  * FXML Controller class
@@ -20,13 +30,15 @@ import javafx.scene.text.Font;
 public class PantallaJuegoController implements Initializable {
 
     @FXML
-    private Color x2;
+    public AnchorPane paneljuego;
     @FXML
-    private Font x1;
+    private AnchorPane panellateral1;
     @FXML
     private Color x21;
     @FXML
     private Font x11;
+    @FXML
+    private AnchorPane panellateral2;
     @FXML
     private Color x22;
     @FXML
@@ -35,13 +47,12 @@ public class PantallaJuegoController implements Initializable {
     private Color x4;
     @FXML
     private Font x3;
-
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+      
     }    
     
 }

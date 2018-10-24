@@ -1,52 +1,76 @@
-package Movement;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Interfaz;
 
+import Movement.DragonHorde;
+import Movement.Hero;
+import java.io.IOException;
+import static java.lang.Thread.sleep;
+import java.util.HashMap;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import java.util.HashMap;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
-public class Main extends Application{
-    //Screen
+/**
+ *
+ * @author Tomás
+ */
+public class InterfazJuego extends Application {
     private  HashMap<KeyCode, Boolean> keys = new HashMap<>();
-    static AnchorPane root = new AnchorPane();
     Scene scene;
-    Image BGImage = new Image(getClass().getResourceAsStream("background24.jpg"));
-    ImageView Background = new ImageView(BGImage);
+     @FXML
+     AnchorPane foo;
     //Player
     Hero player = new Hero();
     //Enemies
     DragonHorde Enemies;
-
-    //       _______________
-    //______/New game screen
-    public void newGame(){
-        root.setPrefSize(1366, 768);
-        Background.setFitWidth(1366);
-        Background.setFitHeight(768);
-        System.out.println(root);
-        System.out.println(root.getChildren());
-        root.getChildren().add(Background);
-         System.out.println(root.getChildren());
+    @Override
+    public void start(Stage primaryStage) throws IOException {
+        
+        FXMLLoader inicio =  new FXMLLoader(getClass().getResource("PantallaJuego.fxml"));
+        Parent hola = inicio.load();
+        this.foo = (AnchorPane)inicio.getNamespace().get("paneljuego");
+        this.scene = new Scene(hola);
+          newGame();
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                movePlayer();
+            }
+        };
+        timer.start();
+        primaryStage.setResizable(false);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+ public void newGame() throws IOException{
         player.setTranslateY(250);
-        root.getChildren().add(player);
-         System.out.println(root.getChildren());
-        Enemies = new DragonHorde(9, (AnchorPane) root);
+        System.out.println(foo);
+        foo.getChildren().add(player);
+        Enemies = new DragonHorde(9, foo);
         enemyMovement.start();
-        scene = new Scene(root);
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> {
             keys.put(event.getCode(), false);
         });
     }
-
-
-    //       _____________
+//       _____________
     //______/Hero control
     public boolean isPressed(KeyCode key){
         return keys.getOrDefault(key, false);
@@ -86,22 +110,11 @@ public class Main extends Application{
         }
     };
 
-    @Override
-    public void start(Stage primaryStage) throws  Exception{
-        newGame();
-        AnimationTimer timer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                movePlayer();
-            }
-        };
-        timer.start();
-        primaryStage.setTitle("GAME OF SORTS");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
-    public static  void  main(String[] args){
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
         launch(args);
     }
+    
 }

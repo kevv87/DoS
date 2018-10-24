@@ -3,6 +3,7 @@ package Movement;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import java.util.ArrayList;
+import javafx.scene.layout.AnchorPane;
 
 public class DragonHorde{
     private int SpawningPointX = 1290;
@@ -10,7 +11,7 @@ public class DragonHorde{
     private int PosX = 1290;
     private ArrayList<Dragon> Horde = new ArrayList<>();
 
-    public DragonHorde(int HordeSize, Pane pane){
+    public DragonHorde(int HordeSize, AnchorPane pane){
         if(Horde.isEmpty()) {
             for (int i = 0; i < HordeSize; i++) {
                 Dragon newDragon = new Dragon(SpawningPointX, SpawningPointY);

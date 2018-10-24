@@ -36,14 +36,9 @@ public class PantallaInicioController implements Initializable {
 
     @FXML
     private void mostrar_pant_juego(ActionEvent event) throws IOException {
-        
-        Parent inicio = FXMLLoader.load(getClass().getResource("PantallaJuego.fxml"));
-         Scene juego = new Scene(inicio);
-         Stage vent = new Stage();
-         vent.setResizable(false); 
-         vent.setScene(juego);
-         vent.show();
-         Stage cierre = (Stage) iniciar.getScene().getWindow();
+        InterfazJuego accionar = new InterfazJuego();
+        Stage cierre = (Stage) iniciar.getScene().getWindow();
+        accionar.start(cierre);
         cierre.close();
         
     }
