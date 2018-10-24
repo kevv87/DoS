@@ -78,10 +78,12 @@ public class Main extends Application{
         }
         if(isPressed(KeyCode.F)){
 
+
             Fire fire = new Fire(player.getPosX()+300, player.getPosY()+250);
             addToPane(fire);
             fireManager.getFriendlyFireList().add(fire);
             Thread.sleep(60);
+
 
         }
 
@@ -91,10 +93,12 @@ public class Main extends Application{
     Thread enemyMovement = new Thread(){
         @Override
         public void run() {
-            while (Enemies.getPosX()>-76 && Enemies.getExitDragonMov()==false){ //PUEDE SER EL LAG DEL THREAD
+            while (Enemies.getPosX()>-76){ //PUEDE SER EL LAG DEL THREAD
                 try{
-                    sleep(50);
-                    Enemies.moveHorde();
+                    if (Enemies.getExitDragonMov()==false) {
+                        sleep(50);
+                        Enemies.moveHorde();
+                    }
                 }
                 catch (Exception E){
 

@@ -26,6 +26,7 @@ public class DragonA extends Dragon{
         this.edad = 1; // Podria estar en un rango de 1 a 1000
         this.resistencia = 1;
         this.tipo = "A";
+
         this.x = x;
         this.y = y;
         width = 76;

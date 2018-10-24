@@ -89,7 +89,6 @@ public class Sorter {
                 if (arr[j] <= pivot)
                 {
                     i++;
-
                     // swap arr[i] and arr[j]
                     int temp = arr[i];
                     arr[i] = arr[j];
@@ -101,12 +100,6 @@ public class Sorter {
             int temp = arr[i+1];
             arr[i+1] = arr[high];
             arr[high] = temp;
-
             return i+1;
         }
-
-
-
-
-
 }

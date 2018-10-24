@@ -9,7 +9,7 @@ import utils.*;
 
 public class DragonHorde{
     private int SpawningPointX = 1290;
-    private int SpawningPointY = 0;
+    private int SpawningPointY = 20;
     private int PosX = 1290;
     private LinkedList<Dragon> Horde = new LinkedList<>();
     private volatile boolean exitDragonMov = false;
@@ -23,6 +23,7 @@ public class DragonHorde{
      * @param columnas Cantidad de columnas 
      * @param windowH Altura de la ventana de juego
      */
+
     public DragonHorde(Pane pane, int A, int B, int C, int columnas, double windowH){
         if(Horde.isEmpty()) {
             int total = A+B+C;
@@ -53,7 +54,7 @@ public class DragonHorde{
                 newDragon.setTranslateY(newDragon.getPosY());
                 pane.getChildren().add(newDragon);
             }
-            SpawningPointY=0;
+            SpawningPointY=20;
             SpawningPointX+=76; 
         }
             AsignadorParametros asignador = new AsignadorParametros(Horde);

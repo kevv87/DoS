@@ -16,6 +16,7 @@ import Actors.factories.dragons.Dragon;
  * @author Sebastián
  * @param <T> Tipo de dato
  */
+
 //@XmlRootElement
 //@XmlSeeAlso(DragonToSend.class)
 public class Nodo<T> {  //Nodo generico para usar con distintos elementos
@@ -26,6 +27,7 @@ public class Nodo<T> {  //Nodo generico para usar con distintos elementos
      * Constructor
      * @param obj Objeto del tipo de dato establecido
      */
+
     public Nodo(T obj){
         Elemento=obj;
         Siguiente=null;
@@ -34,6 +36,7 @@ public class Nodo<T> {  //Nodo generico para usar con distintos elementos
     /**
      * Dummy constuctor
      */
+
     Nodo() {
         Elemento=null;
         Siguiente=null;
@@ -44,6 +47,7 @@ public class Nodo<T> {  //Nodo generico para usar con distintos elementos
         return Elemento;
     }
 
+    
     public Nodo getSiguiente() {
         return Siguiente;
     }
@@ -57,5 +61,6 @@ public class Nodo<T> {  //Nodo generico para usar con distintos elementos
         this.Siguiente = siguiente;
     }
 
-
+    
+    
 }
