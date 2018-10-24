@@ -35,6 +35,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import logger.Logging;
 import utils.LinkedList;
 
 import javax.xml.bind.JAXBException;
@@ -64,6 +65,7 @@ public class InterfazJuego extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         client.sendMessage("Start");
+        Logging.log("info","Iniciando juego");
         FXMLLoader inicio =  new FXMLLoader(getClass().getResource("PantallaJuego.fxml"));
         Parent padre = inicio.load();
         this.foo = (AnchorPane)inicio.getNamespace().get("paneljuego");
@@ -87,6 +89,7 @@ public class InterfazJuego extends Application {
     }
 
     public void newGame() throws IOException, JAXBException {
+        Logging.log("info","Juego iniciado");
         player.setTranslateY(250);
         foo.getChildren().add(player);
         Enemies = new DragonHorde(foo, client.getDragons());

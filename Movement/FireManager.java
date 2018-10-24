@@ -4,6 +4,7 @@ import Actors.factories.DragonFactory;
 import Actors.factories.dragons.Dragon;
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
+import logger.Logging;
 import logic.Sorter;
 
 import java.lang.reflect.Field;
@@ -51,6 +52,7 @@ public class FireManager {
             for(Dragon enemy:Enemies.getHorde()){
                 boolean interseccion = fire.getBoundsInParent().intersects(enemy.getBoundsInParent());
                 if(interseccion){
+                    Logging.log("info","Dragon "+enemy.getName()+" eliminado");
                     if (idAlineacion%5==0) { //primer Caso de eliminacion
 
                         listaDragonPos.clear();
@@ -69,7 +71,7 @@ public class FireManager {
                         Enemies.setExitDragonMov(true);
 
                         //Thread.sleep(2000);
-                        System.out.println("pasé");
+
 
                         Enemies.setExitDragonMov(false);
                         //Acomodo VISUAL

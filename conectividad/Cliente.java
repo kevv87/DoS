@@ -18,6 +18,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import logger.Logging;
 import utils.LinkedList;
 import utils.Nodo;
 
@@ -62,6 +63,7 @@ public class Cliente {
         String respuesta = get_response(conn);
 
         LinkedList<DragonToSend> response = xmlToObject(respuesta);
+        Logging.log("info","Nueva oleada de " + response.getTamanio() + " dragones");
         return DragonToSend_to_Dragon(response);
     }
 
@@ -192,7 +194,7 @@ public class Cliente {
         LinkedList<Dragon> result = new LinkedList<>();
 
         while(aux!=null){
-            
+
             result.add(DragonFactory.getDragon((DragonToSend) aux.getElemento()));
             aux = aux.getSiguiente();
 

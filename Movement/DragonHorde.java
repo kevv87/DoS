@@ -33,7 +33,7 @@ public class DragonHorde{
         if(Horde.isEmpty()) {
             int total = A+B+C;
             int dragonsPerColumn = total/columnas;
-            System.out.println(windowH);
+
             while(dragonsPerColumn*76+SpawningPointY>windowH){
                 columnas++;
                 dragonsPerColumn = total/columnas;
@@ -51,7 +51,7 @@ public class DragonHorde{
                     newDragon = DragonFactory.getDragon("C", SpawningPointX, SpawningPointY, "probe", null);
                     C--;
                 }
-                System.out.println(newDragon.getPosY());
+
                 Horde.add(newDragon);
                 SpawningPointY+=76;
                 newDragon.setTranslateX(newDragon.getPosX());
@@ -71,7 +71,7 @@ public class DragonHorde{
      * @param dragons Lista de dragones hecha.
      * */
     public DragonHorde(Pane pane, utils.LinkedList<Dragon> dragons){
-        System.out.println(dragons.getTamanio());
+
         Nodo aux = dragons.getInicio();
         Dragon newDragon;
         while(aux!=null){
