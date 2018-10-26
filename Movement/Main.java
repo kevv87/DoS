@@ -52,7 +52,6 @@ public class Main extends Application{
         });
     }
 
-
     //       _____________
     //______/Hero control
     public boolean isPressed(KeyCode key){

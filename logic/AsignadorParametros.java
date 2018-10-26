@@ -2,10 +2,54 @@ package logic;
 
 
 import Actors.factories.dragons.Dragon;
+
 import java.util.LinkedList;
 import java.util.Random;
 
 public class AsignadorParametros {
+
+    public class NodoHijo {
+
+        private int id;
+        private int c_hijos;
+        private NodoHijo siguiente;
+
+        public NodoHijo(){
+            id = 0;
+            c_hijos = 2;
+            siguiente = null;
+        }
+
+        public NodoHijo(int id){
+            this.id = id;
+            c_hijos = 2;
+            siguiente = null;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public int getC_hijos() {
+            return c_hijos;
+        }
+
+        public void setC_hijos(int c_hijos) {
+            this.c_hijos = c_hijos;
+        }
+
+        public NodoHijo getSiguiente() {
+            return siguiente;
+        }
+
+        public void setSiguiente(NodoHijo siguiente) {
+            this.siguiente = siguiente;
+        }
+    }
 
     private int[] arregloEdades;
     private int[] arregloVelocidades;
@@ -33,6 +77,76 @@ public class AsignadorParametros {
     }
 
     //FUNCIONES PRINCIPALES
+
+    public void asignaPadres(LinkedList<Dragon> listaRecorrido){
+
+        LinkedList<NodoHijo> listaPosiblesPadres = new LinkedList<>();
+        LinkedList<NodoHijo> listaRecorrido2 = new LinkedList<>();
+        int cont = 0;
+
+        for(Dragon dragon : listaRecorrido){
+            NodoHijo hijo = new NodoHijo(cont);
+            listaPosiblesPadres.add(hijo);
+            listaRecorrido2.add(hijo);
+            cont++;
+        }
+
+        if (Horde.size() > 1){
+
+            //DEFINIR AL PADRE (Omitir caso en el que se seleccione El mismo como padre)
+            boolean bool = true;
+            int idRandomFather = 0;
+            while(bool){
+                idRandomFather = random.nextInt(Horde.size()+1);
+
+                if (idRandomFather != 0){
+                    bool=false;
+                }
+            }
+
+            listaRecorrido2.remove(idRandomFather);
+            listaPosiblesPadres.get(idRandomFather).setC_hijos(1);
+
+            Dragon dragonHijo = Horde.get(0);
+            dragonHijo.setPadre(Horde.get(idRandomFather));
+
+            //listaRecorrido.remove(dragonHijo);
+            listaPosiblesPadres.get(0).setC_hijos(1);
+            listaRecorrido2.remove(0);
+            //DEFINIR RELACIONES DE PADRES ALEATORIAMENTE
+
+            for (NodoHijo dragonRecorrido : listaRecorrido2){
+
+                bool = true;
+                int idRandomNode = 0;
+
+                while(bool){
+                    idRandomNode = random.nextInt(listaPosiblesPadres.size()+1);
+                    if (dragonRecorrido.getId() != listaPosiblesPadres.get(idRandomNode).getId()){
+                        if(Horde.get(listaPosiblesPadres.get(idRandomNode).getId()).getPadre()!=Horde.get(dragonRecorrido.getId())) {
+                            bool = false;
+                        }
+                    }
+                }
+
+                NodoHijo limiteHijos = listaPosiblesPadres.get(idRandomNode);
+
+                if (limiteHijos.getC_hijos() > 1){
+
+                    Horde.get(dragonRecorrido.getId()).setPadre(Horde.get(limiteHijos.getId()));
+                    limiteHijos.setC_hijos(limiteHijos.getC_hijos()-1);
+
+
+                }
+
+                else if(limiteHijos.getC_hijos() == 1){
+
+                    Horde.get(dragonRecorrido.getId()).setPadre(Horde.get(limiteHijos.getId()));
+                    listaPosiblesPadres.remove(limiteHijos);
+                }
+            }
+        }
+    }
 
     public void asignaEdad(){
 

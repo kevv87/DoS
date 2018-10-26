@@ -147,7 +147,6 @@ public class Sorter {
             //Nueva lista ordenada
             cont = 0;
             while (cont < tamanoListaDragones){
-
                 for (Dragon dragon : listaDragones) {
                     if (dragon.getVelocidad_recarga()==arregloVelocidades[cont]){
                         nuevaLista.add(dragon);

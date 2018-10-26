@@ -60,6 +60,7 @@ public class DragonHorde{
             AsignadorParametros asignador = new AsignadorParametros(Horde);
             asignador.asignaEdad();
             asignador.asignaVelocidad();
+            asignador.asignaPadres(Horde);
         }
     }
 
