@@ -66,12 +66,12 @@ public class FireManager {
 
                         listaDragonPos.remove(Enemies.getHorde().size()); //ELIMINA ULTIMO DRAGON
 
-                        Enemies.setExitDragonMov(true);
+                        //Enemies.setExitDragonMov(true);
 
                         //Thread.sleep(2000);
                         System.out.println("pasé");
 
-                        Enemies.setExitDragonMov(false);
+                        //Enemies.setExitDragonMov(false);
                         //Acomodo VISUAL
 
 

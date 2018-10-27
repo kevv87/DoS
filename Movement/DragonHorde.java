@@ -17,8 +17,7 @@ public class DragonHorde{
     private int SpawningPointY = 0;
     private int PosX = 1290;
     private ArrayList<Dragon> Horde = new ArrayList<>();
-    
-    private volatile boolean exitDragonMov = false;
+    private boolean enemiesStop = false;
     /**
      * Constructor principal de la clase
      * @param pane Contenedor donde se pondran los dragones
@@ -87,12 +86,15 @@ public class DragonHorde{
     }
 
     public void moveHorde(){
-        for(int i=0; i<Horde.size(); i++){
-            Dragon TMP = Horde.get(i);
-            TMP.setPosX(TMP.getPosX()-0.4);
-            TMP.setTranslateX(TMP.getPosX());
+        if(enemiesStop==false){
+            for(int i=0; i<Horde.size(); i++){
+                Dragon TMP = Horde.get(i);
+                TMP.setPosX(TMP.getPosX()-0.3);
+                TMP.setTranslateX(TMP.getPosX());
+            }
+            PosX = PosX-2;
         }
-        PosX = PosX-2;
+
     }
 
     public int getSpawningPointY() {
@@ -113,7 +115,11 @@ public class DragonHorde{
 
     public void setHorde(ArrayList<Dragon> Horde) {this.Horde=Horde; }
 
-    public boolean getExitDragonMov(){return exitDragonMov; }
+    public boolean isEnemiesStop() {
+        return enemiesStop;
+    }
 
-    public void setExitDragonMov(boolean exitDragonMov) { this.exitDragonMov = exitDragonMov; }
+    public void setEnemiesStop(boolean enemiesStop) {
+        this.enemiesStop = enemiesStop;
+    }
 }

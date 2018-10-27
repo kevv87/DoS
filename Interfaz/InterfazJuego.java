@@ -34,6 +34,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import utils.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.xml.bind.JAXBException;
 
@@ -50,8 +52,16 @@ public class InterfazJuego extends Application {
     Hero player = new Hero();
     //Enemies
     DragonHorde Enemies;
-    boolean enemiesStop=false;
     private ScrollingBG map = new ScrollingBG();
+    //Disparos
+    private boolean fEnabled = true;
+    private Timer playerT = new Timer();
+    private TimerTask enableFire = new TimerTask() {
+        @Override
+        public void run() {
+            fEnabled=true;
+        }
+    };
 
     private static FireManager fireManager;
     private Cliente client = new Cliente();
@@ -75,9 +85,7 @@ public class InterfazJuego extends Application {
             public void handle(long now) {
                 try {
                     movePlayer();
-                    if(enemiesStop==false){
-                        Enemies.moveHorde();
-                    }
+                    Enemies.moveHorde();
                     fireManager.moveFire();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -96,7 +104,7 @@ public class InterfazJuego extends Application {
         foo.getChildren().add(map.getBG3());
         player.setTranslateY(250);
         foo.getChildren().add(player);
-        Enemies = new DragonHorde(foo, 33,33,34, 3,671);
+        Enemies = new DragonHorde(foo, 100,100,100, 3,671);
         fireManager = new FireManager(foo, width, Enemies);
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> {
@@ -111,7 +119,7 @@ public class InterfazJuego extends Application {
     }
 
     public void movePlayer() throws InterruptedException {
-        if ((isPressed(KeyCode.W) || isPressed(KeyCode.UP)) && player.getPosY()>-260){
+        if ((isPressed(KeyCode.W) || isPressed(KeyCode.UP)) && player.getPosY()>-300){
             player.moveY(-2);
             player.setPosY(player.getPosY()-2);
         }
@@ -134,11 +142,12 @@ public class InterfazJuego extends Application {
                 player.setPosX(player.getPosX()-2);
             }
         }
-        if(isPressed(KeyCode.F)){
-            Fire fire = new Fire(player.getPosX()+300, player.getPosY()+250);
+        if(isPressed(KeyCode.F) && fEnabled){
+            fEnabled=false;
+            Fire fire = new Fire(player.getPosX()+136, player.getPosY()+340);
             addToPane(fire);
             fireManager.getFriendlyFireList().add(fire);
-            Thread.sleep(60);
+            playerT.scheduleAtFixedRate(enableFire, 0, 300);
         }
     }
 
