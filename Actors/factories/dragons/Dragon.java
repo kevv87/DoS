@@ -136,8 +136,4 @@ public abstract class Dragon extends Pane{
     public void setPosY(double y){
         this.y = y;
     }
-
-    public int getEdad() {return edad;}
-
-    public void setEdad(int edad){ this.edad = edad; }
 }
