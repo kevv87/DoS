@@ -6,10 +6,8 @@
 package Interfaz;
 
 import Actors.factories.dragons.Dragon;
-import Movement.DragonHorde;
-import Movement.Fire;
-import Movement.FireManager;
-import Movement.Hero;
+import Movement.*;
+
 import java.io.IOException;
 
 
@@ -52,6 +50,9 @@ public class InterfazJuego extends Application {
     Hero player = new Hero();
     //Enemies
     DragonHorde Enemies;
+    boolean enemiesStop=false;
+    private ScrollingBG map = new ScrollingBG();
+
     private static FireManager fireManager;
     private Cliente client = new Cliente();
     double width;
@@ -74,25 +75,29 @@ public class InterfazJuego extends Application {
             public void handle(long now) {
                 try {
                     movePlayer();
-                } catch (InterruptedException e) {
+                    if(enemiesStop==false){
+                        Enemies.moveHorde();
+                    }
+                    fireManager.moveFire();
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         };
         timer.start();
-        FireManager.moveFire();
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
     public void newGame() throws IOException, JAXBException {
+        foo.getChildren().add(map.getBG1());
+        foo.getChildren().add(map.getBG2());
+        foo.getChildren().add(map.getBG3());
         player.setTranslateY(250);
         foo.getChildren().add(player);
-        Enemies = new DragonHorde(foo, client.getDragons());
-        enemyMovement.start(); //THREAD
+        Enemies = new DragonHorde(foo, 33,33,34, 3,671);
         fireManager = new FireManager(foo, width, Enemies);
-        fireMovement.start(); // THREAD
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> {
             keys.put(event.getCode(), false);
@@ -106,66 +111,36 @@ public class InterfazJuego extends Application {
     }
 
     public void movePlayer() throws InterruptedException {
-        if ((isPressed(KeyCode.W) || isPressed(KeyCode.UP)) && player.getPosY()>-250-50){
+        if ((isPressed(KeyCode.W) || isPressed(KeyCode.UP)) && player.getPosY()>-260){
             player.moveY(-2);
             player.setPosY(player.getPosY()-2);
         }
-        if ((isPressed(KeyCode.S) || isPressed(KeyCode.DOWN)) && player.getPosY()<294){
+        if ((isPressed(KeyCode.S) || isPressed(KeyCode.DOWN)) && player.getPosY()<260){
             player.moveY(2);
             player.setPosY(player.getPosY()+2);
         }
 
-        if ((isPressed(KeyCode.D) || isPressed(KeyCode.RIGHT)) && player.getPosX()<973-player.getWidth()){
-            player.moveX(2);
-            player.setPosX(player.getPosX()+2);
+        if ((isPressed(KeyCode.D) || isPressed(KeyCode.RIGHT))){
+            map.move(1);
+            if(player.getPosX()<830){
+                player.moveX(2);
+                player.setPosX(player.getPosX()+2);
+            }
         }
-        if ((isPressed(KeyCode.A) || isPressed(KeyCode.LEFT)) && player.getPosX()>-75){
-            player.moveX(-2);
-            player.setPosX(player.getPosX()-2);
+        if ((isPressed(KeyCode.A) || isPressed(KeyCode.LEFT))){
+            map.move(-1);
+            if(player.getPosX()>-20){
+                player.moveX(-2);
+                player.setPosX(player.getPosX()-2);
+            }
         }
         if(isPressed(KeyCode.F)){
-
             Fire fire = new Fire(player.getPosX()+300, player.getPosY()+250);
             addToPane(fire);
             fireManager.getFriendlyFireList().add(fire);
             Thread.sleep(60);
-
-
         }
     }
-
-    Thread enemyMovement = new Thread(){
-        @Override
-        public void run() {
-            while (Enemies.getPosX()>-76){
-                try{
-                    sleep(50);
-                    Enemies.moveHorde();
-                }
-                catch (Exception E){
-
-                }
-            }
-        }
-    };
-
-    Thread fireMovement = new Thread(){
-        @Override
-
-
-        public void run() {
-
-            while (true){
-                try{
-                    sleep(10);
-                    FireManager.moveFire();
-                }
-                catch (Exception E){
-
-                }
-            }
-        }
-    };
 
     public void addToPane(Fire toad){
 

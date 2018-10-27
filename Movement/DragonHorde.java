@@ -89,7 +89,7 @@ public class DragonHorde{
     public void moveHorde(){
         for(int i=0; i<Horde.size(); i++){
             Dragon TMP = Horde.get(i);
-            TMP.setPosX(TMP.getPosX()-2);
+            TMP.setPosX(TMP.getPosX()-0.4);
             TMP.setTranslateX(TMP.getPosX());
         }
         PosX = PosX-2;
@@ -116,6 +116,4 @@ public class DragonHorde{
     public boolean getExitDragonMov(){return exitDragonMov; }
 
     public void setExitDragonMov(boolean exitDragonMov) { this.exitDragonMov = exitDragonMov; }
-
-
 }
