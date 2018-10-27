@@ -2,13 +2,81 @@ package logic;
 
 import Actors.factories.DragonFactory;
 import Actors.factories.dragons.Dragon;
+import utils.ArbolBinario;
+import utils.NodoArbol;
 
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 public class Sorter {
 
     private static Random random = new Random();
+
+    public class Listas {
+
+        private LinkedList<Dragon> listaHorde;
+        private LinkedList<Dragon> listaHordePosicion;
+
+        public LinkedList<Dragon> getListaHorde() {
+            return listaHorde;
+        }
+
+        public void setListaHorde(LinkedList<Dragon> listaHorde) {
+            this.listaHorde = listaHorde;
+        }
+
+        public LinkedList<Dragon> getListaHordePosicion() {
+            return listaHordePosicion;
+        }
+
+        public void setListaHordePosicion(LinkedList<Dragon> listaHordePosicion) {
+            this.listaHordePosicion = listaHordePosicion;
+        }
+
+    }
+        public static Listas arbolB(LinkedList<Dragon> listaDragones, LinkedList<Dragon> listaDragonesCopia){
+
+            //LIST TO TREE both parameters
+            Queue<Dragon> colaDragones = new LinkedList<>();
+            ArbolBinario arbolBinario = new ArbolBinario();
+            Dragon padre = DragonFactory.getDragon("A",0,0,"A1",null);
+                //primer caso:
+            for (Dragon dragon : listaDragones){
+                if (dragon.getPadre() == null){
+                    padre = dragon;
+                }
+            }
+
+            colaDragones.add(padre);
+            listaDragones.remove(padre);
+            arbolBinario.insert(null,padre);
+            while (colaDragones.isEmpty()==false){
+
+                for (Dragon dragon: listaDragones){
+                    if (dragon.getPadre()==((LinkedList<Dragon>) colaDragones).getFirst()){
+                        //localiza en el arbol al padre, e inserta el hijo
+                        NodoArbol nodoPadre = arbolBinario.iterativeSearch(((LinkedList<Dragon>) colaDragones).getFirst());
+                        arbolBinario.insert(nodoPadre,dragon);
+                        colaDragones.add(dragon);
+                    }
+                }
+                ((LinkedList<Dragon>) colaDragones).pop();
+            }
+
+            //ARBOL A: RECORRE PRE-ORDEN TO LIST -> listaHorde
+
+
+            //ARBOL B: Asigna posiciones: copia de Enemies.getHorde
+
+
+            //RECORRE PRE-ORDEN TO LIST -> listaHordePos
+
+            arbolBinario.preorderPrint(arbolBinario.getRaiz());
+            return null;
+
+        }
+
 
         public static LinkedList<Dragon> quickSort(LinkedList<Dragon> listaDragones){
 

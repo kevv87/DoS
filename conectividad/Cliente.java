@@ -50,7 +50,7 @@ class Cliente {
 
         while(aux!=null){
             lista_enviar.add(DragonFactory.getDragon((Dragon)aux.getElemento()));
-            aux = aux.getSiguiente();
+            aux = aux.getListaHordePosicion();
         }
 
         try {

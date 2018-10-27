@@ -73,7 +73,7 @@ public class FireManager {
 
                         boolean bool = false;
                         int cont = 0;
-                        SorterDisplayer.acomodoVisualSort(Enemies,listaDragonPos,cont,bool);
+                        SorterDisplayer.acomodoVisualSort2(Enemies,bool);
 
                         //Vuelve a correr el Thread del movimiento de la Horde
                         Enemies.setExitDragonMov(false);

@@ -97,7 +97,7 @@ public class AsignadorParametros {
             boolean bool = true;
             int idRandomFather = 0;
             while(bool){
-                idRandomFather = random.nextInt(Horde.size()+1);
+                idRandomFather = random.nextInt(Horde.size());
 
                 if (idRandomFather != 0){
                     bool=false;
@@ -121,7 +121,7 @@ public class AsignadorParametros {
                 int idRandomNode = 0;
 
                 while(bool){
-                    idRandomNode = random.nextInt(listaPosiblesPadres.size()+1);
+                    idRandomNode = random.nextInt(listaPosiblesPadres.size());
                     if (dragonRecorrido.getId() != listaPosiblesPadres.get(idRandomNode).getId()){
                         if(Horde.get(listaPosiblesPadres.get(idRandomNode).getId()).getPadre()!=Horde.get(dragonRecorrido.getId())) {
                             bool = false;
@@ -179,7 +179,6 @@ public class AsignadorParametros {
     public void printArray(){
         for (int i:arregloEdades){
             System.out.print(i + " ");
-
         }
     }
 

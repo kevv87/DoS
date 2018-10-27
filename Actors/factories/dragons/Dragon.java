@@ -36,7 +36,7 @@ public abstract class Dragon extends Pane{
     protected int height;
     protected Image dragon = new Image(getClass().getResourceAsStream("Dragon.gif"));
     protected ImageView dragonIV = new ImageView(dragon);
-
+    public int id;
 
  
 

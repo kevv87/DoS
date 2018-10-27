@@ -32,6 +32,7 @@ public class DragonA extends Dragon{
         height = 76;
         dragonIV.setViewport(new Rectangle2D(0,0, width, height));
         getChildren().addAll(dragonIV);
+        id = 0;
     }
 
     public void moveX(int x){

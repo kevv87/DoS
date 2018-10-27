@@ -5,7 +5,7 @@ import Actors.factories.dragons.Dragon;
 
 public class NodoArbol {
 
-    private Dragon dradon;
+    private Dragon dragon;
     private NodoArbol padre;
     private NodoArbol hijoIzq;
     private NodoArbol hijoDer;
@@ -15,7 +15,7 @@ public class NodoArbol {
      * Constructor por default
      */
     public NodoArbol(){
-        this.dradon = DragonFactory.getDragon("A",0,0,"A1",null);
+        this.dragon = DragonFactory.getDragon("A",0,0,"A1",null);
         padre = null;
         hijoDer = null;
         hijoIzq = null;
@@ -26,19 +26,19 @@ public class NodoArbol {
      * @param dragon valor asignado
      */
     public NodoArbol(Dragon dragon){
-        this.dradon = dragon;
+        this.dragon = dragon;
         padre = null;
         hijoDer = null;
         hijoIzq = null;
     }
 
     //GETTERS AND SETTERS
-    public Dragon getDradon() {
-        return dradon;
+    public Dragon getDragon() {
+        return dragon;
     }
 
-    public void setDradon(Dragon dradon) {
-        this.dradon = dradon;
+    public void setDragon(Dragon dragon) {
+        this.dragon = dragon;
     }
 
     public NodoArbol getPadre() {

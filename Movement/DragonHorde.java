@@ -13,6 +13,8 @@ public class DragonHorde{
     private int PosX = 1290;
     private LinkedList<Dragon> Horde = new LinkedList<>();
     private volatile boolean exitDragonMov = false;
+    private int columnas = 0;
+    private int dragonsPerColum = 0;
 
     /**
      * Constructor principal de la clase
@@ -26,6 +28,7 @@ public class DragonHorde{
 
     public DragonHorde(Pane pane, int A, int B, int C, int columnas, double windowH){
         if(Horde.isEmpty()) {
+
             int total = A+B+C;
             int dragonsPerColumn = total/columnas;
             System.out.println(windowH);
@@ -33,7 +36,9 @@ public class DragonHorde{
                 columnas++;
                 dragonsPerColumn = total/columnas;
             }
-            System.out.println(columnas);
+            this.columnas = columnas;
+            this.dragonsPerColum = dragonsPerColumn;
+
             for(int j = 0; j<columnas;j++){
             for (int i = 0; i<dragonsPerColumn; i++){
                 Actors.factories.dragons.Dragon newDragon;
@@ -47,7 +52,7 @@ public class DragonHorde{
                     newDragon = DragonFactory.getDragon("C", SpawningPointX, SpawningPointY, "probe", null);
                     C--;
                 }
-                System.out.println("Y pos: " + newDragon.getPosY());
+
                 Horde.add(newDragon);
                 SpawningPointY+=76;
                 newDragon.setTranslateX(newDragon.getPosX());
@@ -79,8 +84,15 @@ public class DragonHorde{
         for(Dragon dragon : dragonLinkedList){
             dragonLinkedListCopy.add(dragon.copy(dragon));
         }
-
         return dragonLinkedListCopy;
+    }
+
+    public int getColumnas() {
+        return columnas;
+    }
+
+    public int getDragonsPerColum() {
+        return dragonsPerColum;
     }
 
     public int getSpawningPointY() {
@@ -104,5 +116,4 @@ public class DragonHorde{
     public boolean getExitDragonMov(){return exitDragonMov; }
 
     public void setExitDragonMov(boolean exitDragonMov) { this.exitDragonMov = exitDragonMov; }
-
 }
