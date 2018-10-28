@@ -7,13 +7,9 @@ package Interfaz;
 
 import Actors.factories.dragons.Dragon;
 import Movement.*;
-
 import java.io.IOException;
-
-
 import static java.lang.Thread.sleep;
 import java.util.HashMap;
-
 import conectividad.Cliente;
 import com.sun.security.ntlm.NTLMException;
 import javafx.animation.AnimationTimer;
@@ -33,10 +29,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import utils.LinkedList;
+import logic.AVLTree;
+
+import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
-
+import java.util.concurrent.TimeUnit;
 import javax.xml.bind.JAXBException;
 
 /**
@@ -52,6 +50,7 @@ public class InterfazJuego extends Application {
     Hero player = new Hero();
     //Enemies
     DragonHorde Enemies;
+    LinkedList<Dragon> firingEnemies;
     private ScrollingBG map = new ScrollingBG();
     //Disparos
     private boolean fEnabled = true;
@@ -62,11 +61,14 @@ public class InterfazJuego extends Application {
             fEnabled=true;
         }
     };
+    private long start;
+    private long end;
 
     private static FireManager fireManager;
     private Cliente client = new Cliente();
     double width;
     double height;
+
 
     public InterfazJuego() throws NTLMException {
     }
@@ -84,9 +86,11 @@ public class InterfazJuego extends Application {
             @Override
             public void handle(long now) {
                 try {
+                    end=System.currentTimeMillis();
                     movePlayer();
                     Enemies.moveHorde();
                     fireManager.moveFire();
+                    Enemies.fire((end-start)/1000, foo, firingEnemies);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -110,7 +114,7 @@ public class InterfazJuego extends Application {
         scene.setOnKeyReleased(event -> {
             keys.put(event.getCode(), false);
         });
-
+        start=System.currentTimeMillis();
     }
 //       _____________
     //______/Hero control
@@ -147,7 +151,7 @@ public class InterfazJuego extends Application {
             Fire fire = new Fire(player.getPosX()+136, player.getPosY()+340);
             addToPane(fire);
             fireManager.getFriendlyFireList().add(fire);
-            playerT.scheduleAtFixedRate(enableFire, 0, 400);
+            playerT.scheduleAtFixedRate(enableFire, 1000, 400);
         }
     }
 
@@ -169,5 +173,8 @@ public class InterfazJuego extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
+    public static FireManager getFireManager() {
+        return fireManager;
+    }
 }

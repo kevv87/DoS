@@ -21,7 +21,8 @@ public class DragonA extends Dragon{
      * @param padre BolaFuego padre, null si no tiene
      */
     public DragonA(double x, double y, String nombre, Dragon padre) {
-        this.velocidad_recarga = 77;  // Podria estar en un rango de 77 a 100
+        this.velocidad_recarga = 	(int)(Math.random() * ((20 - 3) + 1)) + 3;  // Podria estar en un rango de 1 a 10
+        this.elapsedT = this.velocidad_recarga;
         this.edad = 1; // Podria estar en un rango de 1 a 1000
         this.resistencia = 1;
         this.tipo = "A";

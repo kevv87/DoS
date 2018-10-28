@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public abstract class Dragon extends Pane{
     protected String name;
     protected int velocidad_recarga;
+    protected int elapsedT;
     protected int edad;
     protected int resistencia;
     protected String tipo;
@@ -34,9 +35,11 @@ public abstract class Dragon extends Pane{
     protected int height;
     protected Image dragon = new Image(getClass().getResourceAsStream("Dragon.gif"));
     protected ImageView dragonIV = new ImageView(dragon);
+    protected Double NewPosX;
+    protected Double NewPosY;
 
 
- 
+
 
     public boolean isAlive() {
         return alive;
@@ -45,7 +48,7 @@ public abstract class Dragon extends Pane{
     public void setAlive(boolean alive) {
         this.alive = alive;
     }
-    
+
 
     public void setImage_url(String image_url) {
         this.image_url = image_url;
@@ -124,17 +127,40 @@ public abstract class Dragon extends Pane{
     public double getPosX(){
         return x;
     }
-    
+
     public double getPosY(){
         return y;
     }
-    
+
     public void setPosX(double x){
         this.x = x;
     }
-    
+
     public void setPosY(double y){
         this.y = y;
     }
 
+    public Double getNewPosX() {
+        return NewPosX;
+    }
+
+    public void setNewPosX(Double newPosX) {
+        NewPosX = newPosX;
+    }
+
+    public Double getNewPosY() {
+        return NewPosY;
+    }
+
+    public void setNewPosY(Double newPosY) {
+        NewPosY = newPosY;
+    }
+
+    public int getElapsedT() {
+        return elapsedT;
+    }
+
+    public void setElapsedT(int elapsedT) {
+        this.elapsedT = elapsedT;
+    }
 }

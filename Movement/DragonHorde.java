@@ -2,6 +2,7 @@ package Movement;
 
 import Actors.factories.DragonFactory;
 import Actors.factories.dragons.Dragon;
+import Interfaz.InterfazJuego;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import java.util.ArrayList;
@@ -18,13 +19,14 @@ public class DragonHorde{
     private double PosX = 1290;
     private ArrayList<Dragon> Horde = new ArrayList<>();
     private boolean enemiesStop = false;
+    private FireManager fireManager;
     /**
      * Constructor principal de la clase
      * @param pane Contenedor donde se pondran los dragones
      * @param A Cantidad de dragones tipo A
      * @param B Cantidad de dragones tipo B
      * @param C Cantidad de dragones tipo C
-     * @param columnas Cantidad de columnas 
+     * @param columnas Cantidad de columnas
      * @param windowH Altura de la ventana de juego
      */
     public DragonHorde(Pane pane,int A, int B, int C, int columnas, double windowH){
@@ -58,7 +60,7 @@ public class DragonHorde{
                 pane.getChildren().add(newDragon);
             }
             SpawningPointY=0;
-            SpawningPointX+=76; 
+            SpawningPointX+=76;
         }
             AsignadorParametros asignador = new AsignadorParametros(Horde);
             asignador.asignaEdad();
@@ -94,7 +96,41 @@ public class DragonHorde{
             }
             PosX = PosX-0.3;
         }
+    }
 
+    public void fire(double elapsedT, Pane pane, LinkedList<Dragon> firingEnemies){
+        for(int i=0; i<firingEnemies.size(); i++){
+            Dragon TMP = firingEnemies.get(i);
+            if(TMP.getElapsedT()<=elapsedT){
+                Fire fire = new Fire(TMP.getPosX(), TMP.getPosY());
+                pane.getChildren().add(fire);
+                fireManager= InterfazJuego.getFireManager();
+                fireManager.getFoeFireList().add(fire);
+                TMP.setElapsedT((int)(elapsedT+TMP.getVelocidad_recarga()));
+            }
+        }
+    }
+
+    public void rearrangeHorde(){
+        for(int i=0; i<Horde.size(); i++){
+            Dragon TMP = Horde.get(i);
+            if(TMP.getNewPosX()!=TMP.getPosX()){
+                if(TMP.getNewPosX()>TMP.getPosX()){
+                    TMP.setPosX(TMP.getPosX()+0.1);
+                } else {
+                    TMP.setPosX(TMP.getPosX()-0.1);
+                }
+                TMP.setTranslateX(TMP.getPosX());
+            }
+            if(TMP.getNewPosY()!=TMP.getPosY()){
+                if(TMP.getNewPosY()>TMP.getPosY()){
+                    TMP.setPosY(TMP.getPosY()+0.1);
+                } else {
+                    TMP.setPosY(TMP.getPosY()-0.1);
+                }
+                TMP.setTranslateY(TMP.getPosY());
+            }
+        }
     }
 
     public int getSpawningPointY() {
