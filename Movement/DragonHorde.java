@@ -28,7 +28,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import logic.AsignadorParametros;
 import sun.awt.image.ImageWatched;
-import utils.LinkedList;
 
 import utils.Nodo;
 
@@ -128,6 +127,17 @@ public class DragonHorde{
 
             }
         };
+        int total = dragons.getTamanio();
+        System.out.println(total);
+        int columnas = 1;
+        int dragonsPerColumn = total/columnas;
+        int windowH = 671;
+            while(dragonsPerColumn*76+SpawningPointY>windowH){
+                columnas++;
+                dragonsPerColumn = total/columnas;
+            }
+            this.columnas = columnas;
+            this.dragonsPerColum = dragonsPerColumn;
         System.out.println(dragons.getTamanio());
         Nodo aux = dragons.getInicio();
         Dragon newDragon;
@@ -143,7 +153,7 @@ public class DragonHorde{
         AsignadorParametros asignador = new AsignadorParametros(Horde);
         asignador.asignaEdad();
       asignador.asignaVelocidad();
-      asignador.asignaPadres();
+      //asignador.asignaPadres(Horde);
         asignador.asignaNombre();
         mostrar_arbol(Horde);
     }
@@ -174,25 +184,20 @@ public class DragonHorde{
 
     public int getDragonsPerColum() { return dragonsPerColum; }
 
-    public double getPosX() {
-        return PosX;
-    }
 
-    public void mostrar_arbol(java.util.ArrayList<Dragon> lista){
-        LinkedList<String> names = new LinkedList<>();
+
+    public void mostrar_arbol(java.util.LinkedList<Dragon> lista){
+        utils.LinkedList<String> names = new utils.LinkedList<String>();
         for(Dragon dragon:lista){
             names.add(dragon.getName());
         }
         Btree TreeB = new Btree();
         TreeB.insertion(names);
-        System.out.println(TreeB.print());
         this.textArea.setText("\n\n\n\n"+TreeB.print());
 
     }
 
-    public ArrayList<Dragon> getHorde() {
-        return Horde;
-    }
+
 
 
     public int getSpawningPointY() { return SpawningPointY; }

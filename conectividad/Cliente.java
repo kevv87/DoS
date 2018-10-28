@@ -1,6 +1,4 @@
 package conectividad;
-
-
 import Actors.factories.DragonFactory;
 import Actors.factories.dragons.Dragon;
 import Actors.factories.dragons.DragonToSend;
@@ -15,10 +13,10 @@ import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.util.Objects;
 
-//import javax.xml.bind.JAXBContext;
-//import javax.xml.bind.JAXBException;
-//import javax.xml.bind.Marshaller;
-//import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 
 import Logger.Logging;
@@ -32,21 +30,11 @@ import utils.Nodo;
  * Codigo de XML parsing tomado de: https://howtodoinjava.com/jaxb/write-object-to-xml/
  * @author Kevin Zeledon
  * */
-
-/**
-
-
-class Cliente {
-
 public class Cliente {
-
     private static final String url = "http://localhost:9080/Server1_war_exploded/Servlet";
 
-    private static final String url = "http://192.168.100.61:9080/Server1_war_exploded/Servlet";
-
-
     public Cliente(){
-        
+
     }
 
     public static void main(String[] args) throws UnsupportedEncodingException, JAXBException {
@@ -98,7 +86,7 @@ public class Cliente {
 
         while(aux!=null){
             lista_enviar.add(DragonFactory.getDragon((Dragon)aux.getElemento()));
-            aux = aux.getListaHordePosicion();
+            aux = aux.getSiguiente();
         }
 
         try {
@@ -113,8 +101,15 @@ public class Cliente {
         }
         catch(IOException | JAXBException e) { System.err.println(e);return null; }
 
+            /*
+            // GET to test whether POST worked
+            conn = get_connection(url+payload, "GET");  //Agarra la posicion 0 de la lista del server
+            conn.addRequestProperty("accept", "text/xml");
+            conn.connect();
+            get_response(conn);*/
 
-        }
+
+    }
 
 
 
@@ -124,7 +119,12 @@ public class Cliente {
             out.writeBytes(payload);
             out.flush();
 
-
+            /*
+            // GET to test whether POST worked
+            conn = get_connection(url+payload, "GET");  //Agarra la posicion 0 de la lista del server
+            conn.addRequestProperty("accept", "text/xml");
+            conn.connect();
+            get_response(conn);*/
 
 
         }
@@ -151,8 +151,11 @@ public class Cliente {
                     new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String next = null;
             while ((next = reader.readLine()) != null){
-                xml += next;
+                    xml += next;
+
+
             }
+            System.out.println(xml);
             return xml;
         }
         catch(IOException e) { System.err.println(e); return null;}
@@ -204,7 +207,7 @@ public class Cliente {
         LinkedList<Dragon> result = new LinkedList<>();
 
         while(aux!=null){
-            
+
             result.add(DragonFactory.getDragon((DragonToSend) aux.getElemento()));
             aux = aux.getSiguiente();
 
@@ -214,5 +217,3 @@ public class Cliente {
     }
 
 }
-
-*/

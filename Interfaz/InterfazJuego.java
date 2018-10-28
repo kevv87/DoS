@@ -22,8 +22,9 @@ import java.io.UnsupportedEncodingException;
 
 import java.util.HashMap;
 
-//import conectividad.Cliente;
-//import com.sun.security.ntlm.NTLMException;
+import conectividad.Cliente;
+import com.sun.security.ntlm.NTLMException;
+import com.sun.security.ntlm.NTLMException;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -63,18 +64,13 @@ import utils.LinkedList;
 
 //import javax.xml.bind.JAXBException;
 
-
-
 import java.util.Timer;
 import java.util.TimerTask;
-
-
-
-
 
 import Logger.Logging;
 import javafx.stage.WindowEvent;
 
+import javax.xml.bind.JAXBException;
 
 
 /**
@@ -96,7 +92,7 @@ public class InterfazJuego extends Application {
 
 
     private ScrollingBG map = new ScrollingBG();
-    int c = 0;
+    int c = 0;  // Columna weon
     //Disparos
     private boolean fEnabled = true;
     private Timer playerT = new Timer();
@@ -118,15 +114,11 @@ public class InterfazJuego extends Application {
     double height;
 
 
-    public InterfazJuego() /** throws NTLMException*/ {
-
     private boolean pause_b = false;
-    private static int ordenamiento = 0;
+    private static int ordenamiento = -1;
 
 
-    public InterfazJuego() throws NTLMException {
 
-    }
 
     @Override
 
@@ -150,6 +142,7 @@ public class InterfazJuego extends Application {
         });
 
 
+        Cliente client =  new Cliente();
         client.sendMessage("Start");
         Logging.log("info","Iniciando juego");
 
@@ -174,6 +167,9 @@ public class InterfazJuego extends Application {
             public void handle(long now) {
                 try {
                    switch(ordenamiento){
+                       case -1:
+                           mostrar_layout("No ordenado");
+                           break;
                        case 0:
                            mostrar_layout("Linked List por edades");
                            break;
@@ -249,6 +245,7 @@ public class InterfazJuego extends Application {
 
 
         Enemies = new DragonHorde(foo, infodragon,textarea, cliente.getDragons());
+        System.out.println(Enemies.getHorde().size());
 
 
         fireManager = new FireManager(foo, width, Enemies);
@@ -297,13 +294,12 @@ public class InterfazJuego extends Application {
             }
         }
 
-        if(isPressed(KeyCode.F) || command.equals("f") && fEnabled && !pause_b){
+        if(isPressed(KeyCode.F) && fEnabled && !pause_b){
 
             fEnabled=false;
             Fire fire = new Fire(player.getPosX()+136, player.getPosY()+340);
             addToPane(fire);
             fireManager.getFriendlyFireList().add(fire);
-
             playerT.scheduleAtFixedRate(enableFire, 1000, 400);
 
         }
@@ -311,18 +307,22 @@ public class InterfazJuego extends Application {
 
 
         if (isPressed(KeyCode.P)) {
+            //System.out.println("P");
             pause_b = !pause_b;
             if (pause_b) {
 
                 for(Dragon dragon:Enemies.getHorde()){
                     Text texto = new Text();
                     switch (ordenamiento){
+                        case -1:
+                            texto.setText("N/A");
+                            break;
                         case 0:
                             texto.setText("Edad: "+dragon.getEdad());
                             texto.setY(76);
                             break;
                         case 1:
-                            texto.setText("Velocidad de recarga: "+dragon.getVelocidad_recarga());
+                            texto.setText("Velocidad: "+"\n"+dragon.getVelocidad_recarga());
                             texto.setY(76);
                             break;
                         case 2:

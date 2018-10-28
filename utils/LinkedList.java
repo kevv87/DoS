@@ -7,9 +7,9 @@ package utils;
 
 
 
-//import javax.xml.bind.annotation.XmlElement;
-//import javax.xml.bind.annotation.XmlRootElement;
-//import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import Actors.factories.dragons.Dragon;
 import Actors.factories.dragons.DragonToSend;
 
@@ -32,7 +32,7 @@ import java.util.function.Consumer;
  *  Clase encargada de crear listas de datos genéricas
  * @author Sebastián
  */
-//@XmlRootElement
+@XmlRootElement
 public class LinkedList<T>{ //Lista para nodos genericos
 
     private Nodo<T> Inicio;
