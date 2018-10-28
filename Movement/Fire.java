@@ -26,8 +26,8 @@ public class Fire extends Pane{
         setTranslateY(y);
         Image fire = new Image(getClass().getResourceAsStream("playerfire.gif"));
         ImageView pepaIV = new ImageView(fire);
-        pepaIV.setFitWidth(30);
-        pepaIV.setFitHeight(30);
+        pepaIV.setFitWidth(40);
+        pepaIV.setFitHeight(40);
         getChildren().addAll(pepaIV);
     }
     

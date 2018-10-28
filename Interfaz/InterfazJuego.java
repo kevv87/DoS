@@ -104,7 +104,7 @@ public class InterfazJuego extends Application {
         foo.getChildren().add(map.getBG3());
         player.setTranslateY(250);
         foo.getChildren().add(player);
-        Enemies = new DragonHorde(foo, 100,100,100, 3,671);
+        Enemies = new DragonHorde(foo, 30,30,30, 3,671);
         fireManager = new FireManager(foo, width, Enemies);
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> {
@@ -147,7 +147,7 @@ public class InterfazJuego extends Application {
             Fire fire = new Fire(player.getPosX()+136, player.getPosY()+340);
             addToPane(fire);
             fireManager.getFriendlyFireList().add(fire);
-            playerT.scheduleAtFixedRate(enableFire, 0, 300);
+            playerT.scheduleAtFixedRate(enableFire, 0, 400);
         }
     }
 

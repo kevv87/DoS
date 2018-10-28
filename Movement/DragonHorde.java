@@ -15,7 +15,7 @@ import utils.Nodo;
 public class DragonHorde{
     private int SpawningPointX = 1290;
     private int SpawningPointY = 0;
-    private int PosX = 1290;
+    private double PosX = 1290;
     private ArrayList<Dragon> Horde = new ArrayList<>();
     private boolean enemiesStop = false;
     /**
@@ -92,7 +92,7 @@ public class DragonHorde{
                 TMP.setPosX(TMP.getPosX()-0.3);
                 TMP.setTranslateX(TMP.getPosX());
             }
-            PosX = PosX-2;
+            PosX = PosX-0.3;
         }
 
     }
@@ -105,7 +105,7 @@ public class DragonHorde{
         SpawningPointY = spawningPointY;
     }
 
-    public int getPosX() {
+    public double getPosX() {
         return PosX;
     }
 
