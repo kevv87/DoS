@@ -151,7 +151,11 @@ public class InterfazJuego extends Application {
             Fire fire = new Fire(player.getPosX()+136, player.getPosY()+340);
             addToPane(fire);
             fireManager.getFriendlyFireList().add(fire);
-            playerT.scheduleAtFixedRate(enableFire, 1000, 400);
+            try{
+                playerT.scheduleAtFixedRate(enableFire, 1000, 400);
+            } catch (Exception E){
+                
+            }
         }
     }
 

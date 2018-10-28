@@ -99,14 +99,16 @@ public class DragonHorde{
     }
 
     public void fire(double elapsedT, Pane pane, LinkedList<Dragon> firingEnemies){
-        for(int i=0; i<firingEnemies.size(); i++){
-            Dragon TMP = firingEnemies.get(i);
-            if(TMP.getElapsedT()<=elapsedT){
-                Fire fire = new Fire(TMP.getPosX(), TMP.getPosY());
-                pane.getChildren().add(fire);
-                fireManager= InterfazJuego.getFireManager();
-                fireManager.getFoeFireList().add(fire);
-                TMP.setElapsedT((int)(elapsedT+TMP.getVelocidad_recarga()));
+        if(firingEnemies!=null){
+            for(int i=0; i<firingEnemies.size(); i++){
+                Dragon TMP = firingEnemies.get(i);
+                if(TMP.getElapsedT()<=elapsedT){
+                    Fire fire = new Fire(TMP.getPosX(), TMP.getPosY());
+                    pane.getChildren().add(fire);
+                    fireManager= InterfazJuego.getFireManager();
+                    fireManager.getFoeFireList().add(fire);
+                    TMP.setElapsedT((int)(elapsedT+TMP.getVelocidad_recarga()));
+                }
             }
         }
     }
