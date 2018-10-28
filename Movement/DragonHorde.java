@@ -107,7 +107,7 @@ public class DragonHorde{
      * */
     public DragonHorde(Pane pane, Label layoutactual, TextArea textArea, utils.LinkedList<Dragon> dragons){
         this.textArea = textArea;
-        EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {87g
+        EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
                 Dragon dragonClicked = ((Dragon)(e.getSource()));

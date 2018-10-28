@@ -37,10 +37,13 @@ import utils.Nodo;
 
 
 class Cliente {
-=======
+
 public class Cliente {
->>>>>>> aa1e5f6e8386fb51490f3a949570c2154fb41cd1
+
     private static final String url = "http://localhost:9080/Server1_war_exploded/Servlet";
+
+    private static final String url = "http://192.168.100.61:9080/Server1_war_exploded/Servlet";
+
 
     public Cliente(){
         
