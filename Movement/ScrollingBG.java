@@ -25,7 +25,6 @@ public class ScrollingBG{
             backgroundIV.setFitWidth(978);
             backgroundIV.setFitHeight(671);
             getChildren().add(backgroundIV);
-            setTranslateX(x);
             setPosition(x);
         }
 
@@ -35,7 +34,7 @@ public class ScrollingBG{
 
         public void setPosition(int position) {
             this.position = position;
-            setTranslateX(position-2);
+            setTranslateX(position);
         }
     }
 
@@ -45,14 +44,17 @@ public class ScrollingBG{
                 if(rightMost==BG3){
                     BG1.setPosition(BG3.getPosition()+960);
                     rightMost=BG1;
+                    leftMost=BG2;
                 }
                 else if(rightMost==BG1){
                     BG2.setPosition(BG1.getPosition()+960);
                     rightMost=BG2;
+                    leftMost=BG3;
                 }
                 else if(rightMost==BG2){
                     BG3.setPosition(BG2.getPosition()+960);
                     rightMost=BG3;
+                    leftMost=BG1;
                 }
                 posX=0;
             }
@@ -64,19 +66,21 @@ public class ScrollingBG{
             }
         }
         else{
-            if(posX==950){
+            if(posX==960){
                 if(leftMost==BG1){
-                    System.out.println("No lo está haciendo RICK");
-                    BG3.setPosition(BG1.getPosition()-966);
+                    BG3.setPosition(BG1.getPosition()-960);
                     leftMost=BG3;
+                    rightMost=BG2;
                 }
                 else if(leftMost==BG3){
-                    BG2.setPosition(BG3.getPosition()-966);
+                    BG2.setPosition(BG3.getPosition()-960);
                     leftMost=BG2;
+                    rightMost=BG1;
                 }
                 else if(leftMost==BG2){
-                    BG1.setPosition(BG2.getPosition()-966);
+                    BG1.setPosition(BG2.getPosition()-960);
                     leftMost=BG1;
+                    rightMost=BG3;
                 }
                 posX=0;
             }
@@ -90,11 +94,12 @@ public class ScrollingBG{
     }
 
     public ScrollingBG(){
-        BG1 = new Background(-966);
+        BG1 = new Background(-960);
         BG2 = new Background(0);
-        BG3 = new Background(966);
+        BG3 = new Background(960);
         leftMost=BG1;
         rightMost=BG3;
+        posX=0;
     }
 
     public Background getBG1() {

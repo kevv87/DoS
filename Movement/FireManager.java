@@ -89,6 +89,7 @@ public class FireManager {
                         //Acomodo por Insertion
                         Enemies.setHorde(sorter.insertionSort(Enemies.getHorde()));
 
+
                         //Acomodo VISUAL
 
 
@@ -104,7 +105,7 @@ public class FireManager {
                         break;
                     }
 
-                    if (idAlineacion%3 == 2) { //primer Caso de eliminacion
+                    else if (idAlineacion%3 == 2) { //primer Caso de eliminacion
 
                         Enemies.getHorde().remove(enemy); //remover de ArrayList
                         remove(enemy);//remover enemigo del Pane
@@ -114,6 +115,9 @@ public class FireManager {
                         //Acomodo por QUICKSORT
                         Enemies.setHorde(sorter.quickSort(Enemies.getHorde()));
 
+                        //Enemies.setExitDragonMov(true);
+
+                        //Enemies.setExitDragonMov(false);
 
                         //Acomodo VISUAL
 

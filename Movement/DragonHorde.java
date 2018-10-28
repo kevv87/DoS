@@ -15,7 +15,7 @@ public class DragonHorde{
     private int SpawningPointX = 1290;
     private int SpawningPointY = 20;
     private double PosX = 1290;
-    private boolean enemiesStop=false;
+    private volatile boolean enemiesStop=false;
     private LinkedList<Dragon> Horde = new LinkedList<>();
 
     private volatile boolean exitDragonMov = false;
@@ -98,13 +98,14 @@ public class DragonHorde{
     }
 
     public void moveHorde(){
-        
-        for(int i=0; i<Horde.size(); i++){
-            Dragon TMP = Horde.get(i);
-            TMP.setPosX(TMP.getPosX()-0.3);
-            TMP.setTranslateX(TMP.getPosX());
+        if(enemiesStop==false){
+            for(int i=0; i<Horde.size(); i++){
+                Dragon TMP = Horde.get(i);
+                TMP.setPosX(TMP.getPosX()-0.3);
+                TMP.setTranslateX(TMP.getPosX());
+            }
+            PosX = PosX-2;
         }
-        PosX = PosX-0.3;
     }
 /*
     public LinkedList<Dragon> copyHorde(LinkedList<Dragon> dragonLinkedList){
@@ -116,39 +117,22 @@ public class DragonHorde{
         return dragonLinkedListCopy;
     }*/
 
-    public int getColumnas() {
-        return columnas;
-    }
+    public int getColumnas(){ return columnas; }
 
-    public boolean isEnemiesStop() { return enemiesStop; }
 
-    public int getDragonsPerColum() {
-        return dragonsPerColum;
-    }
+    public int getDragonsPerColum() { return dragonsPerColum; }
 
-    public int getSpawningPointY() {
-        return SpawningPointY;
-    }
+    public int getSpawningPointY() { return SpawningPointY; }
 
-    public void setSpawningPointY(int spawningPointY) {
-        SpawningPointY = spawningPointY;
-    }
+    public void setSpawningPointY(int spawningPointY) { SpawningPointY = spawningPointY; }
 
-    public double getPosX() {
-        return PosX;
-    }
+    public double getPosX() { return PosX; }
 
     public LinkedList<Dragon> getHorde() { return Horde; }
 
-
-
     public void setHorde(LinkedList<Dragon> Horde) {this.Horde=Horde; }
 
-    public boolean getExitDragonMov(){return exitDragonMov; }
-
-    public void setExitDragonMov(boolean exitDragonMov) { this.exitDragonMov = exitDragonMov; }
+    public boolean isEnemiesStop() { return enemiesStop; }
 
     public void setEnemiesStop(boolean enemiesStop) { this.enemiesStop = enemiesStop; }
-
-
 }

@@ -36,9 +36,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import utils.LinkedList;
+
 //import javax.xml.bind.JAXBException;
 import java.util.Timer;
 import java.util.TimerTask;
+
+
+
 
 /**
  * @author Tomas
@@ -53,6 +57,7 @@ public class InterfazJuego extends Application {
     Hero player = new Hero();
     //Enemies
     DragonHorde Enemies;
+
 
     private ScrollingBG map = new ScrollingBG();
     //int c = 0;
@@ -89,6 +94,7 @@ public class InterfazJuego extends Application {
                 try {
                     movePlayer();
                     Enemies.moveHorde();
+
                     /**
                     if(Enemies.isEnemiesStop()==false){
                         Enemies.moveHorde();
@@ -104,6 +110,7 @@ public class InterfazJuego extends Application {
                         //SorterDisplayer.acomodoVisualSort2(Enemies,false);
                     }
                      */
+
                     fireManager.moveFire();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -122,7 +129,9 @@ public class InterfazJuego extends Application {
         foo.getChildren().add(map.getBG3());
         player.setTranslateY(250);
         foo.getChildren().add(player);
+
         Enemies = new DragonHorde(foo, 33,33,33, 3,671);
+
         fireManager = new FireManager(foo, width, Enemies);
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> {
@@ -137,7 +146,7 @@ public class InterfazJuego extends Application {
     }
 
     public void movePlayer() throws InterruptedException {
-        if ((isPressed(KeyCode.W) || isPressed(KeyCode.UP)) && player.getPosY()>-260){
+        if ((isPressed(KeyCode.W) || isPressed(KeyCode.UP)) && player.getPosY()>-300){
             player.moveY(-2);
             player.setPosY(player.getPosY()-2);
         }
@@ -165,7 +174,7 @@ public class InterfazJuego extends Application {
             Fire fire = new Fire(player.getPosX()+136, player.getPosY()+340);
             addToPane(fire);
             fireManager.getFriendlyFireList().add(fire);
-            playerT.scheduleAtFixedRate(enableFire, 0, 3000);
+            playerT.scheduleAtFixedRate(enableFire, 0, 300);
         }
     }
 

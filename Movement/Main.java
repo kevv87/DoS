@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.Node;
-
+/**
 public class Main extends Application{
     //Screen
     private  HashMap<KeyCode, Boolean> keys = new HashMap<>();
@@ -161,8 +161,6 @@ public class Main extends Application{
             
         });   
     }
-    
-    
-    
 
 }
+*/
