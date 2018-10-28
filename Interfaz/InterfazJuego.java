@@ -114,7 +114,7 @@ public class InterfazJuego extends Application {
     public void mostrar_arbol(LinkedList lista){
         Btree TreeB = new Btree();
         TreeB.insertion(lista);
-        this.textarea.setText(TreeB.print());
+        this.textarea.setText("\n\n\n\n"+TreeB.print());
      
     }
     public void mostrar_layout(String a){
