@@ -18,7 +18,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+
 import Logger.Logging;
+
 import utils.LinkedList;
 import utils.Nodo;
 
@@ -49,7 +51,9 @@ public class Cliente {
         String payload = URLEncoder.encode("message","UTF-8") + "=" + URLEncoder.encode(message,"UTF-8");
 
         send_requests(payload, conn);
+
         get_response(conn);
+
 
 
 
@@ -64,7 +68,10 @@ public class Cliente {
         String respuesta = get_response(conn);
 
         LinkedList<DragonToSend> response = xmlToObject(respuesta);
+
         Logging.log("info", "Nueva oleada de " + response.getTamanio() + " dragones.");
+
+
         return DragonToSend_to_Dragon(response);
     }
 
@@ -121,7 +128,9 @@ public class Cliente {
 
 
         }
-        catch(IOException | NullPointerException e) { System.out.println(e); }
+
+        catch(IOException | NullPointerException e) { System.err.println(e); }
+
     }
 
     private HttpURLConnection get_connection(String url_string, String verb) {

@@ -14,7 +14,9 @@ import java.io.IOException;
 
 import static java.lang.Thread.sleep;
 
+
 import java.io.UnsupportedEncodingException;
+
 import java.util.HashMap;
 
 import conectividad.Cliente;
@@ -22,22 +24,41 @@ import com.sun.security.ntlm.NTLMException;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+
+import javafx.scene.control.Button;
+import javafx.scene.control.Control;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import utils.LinkedList;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.xml.bind.JAXBException;
 
+
 import Logger.Logging;
 import javafx.stage.WindowEvent;
+
 
 /**
  *
@@ -58,7 +79,9 @@ public class InterfazJuego extends Application {
     private Timer playerT = new Timer();
     private static String controlCommand = "n";
 
+
     private Cliente cliente = new Cliente();
+
     private TimerTask enableFire = new TimerTask() {
         @Override
         public void run() {
@@ -70,8 +93,10 @@ public class InterfazJuego extends Application {
     private Cliente client = new Cliente();
     double width;
     double height;
+
     private boolean pause_b = false;
     private static int ordenamiento = 0;
+
 
     public InterfazJuego() throws NTLMException {
     }
@@ -82,6 +107,7 @@ public class InterfazJuego extends Application {
         // Conexion con arduino
         Connection main = new Connection();
         main.initialize();
+
 
 
         primaryStage.setOnCloseRequest((WindowEvent event1) -> {
@@ -95,6 +121,7 @@ public class InterfazJuego extends Application {
 
         client.sendMessage("Start");
         Logging.log("info","Iniciando juego");
+
         FXMLLoader inicio =  new FXMLLoader(getClass().getResource("PantallaJuego.fxml"));
         Parent padre = inicio.load();
         this.foo = (AnchorPane)inicio.getNamespace().get("paneljuego");
@@ -105,10 +132,12 @@ public class InterfazJuego extends Application {
             public void handle(long now) {
                 try {
                     movePlayer();
+
                     if(!pause_b){
                         Enemies.moveHorde();
                         fireManager.moveFire();
                     }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -126,7 +155,9 @@ public class InterfazJuego extends Application {
         foo.getChildren().add(map.getBG3());
         player.setTranslateY(250);
         foo.getChildren().add(player);
+
         Enemies = new DragonHorde(foo, cliente.getDragons());
+
         fireManager = new FireManager(foo, width, Enemies);
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> {
@@ -142,36 +173,45 @@ public class InterfazJuego extends Application {
 
     public void movePlayer() throws InterruptedException {
         String command = InterfazJuego.getControlCommand();
+
         if ((isPressed(KeyCode.W) || isPressed(KeyCode.UP)  && player.getPosY()>-300 && !pause_b)){
             player.moveY(-2);
             player.setPosY(player.getPosY()-2);
         }
         if ((isPressed(KeyCode.S) || isPressed(KeyCode.DOWN) && player.getPosY()<260 && !pause_b)){
+
             player.moveY(2);
             player.setPosY(player.getPosY()+2);
         }
 
+
         if ((isPressed(KeyCode.D) || isPressed(KeyCode.RIGHT) && !pause_b)){
+
             map.move(1);
             if(player.getPosX()<830){
                 player.moveX(2);
                 player.setPosX(player.getPosX()+2);
             }
         }
+
         if ((isPressed(KeyCode.A) || isPressed(KeyCode.LEFT) && !pause_b)){
+
             map.move(-1);
             if(player.getPosX()>-20){
                 player.moveX(-2);
                 player.setPosX(player.getPosX()-2);
             }
         }
+
         if(isPressed(KeyCode.F) || command.equals("f") && fEnabled && !pause_b){
+
             fEnabled=false;
             Fire fire = new Fire(player.getPosX()+136, player.getPosY()+340);
             addToPane(fire);
             fireManager.getFriendlyFireList().add(fire);
             playerT.scheduleAtFixedRate(enableFire, 0, 400);
         }
+
 
 
         if (isPressed(KeyCode.P)) {
@@ -221,6 +261,7 @@ public class InterfazJuego extends Application {
             Thread.sleep(100);
 
         }
+
 
 
         //Control
@@ -278,6 +319,7 @@ public class InterfazJuego extends Application {
         InterfazJuego.controlCommand = controlCommand;
     }
 
+
     /**
      * Finaliza el juego
      * */
@@ -292,6 +334,7 @@ public class InterfazJuego extends Application {
     public static void nextOrden(){
         ordenamiento = (ordenamiento+1)%5;
     }
+
 
 
 }
