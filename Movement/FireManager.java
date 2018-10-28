@@ -2,6 +2,7 @@ package Movement;
 
 import Actors.factories.DragonFactory;
 import Actors.factories.dragons.Dragon;
+import Interfaz.InterfazJuego;
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 import logic.Sorter;
@@ -51,7 +52,8 @@ public class FireManager {
             for(Dragon enemy:Enemies.getHorde()){
                 boolean interseccion = fire.getBoundsInParent().intersects(enemy.getBoundsInParent());
                 if(interseccion){
-                    if (idAlineacion%5==0) { //primer Caso de eliminacion
+
+                    InterfazJuego.nextOrden();
 
                         listaDragonPos.clear();
                         listaDragonPos.addAll(Enemies.getHorde()); //OBTIENE POSICION DE DRAGONES
@@ -77,7 +79,7 @@ public class FireManager {
 
 
                         return;
-                    }
+
                 }
             }
         }

@@ -5,6 +5,7 @@
  */
 package Interfaz;
 
+import Actors.factories.dragons.Dragon;
 import Arduino.Connection;
 import Movement.*;
 
@@ -27,6 +28,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.Timer;
@@ -68,6 +70,8 @@ public class InterfazJuego extends Application {
     private Cliente client = new Cliente();
     double width;
     double height;
+    private boolean pause_b = false;
+    private static int ordenamiento = 0;
 
     public InterfazJuego() throws NTLMException {
     }
@@ -101,8 +105,10 @@ public class InterfazJuego extends Application {
             public void handle(long now) {
                 try {
                     movePlayer();
-                    Enemies.moveHorde();
-                    fireManager.moveFire();
+                    if(!pause_b){
+                        Enemies.moveHorde();
+                        fireManager.moveFire();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -136,35 +142,84 @@ public class InterfazJuego extends Application {
 
     public void movePlayer() throws InterruptedException {
         String command = InterfazJuego.getControlCommand();
-        if ((isPressed(KeyCode.W) || isPressed(KeyCode.UP)  && player.getPosY()>-300)){
+        if ((isPressed(KeyCode.W) || isPressed(KeyCode.UP)  && player.getPosY()>-300 && !pause_b)){
             player.moveY(-2);
             player.setPosY(player.getPosY()-2);
         }
-        if ((isPressed(KeyCode.S) || isPressed(KeyCode.DOWN) && player.getPosY()<260)){
+        if ((isPressed(KeyCode.S) || isPressed(KeyCode.DOWN) && player.getPosY()<260 && !pause_b)){
             player.moveY(2);
             player.setPosY(player.getPosY()+2);
         }
 
-        if ((isPressed(KeyCode.D) || isPressed(KeyCode.RIGHT))){
+        if ((isPressed(KeyCode.D) || isPressed(KeyCode.RIGHT) && !pause_b)){
             map.move(1);
             if(player.getPosX()<830){
                 player.moveX(2);
                 player.setPosX(player.getPosX()+2);
             }
         }
-        if ((isPressed(KeyCode.A) || isPressed(KeyCode.LEFT))){
+        if ((isPressed(KeyCode.A) || isPressed(KeyCode.LEFT) && !pause_b)){
             map.move(-1);
             if(player.getPosX()>-20){
                 player.moveX(-2);
                 player.setPosX(player.getPosX()-2);
             }
         }
-        if(isPressed(KeyCode.F) || command.equals("f") && fEnabled ){
+        if(isPressed(KeyCode.F) || command.equals("f") && fEnabled && !pause_b){
             fEnabled=false;
             Fire fire = new Fire(player.getPosX()+136, player.getPosY()+340);
             addToPane(fire);
             fireManager.getFriendlyFireList().add(fire);
             playerT.scheduleAtFixedRate(enableFire, 0, 400);
+        }
+
+
+        if (isPressed(KeyCode.P)) {
+            pause_b = !pause_b;
+            if (pause_b) {
+
+                for(Dragon dragon:Enemies.getHorde()){
+                    Text texto = new Text();
+                    switch (ordenamiento){
+                        case 0:
+                            texto.setText("Edad: "+dragon.getEdad());
+                            texto.setY(76);
+                            break;
+                        case 1:
+                            texto.setText("Velocidad de recarga: "+dragon.getVelocidad_recarga());
+                            texto.setY(76);
+                            break;
+                        case 2:
+                            texto.setText("Edad: "+dragon.getEdad());
+                            texto.setY(76);
+                            break;
+                        case 3:
+                            if(dragon.getPadre() != null) {
+                                texto.setText("Nombre: " + dragon.getName() + ".Padre: " + dragon.getPadre().getName());
+                            } else{
+                                texto.setText("Huerfano");
+                            }
+                            texto.setY(76);
+                            break;
+                        case 4:
+                            texto.setText("Edad: "+dragon.getEdad());
+                            texto.setY(76);
+                            break;
+                    }
+                    dragon.getChildren().addAll(texto);
+                }
+
+                //enemyMovement.suspend();
+                //fireMovement.suspend();
+            } else {
+                for(Dragon dragon:Enemies.getHorde()){
+                    dragon.getChildren().remove(dragon.getChildren().size()-1);
+                }
+                //enemyMovement.resume();
+                //fireMovement.resume();
+            }
+            Thread.sleep(100);
+
         }
 
 
@@ -232,4 +287,11 @@ public class InterfazJuego extends Application {
         Logger.Logging.log("info","Juego terminado");
         System.exit(0);
     }
+
+
+    public static void nextOrden(){
+        ordenamiento = (ordenamiento+1)%5;
+    }
+
+
 }
