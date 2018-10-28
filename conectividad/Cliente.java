@@ -48,6 +48,7 @@ public class Cliente {
         String payload = URLEncoder.encode("message","UTF-8") + "=" + URLEncoder.encode(message,"UTF-8");
 
         send_requests(payload, conn);
+        get_response(conn);
 
 
 
@@ -118,7 +119,7 @@ public class Cliente {
 
 
         }
-        catch(IOException | NullPointerException e) { System.err.println(e); }
+        catch(IOException | NullPointerException e) { System.out.println(e); }
     }
 
     private HttpURLConnection get_connection(String url_string, String verb) {

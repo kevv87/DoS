@@ -34,6 +34,9 @@ import java.util.TimerTask;
 
 import javax.xml.bind.JAXBException;
 
+import Logger.Logging;
+import javafx.stage.WindowEvent;
+
 /**
  *
  * @author Tomas
@@ -75,6 +78,15 @@ public class InterfazJuego extends Application {
         // Conexion con arduino
         Connection main = new Connection();
         main.initialize();
+
+
+        primaryStage.setOnCloseRequest((WindowEvent event1) -> {
+            try {
+                finish();
+            } catch (JAXBException | UnsupportedEncodingException | NTLMException e) {
+                e.printStackTrace();
+            }
+        });
 
 
         client.sendMessage("Start");
@@ -216,7 +228,7 @@ public class InterfazJuego extends Application {
     public static void finish() throws JAXBException, UnsupportedEncodingException, NTLMException {
         Cliente client = new Cliente();
         client.sendMessage("end");
-        Logger.log("info","Juego terminado");
+        Logger.Logging.log("info","Juego terminado");
         System.exit(0);
     }
 }
