@@ -130,7 +130,7 @@ public class InterfazJuego extends Application {
         player.setTranslateY(250);
         foo.getChildren().add(player);
 
-        Enemies = new DragonHorde(foo, 3,3,3, 3,671);
+        Enemies = new DragonHorde(foo, 5,5,5, 3,671);
 
         fireManager = new FireManager(foo, width, Enemies);
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));

@@ -11,6 +11,7 @@ public class ArbolBinario {
     private int nElementos = 0;
     private NodoArbol temp = raiz;
     private LinkedList<Dragon> listaPreorden = new LinkedList<>();
+    private LinkedList<Dragon> listaDragones = new LinkedList<>(); //Para el sorter (que no elimine del Enemies.getHorde() al padre
 
     /**
      * Constructor por default
@@ -168,5 +169,13 @@ public class ArbolBinario {
 
     public LinkedList<Dragon> getListaPreorden() {
         return listaPreorden;
+    }
+
+    public LinkedList<Dragon> getListaDragones() {
+        return listaDragones;
+    }
+
+    public void setListaDragones(LinkedList<Dragon> listaDragones) {
+        this.listaDragones = listaDragones;
     }
 }

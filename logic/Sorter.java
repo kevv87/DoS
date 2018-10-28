@@ -14,29 +14,34 @@ public class Sorter {
     private static Random random = new Random();
 
     public static LinkedList<Dragon> arbolBinario(LinkedList<Dragon> listaDragones){
-
         //LIST TO TREE both parameters
         Queue<Dragon> colaDragones = new LinkedList<>();
         ArbolBinario arbolBinario = new ArbolBinario();
         Dragon padre = DragonFactory.getDragon("A",0,0,"A1",null);
+
+
         //primer caso:
         for (Dragon dragon : listaDragones){
             if (dragon.getPadre() == null){
                 padre = dragon;
+                break;
             }
         }
-
+        //listaDragones.remove(padre);
         colaDragones.add(padre);
-        listaDragones.remove(padre);
         arbolBinario.insert(null,padre);
         while (colaDragones.isEmpty()==false){
 
             for (Dragon dragon: listaDragones){
-                if (dragon.getPadre()==((LinkedList<Dragon>) colaDragones).getFirst()){
-                    //localiza en el arbol al padre, e inserta el hijo
-                    NodoArbol nodoPadre = arbolBinario.iterativeSearch(((LinkedList<Dragon>) colaDragones).getFirst());
-                    arbolBinario.insert(nodoPadre,dragon);
-                    colaDragones.add(dragon);
+
+                if (dragon != padre) { //REVISAR
+
+                    if (dragon.getPadre() == ((LinkedList<Dragon>) colaDragones).getFirst()) {
+                        //localiza en el arbol al padre, e inserta el hijo
+                        NodoArbol nodoPadre = arbolBinario.iterativeSearch(((LinkedList<Dragon>) colaDragones).getFirst());
+                        arbolBinario.insert(nodoPadre, dragon);
+                        colaDragones.add(dragon);
+                    }
                 }
             }
             ((LinkedList<Dragon>) colaDragones).pop();
