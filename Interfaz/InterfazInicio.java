@@ -24,9 +24,7 @@ public class InterfazInicio extends Application {
          stage.setResizable(false); 
          stage.setScene(iniciar);
          stage.show();
-         
-  
-        
+
     }
 
     /**

@@ -24,10 +24,10 @@ public class Fire extends Pane{
         this.x = x;
         setTranslateX(x);
         setTranslateY(y);
-        Image pepa = new Image(getClass().getResourceAsStream("powerpig.jpg"));
-        ImageView pepaIV = new ImageView(pepa);
-        pepaIV.setViewport(new Rectangle2D(0,0, 30, 30));
-        
+        Image fire = new Image(getClass().getResourceAsStream("playerfire.gif"));
+        ImageView pepaIV = new ImageView(fire);
+        pepaIV.setFitWidth(40);
+        pepaIV.setFitHeight(40);
         getChildren().addAll(pepaIV);
     }
     
