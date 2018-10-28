@@ -6,6 +6,7 @@
 package Interfaz;
 
 import Actors.factories.dragons.Dragon;
+import Arduino.Connection;
 import Movement.*;
 
 import java.io.IOException;
@@ -26,6 +27,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -56,6 +58,7 @@ public class InterfazJuego extends Application {
     //Disparos
     private boolean fEnabled = true;
     private Timer playerT = new Timer();
+    private static String controlCommand = "n";
     private TimerTask enableFire = new TimerTask() {
         @Override
         public void run() {
@@ -73,6 +76,11 @@ public class InterfazJuego extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        // Conexion con arduino
+        Connection main = new Connection();
+        main.initialize();
+
 
         client.sendMessage("Start");
         FXMLLoader inicio =  new FXMLLoader(getClass().getResource("PantallaJuego.fxml"));
@@ -119,11 +127,12 @@ public class InterfazJuego extends Application {
     }
 
     public void movePlayer() throws InterruptedException {
-        if ((isPressed(KeyCode.W) || isPressed(KeyCode.UP)) && player.getPosY()>-300){
+        String command = InterfazJuego.getControlCommand();
+        if ((isPressed(KeyCode.W) || isPressed(KeyCode.UP)  && player.getPosY()>-300)){
             player.moveY(-2);
             player.setPosY(player.getPosY()-2);
         }
-        if ((isPressed(KeyCode.S) || isPressed(KeyCode.DOWN)) && player.getPosY()<260){
+        if ((isPressed(KeyCode.S) || isPressed(KeyCode.DOWN) && player.getPosY()<260)){
             player.moveY(2);
             player.setPosY(player.getPosY()+2);
         }
@@ -142,13 +151,41 @@ public class InterfazJuego extends Application {
                 player.setPosX(player.getPosX()-2);
             }
         }
-        if(isPressed(KeyCode.F) && fEnabled){
+        if(isPressed(KeyCode.F) || command.equals("f") && fEnabled ){
             fEnabled=false;
             Fire fire = new Fire(player.getPosX()+136, player.getPosY()+340);
             addToPane(fire);
             fireManager.getFriendlyFireList().add(fire);
             playerT.scheduleAtFixedRate(enableFire, 0, 400);
         }
+
+
+        //Control
+        if(command.equals("l")){
+            map.move(-1);
+            if(player.getPosX()>-20){
+                player.moveX(-2);
+                player.setPosX(player.getPosX()-2);
+            }
+        }
+        if(command.equals("r")){
+            map.move(1);
+            if(player.getPosX()<830){
+                player.moveX(2);
+                player.setPosX(player.getPosX()+2);
+            }
+        }
+        if(command.equals("a")){
+            player.moveY(2);
+            player.setPosY(player.getPosY()+2);
+        }
+        if(command.equals("u")){
+            player.moveY(-2);
+            player.setPosY(player.getPosY()-2);
+        }
+
+        setControlCommand("n");
+
     }
 
     public void addToPane(Fire toad){
@@ -169,5 +206,12 @@ public class InterfazJuego extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
+    public static String getControlCommand() {
+        return controlCommand;
+    }
+
+    public static void setControlCommand(String controlCommand) {
+        InterfazJuego.controlCommand = controlCommand;
+    }
 }
