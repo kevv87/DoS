@@ -133,6 +133,13 @@ public class DragonHorde{
         }
     }
 
+    public void killFiring(){
+        for(int i=0; i<Horde.size(); i++){
+            Dragon TMP=Horde.get(i);
+            TMP.setCanFire(false);
+        }
+    }
+
     public int getSpawningPointY() {
         return SpawningPointY;
     }

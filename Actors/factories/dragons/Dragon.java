@@ -37,6 +37,7 @@ public abstract class Dragon extends Pane{
     protected ImageView dragonIV = new ImageView(dragon);
     protected Double NewPosX;
     protected Double NewPosY;
+    protected boolean canFire;
 
 
 
@@ -162,5 +163,13 @@ public abstract class Dragon extends Pane{
 
     public void setElapsedT(int elapsedT) {
         this.elapsedT = elapsedT;
+    }
+
+    public boolean isCanFire() {
+        return canFire;
+    }
+
+    public void setCanFire(boolean canFire) {
+        this.canFire = canFire;
     }
 }

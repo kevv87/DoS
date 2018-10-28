@@ -1,6 +1,7 @@
 package logic;
 
 import Actors.factories.dragons.Dragon;
+import Movement.DragonHorde;
 
 import java.util.LinkedList;
 
@@ -50,6 +51,20 @@ public class AVLTree {
         }
         if(node.getRight()!=null){
             arrangedPos(node.getRight());
+        }
+    }
+
+    public void activateFireR(AVLNode node){
+        if(node!=null){
+            node.getDragon().setCanFire(true);
+            activateFireR(node.getRight());
+        }
+    }
+
+    public void activateFireL(AVLNode node){
+        if(node!=null){
+            node.getDragon().setCanFire(true);
+            activateFireL(node.getLeft());
         }
     }
 
