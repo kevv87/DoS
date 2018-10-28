@@ -13,6 +13,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 
 /**
  *
@@ -24,10 +26,10 @@ public class InterfazInicio extends Application {
     public void start(Stage stage) throws Exception {
         Parent inicio = FXMLLoader.load(getClass().getResource("PantallaInicio.fxml"));
         Scene iniciar = new Scene(inicio);
-        Media media = new Media(getClass().getClassLoader().getResource("utils/PantallaInicio.mp3").toString());
-        this.player = new MediaPlayer(media); 
-        player.setCycleCount(MediaPlayer.INDEFINITE);
-        player.play();
+        //Media media = new Media(getClass().getClassLoader().getResource("file:///utils/PantallaInicio.mp3").toString());
+        //this.player = new MediaPlayer(media);
+        //player.setCycleCount(MediaPlayer.INDEFINITE);
+        //player.play();
         
         stage.setResizable(false); 
          stage.setScene(iniciar);

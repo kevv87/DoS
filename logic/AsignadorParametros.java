@@ -11,6 +11,7 @@ public class AsignadorParametros {
     private int[] arregloEdades;
     private ArrayList<Actors.factories.dragons.Dragon> Horde = new ArrayList<>();
     private Random random;
+    private String[] arr = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 
     /**
      * Default constructor
@@ -43,6 +44,15 @@ public class AsignadorParametros {
             cont++;
         }
 
+    }
+
+    public void asignaNombre(){
+        String name;
+        for(Dragon dragon:Horde){
+            name = arr[random.nextInt(14)];
+            dragon.setName(name + Integer.toString(random.nextInt(100)));
+            System.out.println(dragon.getName());
+        }
     }
 
     //FUNCIONES SECUNDARIAS

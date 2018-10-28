@@ -37,7 +37,7 @@ public class Btree {
      * The B Tree Constructor.
      *  Create new root, assign the root node to be a isLeaf,and initial the key value in the root to -1 (null)
      */
-    Btree() {
+    public Btree() {
         // new root
         root = new NodeBtree();
         // assign the root node to be a isLeaf

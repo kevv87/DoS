@@ -142,17 +142,35 @@ public class InterfazJuego extends Application {
         this.textarea = (TextArea)inicio.getNamespace().get("textarea");
         this.layoutactual = (Label)inicio.getNamespace().get("layout_actual");
         this.infodragon = (Label)inicio.getNamespace().get("info_dragon");
-        this.scene = new Scene(hola);
+        this.scene = new Scene(padre);
+        /*
         Media media = new Media(getClass().getClassLoader().getResource("utils/PantallaJuego.mp3").toString());
         MediaPlayer player = new MediaPlayer(media); 
         player.setCycleCount(MediaPlayer.INDEFINITE);
-        player.play();
+        player.play();*/
           newGame();
 
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 try {
+                   switch(ordenamiento){
+                       case 0:
+                           mostrar_layout("Linked List por edades");
+                           break;
+                       case 1:
+                           mostrar_layout("Linked list por velocidad");
+                           break;
+                       case 2:
+                           mostrar_layout("Linked list por edades");
+                           break;
+                       case 3:
+                           mostrar_layout("Arbol binario por familias");
+                           break;
+                       case 4:
+                           mostrar_layout("Arbol AVL por edades");
+                           break;
+                   }
                     movePlayer();
 
                     if(!pause_b){
@@ -168,52 +186,10 @@ public class InterfazJuego extends Application {
         timer.start();
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
-        //Test---------------------------------------------
-        LinkedList prueba1 = new LinkedList();
-        prueba1.add("A1");
-        prueba1.add("A2");
-        prueba1.add("A3");
-        prueba1.add("A4");
-        prueba1.add("A5");
-        prueba1.add("A6");
-        prueba1.add("A7");
-        prueba1.add("A8");
-        prueba1.add("A9");
-        prueba1.add("B1");
-        mostrar_arbol(prueba1);
-        //Test---------------------------------------------
         primaryStage.show();
-        //Test---------------------------------------------
-        LinkedList prueba2 = new LinkedList();
-        prueba2.add("A1");
-        prueba2.add("A2");
-        prueba2.add("A3");
-        prueba2.add("A5");
-        prueba2.add("A6");
-        prueba2.add("A7");
-        prueba2.add("A8");
-        prueba2.add("A9");
-        prueba2.add("B1");
-        mostrar_arbol(prueba2);
-        sleep(3000);
-        LinkedList prueba3 = new LinkedList();
-        prueba3.add("A1");
-        prueba3.add("A2");
-        prueba3.add("A3");
-        prueba3.add("A6");
-        prueba3.add("A7");
-        prueba3.add("A8");
-        prueba3.add("B1");
-        mostrar_arbol(prueba3);
-        //Test---------------------------------------------
     }
 
-    public void mostrar_arbol(LinkedList lista){
-        Btree TreeB = new Btree();
-        TreeB.insertion(lista);
-        this.textarea.setText("\n\n\n\n"+TreeB.print());
-     
-    }
+
     public void mostrar_layout(String a){
         this.layoutactual.setText(a);
     }
@@ -235,7 +211,7 @@ public class InterfazJuego extends Application {
         foo.getChildren().add(player);
 
 
-        Enemies = new DragonHorde(foo, cliente.getDragons());
+        Enemies = new DragonHorde(foo, infodragon,textarea, cliente.getDragons());
 
         fireManager = new FireManager(foo, width, Enemies);
 

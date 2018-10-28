@@ -65,7 +65,7 @@
                                           <Color blue="0.624" green="0.624" red="0.624" fx:id="x21" />
                                        </textFill>
                                        <font>
-                                          <Font size="42.0" fx:id="x11" />
+                                          <Font size="20.0" fx:id="x11" />
                                        </font>
                                     </Label>
                                  </children>
