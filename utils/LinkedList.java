@@ -5,8 +5,12 @@
  */
 package utils;
 
+
+import java.util.ArrayList;
+
 import Actors.factories.dragons.Dragon;
 import Actors.factories.dragons.DragonToSend;
+
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -95,6 +99,32 @@ public class LinkedList<T>{ //Lista para nodos genericos
         }
     }
 
+    /**
+     *
+     * @return
+     */
+    public ArrayList recorrer(){
+        ArrayList lista = new ArrayList();
+        Nodo<T> act;
+        act = this.Inicio;
+        System.out.println(act);//Debug
+        T data = act.getElemento();
+        System.out.println(data);//Debug
+        while((String)data!=null){
+            System.out.println("Entre al ciclo, wao");//Debug
+            lista.add(data);
+            System.out.println(act);//Debug
+            if (act!=null&&act.getSiguiente()!=null){
+            act = act.getSiguiente();
+            data = act.getElemento();
+             }else{
+                data = null;
+            }
+            
+            System.out.println(data);//Debug
+        }
+        return lista;
+    }
     /**
      * Elimina un dato de una lista
      * @param <T> Tipo de dato asignado
