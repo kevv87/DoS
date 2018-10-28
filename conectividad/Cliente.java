@@ -31,7 +31,7 @@ import utils.Nodo;
  * @author Kevin Zeledon
  * */
 public class Cliente {
-    private static final String url = "http://localhost:9080/Server1_war_exploded/Servlet";
+    private static final String url = "http://192.168.100.61:9080/Server1_war_exploded/Servlet";
 
     public Cliente(){
         
