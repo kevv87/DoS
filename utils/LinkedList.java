@@ -8,9 +8,9 @@ package utils;
 import Actors.factories.dragons.Dragon;
 import Actors.factories.dragons.DragonToSend;
 
-import javax.xml.bind.annotation.XmlElement;
+/**import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlSeeAlso;*/
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Spliterator;
@@ -20,7 +20,7 @@ import java.util.function.Consumer;
  *  Clase encargada de crear listas de datos genéricas
  * @author Sebastián
  */
-@XmlRootElement
+//@XmlRootElement
 public class LinkedList<T>{ //Lista para nodos genericos
 
     private Nodo<T> Inicio;
@@ -38,7 +38,6 @@ public class LinkedList<T>{ //Lista para nodos genericos
     
     /**
      * Anade un elemento al inicio de la lista
-     * @param <T> Tipo de dato asignado
      * @param dato Objeto del tipo de dato establecido
      */
     public void anadirInicio(T dato){
@@ -54,7 +53,6 @@ public class LinkedList<T>{ //Lista para nodos genericos
     
     /**
      * Anade un elemento al final de la lista
-     * @param <T> Tipo de dato asignado
      * @param dato Objeto del tipo de dato establecido
      */
     public void add(T dato){
@@ -73,7 +71,6 @@ public class LinkedList<T>{ //Lista para nodos genericos
     }
     /**
      * Retorna true si un objeto pertenece a una lista
-     * @param <T> Tipo de dato asignado
      * @param dato Objeto del tipo de dato establecido
      * @return True si dato se encuentra en la lista
      */             
@@ -97,7 +94,6 @@ public class LinkedList<T>{ //Lista para nodos genericos
 
     /**
      * Elimina un dato de una lista
-     * @param <T> Tipo de dato asignado
      * @param dato Objeto del tipo de dato establecido
      */    
     public void eliminar(T dato){

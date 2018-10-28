@@ -16,7 +16,7 @@ public class DragonHorde{
     private int SpawningPointX = 1290;
     private int SpawningPointY = 0;
     private double PosX = 1290;
-    private ArrayList<Dragon> Horde = new ArrayList<>();
+    private LinkedList<Dragon> Horde = new LinkedList<>();
     private boolean enemiesStop = false;
     /**
      * Constructor principal de la clase
@@ -62,6 +62,7 @@ public class DragonHorde{
         }
             AsignadorParametros asignador = new AsignadorParametros(Horde);
             asignador.asignaEdad();
+            asignador.asignaVelocidad();
         }
     }
 
@@ -109,11 +110,11 @@ public class DragonHorde{
         return PosX;
     }
 
-    public ArrayList<Dragon> getHorde() {
+    public LinkedList<Dragon> getHorde() {
         return Horde;
     }
 
-    public void setHorde(ArrayList<Dragon> Horde) {this.Horde=Horde; }
+    public void setHorde(LinkedList<Dragon> Horde) {this.Horde=Horde; }
 
     public boolean isEnemiesStop() {
         return enemiesStop;

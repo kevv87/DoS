@@ -6,6 +6,7 @@
 package gos;
 
 import java.util.ArrayList;
+import logic.Sorter;
 
 /**
  *
@@ -26,6 +27,36 @@ public class GoS {
         lista.add(1);
         lista.add(2);
         System.out.println("posicion 2: ");
+
+        int[] array = new int[12];
+
+        array[0] = 10;
+        array[1] = 80;
+        array[2] = 30;
+        array[3] = 90;
+        array[4] = 40;
+        array[5] = 50;
+        array[6] = 70;
+        array[7] = 100;
+        array[8] = 9;
+        array[9] = 4;
+        array[10] = 54;
+        array[11] = 72;
+
+        Sorter.insertionSortAscendente(array);
+        System.out.println(array[0] + " " +
+                array[1] + " " +
+                array[2] + " " +
+                array[3] + " " +
+                array[4] + " " +
+                array[5] + " " +
+                array[6] + " " +
+                array[7] + " " +
+                array[8] + " " +
+                array[9] + " " +
+                array[10] + " " +
+                array[11] );
+
     }
     
 }

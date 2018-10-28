@@ -14,8 +14,8 @@ import java.io.IOException;
 import static java.lang.Thread.sleep;
 import java.util.HashMap;
 
-import conectividad.Cliente;
-import com.sun.security.ntlm.NTLMException;
+//import conectividad.Cliente;
+//import com.sun.security.ntlm.NTLMException;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -37,7 +37,7 @@ import utils.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.xml.bind.JAXBException;
+//import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -64,17 +64,17 @@ public class InterfazJuego extends Application {
     };
 
     private static FireManager fireManager;
-    private Cliente client = new Cliente();
+    //private Cliente client = new Cliente();
     double width;
     double height;
 
-    public InterfazJuego() throws NTLMException {
+    public InterfazJuego() throws Exception { //NTLMException
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        client.sendMessage("Start");
+        //client.sendMessage("Start");
         FXMLLoader inicio =  new FXMLLoader(getClass().getResource("PantallaJuego.fxml"));
         Parent padre = inicio.load();
         this.foo = (AnchorPane)inicio.getNamespace().get("paneljuego");
@@ -98,13 +98,13 @@ public class InterfazJuego extends Application {
         primaryStage.show();
     }
 
-    public void newGame() throws IOException, JAXBException {
+    public void newGame() throws IOException /**, JAXBException*/ {
         foo.getChildren().add(map.getBG1());
         foo.getChildren().add(map.getBG2());
         foo.getChildren().add(map.getBG3());
         player.setTranslateY(250);
         foo.getChildren().add(player);
-        Enemies = new DragonHorde(foo, 30,30,30, 3,671);
+        Enemies = new DragonHorde(foo, 3,3,3, 3,671);
         fireManager = new FireManager(foo, width, Enemies);
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> {

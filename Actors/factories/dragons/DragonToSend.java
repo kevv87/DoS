@@ -2,14 +2,14 @@ package Actors.factories.dragons;
 
 
 
-import javax.xml.bind.annotation.XmlRootElement;
+//import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Clase destinada a ser incluida en un XML y ser enviada por protoclo HTTP. Nace de la incapacidad del XML Parser para
  * manejar objetos tipo Pane de JavaFx.
  * @author Kevin Zeledon
  * */
-@XmlRootElement
+//@XmlRootElement
 public class DragonToSend {
     protected String name;
     protected int velocidad_recarga;

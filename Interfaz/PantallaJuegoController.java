@@ -20,7 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import static jdk.nashorn.internal.objects.NativeDebug.getClass;
+//import static jdk.nashorn.internal.objects.NativeDebug.getClass;
 
 /**
  * FXML Controller class

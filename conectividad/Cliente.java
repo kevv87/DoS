@@ -13,20 +13,24 @@ import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.util.Objects;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+//import javax.xml.bind.JAXBContext;
+//import javax.xml.bind.JAXBException;
+//import javax.xml.bind.Marshaller;
+//import javax.xml.bind.Unmarshaller;
 
 import utils.LinkedList;
 import utils.Nodo;
+
+/**
 
 /**
  * Clase encargada de manejar las peticiones con el servidor
  * Codigo del cliente tomado de: https://www.oreilly.com/library/view/java-web-services/9780596157708/ch04s05.html
  * Codigo de XML parsing tomado de: https://howtodoinjava.com/jaxb/write-object-to-xml/
  * @author Kevin Zeledon
- * */
+ *
+
+
 public class Cliente {
     private static final String url = "http://localhost:9080/Server1_war_exploded/Servlet";
 
@@ -96,7 +100,7 @@ public class Cliente {
             conn = get_connection(url+payload, "GET");  //Agarra la posicion 0 de la lista del server
             conn.addRequestProperty("accept", "text/xml");
             conn.connect();
-            get_response(conn);*/
+            get_response(conn);
 
 
         }
@@ -114,7 +118,7 @@ public class Cliente {
             conn = get_connection(url+payload, "GET");  //Agarra la posicion 0 de la lista del server
             conn.addRequestProperty("accept", "text/xml");
             conn.connect();
-            get_response(conn);*/
+            get_response(conn);
 
 
         }
@@ -202,3 +206,4 @@ public class Cliente {
     }
 
 }
+*/
