@@ -1,15 +1,13 @@
 package Movement;
 
-import Actors.factories.DragonFactory;
 import Actors.factories.dragons.Dragon;
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
+import logic.AsignadorParametros;
+import logic.PositionManager;
 import logic.Sorter;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.TreeMap;
 
 public class FireManager {
 
@@ -53,7 +51,7 @@ public class FireManager {
                 boolean interseccion = fire.getBoundsInParent().intersects(enemy.getBoundsInParent());
                 if(interseccion){
 
-                    if (idAlineacion%3 == 0) { // primer Caso de eliminacion
+                    if (idAlineacion%5 == 0) { // primer Caso de eliminacion
 
                         Enemies.getHorde().remove(enemy); //remover de ArrayList
                         remove(enemy);//remover enemigo del Pane
@@ -70,6 +68,7 @@ public class FireManager {
                             dragon.setConstantPosPerDragon(false);
                         }
 
+                        PositionManager.asignaPosLista(Enemies);
                         Enemies.setEnemiesStop(true);
                         //SorterDisplayer.acomodoVisualSort2(Enemies,bool);
 
@@ -80,7 +79,7 @@ public class FireManager {
                         return;
                     }
 
-                    else if (idAlineacion%3 == 1) { //segundo Caso de eliminacion insertionSort
+                    else if (idAlineacion%5 == 1) { //segundo Caso de eliminacion insertionSort
 
                         Enemies.getHorde().remove(enemy); //remover de ArrayList
                         remove(enemy);//remover enemigo del Pane
@@ -98,6 +97,7 @@ public class FireManager {
                             dragon.setConstantPosPerDragon(false);
                         }
 
+                        PositionManager.asignaPosLista(Enemies);
                         Enemies.setEnemiesStop(true);
                         //SorterDisplayer.acomodoVisualSort(Enemies,listaDragonPos,cont,bool);
 
@@ -106,7 +106,7 @@ public class FireManager {
                         return;
                     }
 
-                    else if (idAlineacion%3 == 2) { //primer Caso de eliminacion
+                    else if (idAlineacion%5 == 2) { //tercer Caso de eliminacion
 
                         Enemies.getHorde().remove(enemy); //remover de ArrayList
                         remove(enemy);//remover enemigo del Pane
@@ -126,7 +126,74 @@ public class FireManager {
                         for (Dragon dragon : Enemies.getHorde()){
                             dragon.setConstantPosPerDragon(false);
                         }
-                        
+
+
+                        PositionManager.asignaPosLista(Enemies);
+                        Enemies.setEnemiesStop(true);
+                        //SorterDisplayer.acomodoVisualSort(Enemies,listaDragonPos,cont,bool);
+
+                        //Vuelve a correr el Thread del movimiento de la Horde
+                        idAlineacion+=1;
+                        return;
+                    }
+
+                    else if (idAlineacion%5 == 3) { //cuarto Caso de eliminacion
+
+                        Enemies.getHorde().remove(enemy); //remover de ArrayList
+                        remove(enemy);//remover enemigo del Pane
+                        remove(fire);//remover fuego del Pane
+                        friendlyFireList.remove(fire); // Elimina de la lista fuegos
+
+                        //Acomodo por AVLTREE
+
+                        AsignadorParametros asignador = new AsignadorParametros(Enemies.getHorde());
+                        asignador.asignaPadres(Enemies.getHorde());
+
+                        Enemies.setHorde(sorter.arbolBinario(Enemies.getHorde()));
+
+                        //Enemies.setExitDragonMov(true);
+
+                        //Enemies.setExitDragonMov(false);
+
+                        //Acomodo VISUAL
+
+                        for (Dragon dragon : Enemies.getHorde()){
+                            dragon.setConstantPosPerDragon(false);
+                        }
+
+
+                        Enemies.setEnemiesStop(true);
+                        //SorterDisplayer.acomodoVisualSort(Enemies,listaDragonPos,cont,bool);
+
+                        //Vuelve a correr el Thread del movimiento de la Horde
+                        idAlineacion+=1;
+                        return;
+                    }
+                    else if (idAlineacion%5 == 4) { //quinto Caso de eliminacion
+
+                        Enemies.getHorde().remove(enemy); //remover de ArrayList
+                        remove(enemy);//remover enemigo del Pane
+                        remove(fire);//remover fuego del Pane
+                        friendlyFireList.remove(fire); // Elimina de la lista fuegos
+
+                        //Acomodo por AVLTREE
+
+                        AsignadorParametros asignador = new AsignadorParametros(Enemies.getHorde());
+                        asignador.asignaPadres(Enemies.getHorde());
+
+                        Enemies.setHorde(sorter.arbolBinario(Enemies.getHorde()));
+
+                        //Enemies.setExitDragonMov(true);
+
+                        //Enemies.setExitDragonMov(false);
+
+                        //Acomodo VISUAL
+
+                        for (Dragon dragon : Enemies.getHorde()){
+                            dragon.setConstantPosPerDragon(false);
+                        }
+
+
                         Enemies.setEnemiesStop(true);
                         //SorterDisplayer.acomodoVisualSort(Enemies,listaDragonPos,cont,bool);
 

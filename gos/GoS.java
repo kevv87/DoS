@@ -127,7 +127,7 @@ public class GoS {
 
          */
         //System.out.println("implementacion de arbol \n");
-        //Sorter.arbolB(listaDragon,listaDragon);
+        //Sorter.arbolBinario(listaDragon,listaDragon);
 
     }
 }

@@ -124,23 +124,11 @@ public class SorterDisplayer {
     public static void acomodoVisualSort2(DragonHorde Enemies, boolean bool) throws Exception {
 
         boolCont = 0;
-        double columna = 0;
-        double fila = 0;
-
-        double filaLimite = Enemies.getDragonsPerColum();
-        double columnaLimite = Enemies.getColumnas();
-
-        double posXinicial = Enemies.getPosX();
 
         for (Dragon dragon : Enemies.getHorde()){
 
-            if (fila >= filaLimite){
-                fila =0;
-                columna+=1;
-            }
-
-            double limX = posXinicial+(columna*76);
-            double limY = 20+(fila*76);
+            double limX = dragon.getPosXfinal();
+            double limY = dragon.getPosYfinal();
 
             double actualX = dragon.getPosX();
             double actualY = dragon.getPosY();
@@ -243,7 +231,6 @@ public class SorterDisplayer {
 
                 }
             }
-            fila+=1;
             bool = false;
         }
     }

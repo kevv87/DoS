@@ -12,6 +12,12 @@ public class AVLNode {
     private AVLNode Left;
     private AVLNode Right;
 
+    public AVLNode (){
+        dragon= null;
+        Key=0;
+        Height=0;
+    }
+
     public AVLNode(Dragon enemy){
         dragon=enemy;
         Key=dragon.getEdad();

@@ -85,6 +85,7 @@ public class AsignadorParametros {
         int cont = 0;
 
         for(Dragon dragon : listaRecorrido){
+            dragon.setPadre(null);
             NodoHijo hijo = new NodoHijo(cont);
             listaPosiblesPadres.add(hijo);
             listaRecorrido2.add(hijo);
@@ -103,7 +104,6 @@ public class AsignadorParametros {
                     bool=false;
                 }
             }
-
             listaRecorrido2.remove(idRandomFather);
             listaPosiblesPadres.get(idRandomFather).setC_hijos(1);
 

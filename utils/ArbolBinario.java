@@ -10,6 +10,7 @@ public class ArbolBinario {
     private NodoArbol raiz;
     private int nElementos = 0;
     private NodoArbol temp = raiz;
+    private LinkedList<Dragon> listaPreorden = new LinkedList<>();
 
     /**
      * Constructor por default
@@ -18,7 +19,6 @@ public class ArbolBinario {
         this.raiz = null;
         this.nElementos = 0;
         this.temp = raiz;
-
     }
 
     /**
@@ -46,28 +46,29 @@ public class ArbolBinario {
         preorderPrint(node.getHijoDer());
     }
 
-    public void setPositions(NodoArbol node, int lvl, int posY){
-        if(node!=null){
-            node.getDragon().setPosX(raiz.getDragon().getPosX()+(lvl*76));
-            node.getDragon().setPosY(posY);
-            setPositions(node.getHijoDer(), lvl+1, posY-(230/(lvl+1)));
-            setPositions(node.getHijoIzq(), lvl+1, posY+(230/(lvl+1)));
+    public void setPositions(NodoArbol node, int lvl, int posY, Dragon xPos){
+        if(node!=null) {
+            node.getDragon().setPosXfinal(xPos.getPosX() + (lvl * 76));
+            node.getDragon().setPosYfinal(posY);
+            setPositions(node.getHijoIzq(), lvl + 1, posY + (130 / (lvl + 1)), xPos);
+            setPositions(node.getHijoDer(), lvl + 1, posY - (130 / (lvl + 1)), xPos);
         }
     }
 
-    public void preorderToList(NodoArbol node, LinkedList <Dragon> dragonLinkedList)
+    public void preorderToList(NodoArbol node)
     {
         if (node == null)
             return;
 
-        /* first print data of node */
-        dragonLinkedList.add(node.getDragon());
+        listaPreorden.add(node.getDragon());
 
-        /* then recur on left sutree */
-        preorderToList(node.getHijoIzq(), dragonLinkedList);
+        if(node.getHijoIzq()!=null) {
+            preorderToList(node.getHijoIzq());
+        }
 
-        /* now recur on right subtree */
-        preorderToList(node.getHijoDer(), dragonLinkedList);
+        if(node.getHijoDer()!=null) {
+            preorderToList(node.getHijoDer());
+        }
     }
 
     public NodoArbol iterativeSearch(Dragon x)
@@ -165,7 +166,7 @@ public class ArbolBinario {
         this.raiz = raiz;
     }
 
-
-
-
+    public LinkedList<Dragon> getListaPreorden() {
+        return listaPreorden;
+    }
 }

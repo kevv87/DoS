@@ -2,8 +2,8 @@ package logic;
 
 import Actors.factories.DragonFactory;
 import Actors.factories.dragons.Dragon;
-//import utils.ArbolBinario;
-//import utils.NodoArbol;
+import utils.ArbolBinario;
+import utils.NodoArbol;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -13,30 +13,7 @@ public class Sorter {
 
     private static Random random = new Random();
 
-    public class Listas {
-
-        private LinkedList<Dragon> listaHorde;
-        private LinkedList<Dragon> listaHordePosicion;
-
-        public LinkedList<Dragon> getListaHorde() {
-            return listaHorde;
-        }
-
-        public void setListaHorde(LinkedList<Dragon> listaHorde) {
-            this.listaHorde = listaHorde;
-        }
-
-        public LinkedList<Dragon> getListaHordePosicion() {
-            return listaHordePosicion;
-        }
-
-        public void setListaHordePosicion(LinkedList<Dragon> listaHordePosicion) {
-            this.listaHordePosicion = listaHordePosicion;
-        }
-
-    }
-    /**
-    public static Listas arbolB(LinkedList<Dragon> listaDragones, LinkedList<Dragon> listaDragonesCopia){
+    public static LinkedList<Dragon> arbolBinario(LinkedList<Dragon> listaDragones){
 
         //LIST TO TREE both parameters
         Queue<Dragon> colaDragones = new LinkedList<>();
@@ -65,18 +42,34 @@ public class Sorter {
             ((LinkedList<Dragon>) colaDragones).pop();
         }
 
-        //ARBOL A: RECORRE PRE-ORDEN TO LIST -> listaHorde
+        //SET POSITIONS
+        arbolBinario.setPositions(arbolBinario.getRaiz(),0,350, listaDragones.getFirst());
 
+        //TREE TO LIST
 
-        //ARBOL B: Asigna posiciones: copia de Enemies.getHorde
+        arbolBinario.preorderToList(arbolBinario.getRaiz());
+        LinkedList<Dragon> nuevaLista =arbolBinario.getListaPreorden();
 
+        return nuevaLista;
 
-        //RECORRE PRE-ORDEN TO LIST -> listaHordePos
+    }
 
-        arbolBinario.preorderPrint(arbolBinario.getRaiz());
-        return null;
+    public static LinkedList<Dragon> AVLTree (LinkedList<Dragon> listaDragones){
 
-    }*/
+        //LIST TO TREE
+
+        AVLTree avlTree = new AVLTree(listaDragones);
+
+        //SET POSITIONS
+        avlTree.setPositions(avlTree.getRoot(),0,350,listaDragones.getFirst());
+
+        //TREE TO LIST
+
+        avlTree.arrangedPos(avlTree.getRoot());
+        LinkedList<Dragon> nuevaLista = avlTree.getList();
+
+        return nuevaLista;
+    }
 
 
     public static LinkedList<Dragon> quickSort(LinkedList<Dragon> listaDragones){
