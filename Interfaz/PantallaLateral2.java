@@ -6,6 +6,7 @@
 package Interfaz;
 
 import java.io.IOException;
+import static java.lang.Thread.sleep;
 import java.util.Scanner;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -18,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import static javafx.application.Application.launch;
+import utils.LinkedList;
 /**
  *
  * @author Tomás
@@ -25,80 +27,52 @@ import static javafx.application.Application.launch;
 public class PantallaLateral2 extends Application {
     TextArea textarea;
     Scene scene;
-    Btree TreeB;
     /**
      * @throws java.io.IOException
      */
     @Override
-    public void start(Stage primaryStage) throws IOException {
-        this.TreeB = new Btree(); 
-        test(this.TreeB);
-        FXMLLoader inicio =  new FXMLLoader(getClass().getResource("FXML.fxml"));
+    public void start(Stage primaryStage) throws IOException, InterruptedException {
+        FXMLLoader inicio =  new FXMLLoader(getClass().getResource("PantallaLateral2.fxml"));
         Parent hola = inicio.load();
         this.textarea = (TextArea)inicio.getNamespace().get("textarea");
         this.scene = new Scene(hola);
-        textarea.setText(TreeB.print());
-        textarea.setRotate(90.0);
-        System.out.println("hola wapo "+TreeB.print());
+       
+
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
+        LinkedList prueba1 = new LinkedList();
+        prueba1.add("A1");
+        prueba1.add("A2");
+        prueba1.add("A3");
+        prueba1.add("A4");
+        prueba1.add("A5");
+        prueba1.add("A6");
+        prueba1.add("A7");
+        prueba1.add("A8");
+        prueba1.add("A9");
+        prueba1.add("B1");
+        mostrar_arbol(prueba1);
         primaryStage.show();
-        test_tr();        
+        sleep(10000);
+        System.out.println("----------------------------------------");
+        LinkedList prueba2 = new LinkedList();
+        prueba2.add("A1");
+        prueba2.add("A2");
+        prueba2.add("A3");
+        prueba2.add("A5");
+        prueba2.add("A6");
+        prueba2.add("A7");
+        prueba2.add("A8");
+        prueba2.add("A9");
+        prueba2.add("B1");
+        mostrar_arbol(prueba2);
     }
-    public void del_act(String a){
-        this.TreeB.delete(a);
-        textarea.setText(TreeB.print());
-    }
-    
-    public void test(Btree b){
-        for(int i = 0; i<=9; i++){
-                TreeB.insert("A"+i);
-                System.out.println("A"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                TreeB.insert("B"+i);
-                System.out.println("B"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                TreeB.insert("C"+i);
-                System.out.println("C"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                TreeB.insert("D"+i);
-                System.out.println("D"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                TreeB.insert("E"+i);
-                System.out.println("E"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                TreeB.insert("F"+i);
-                System.out.println("F"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                TreeB.insert("G"+i);
-                System.out.println("G"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                TreeB.insert("H"+i);
-                System.out.println("H"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                TreeB.insert("I"+i);
-                System.out.println("I"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                TreeB.insert("J"+i);
-                System.out.println("J"+i);
-            }
-                TreeB.insert("K0");
-        //---------------------------------------------------
-       
-    }
-    public void test_tr(){
-       Scanner in = new Scanner(System.in);  
-       System.out.println("Inserte el nombre del dragon que desea eliminar: \n");
-       del_act(in.next());
+  
+    public void mostrar_arbol(LinkedList lista){
+        Btree TreeB = new Btree();
+        TreeB.insertion(lista);
+        this.textarea.setText(TreeB.print());
+     
     }
     public static void main(String[] args) {
       launch(args);

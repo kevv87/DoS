@@ -5,6 +5,10 @@
  */
 package Interfaz;
 
+import java.util.ArrayList;
+import utils.LinkedList;
+
+
 
 
 /**
@@ -28,7 +32,7 @@ public class Btree {
      */
     public NodeBtree root;
     private String chain = "";
-
+    public LinkedList almacen;
     /**
      * The B Tree Constructor.
      *  Create new root, assign the root node to be a isLeaf,and initial the key value in the root to -1 (null)
@@ -213,10 +217,6 @@ public class Btree {
      * @param k the value to be deleted.
      * @return True if deleted, false otherwise.
      */
-    public boolean delete(String k) {
-        NodeBtree x = root; // getting the root node
-        return delete(x, k); // calling the delete with the root node as starting point
-    }
 
     /**
      * The Delete Method
@@ -255,42 +255,13 @@ public class Btree {
      * @param value the value the will be deleted
      * @return Ture if deleted, false otherwise.
      */
-    public void insertion(){
-        
+    public void insertion(LinkedList lista){
+        System.out.println("Este es el tamano de la lista que se insertara: "+lista.getTamanio());//Debug
+        for(int i = 0; i<lista.getTamanio(); i++){
+        this.insert((String)lista.recorrer().get(i));
+       }
     }
-    public boolean delete(NodeBtree node, String value) {
-        // look up for a key k that will be deleted
-        int i = 1;
-//---
-        // find the smallest index i such that k<= x.keyi, or else set i to x.n ++
-        while (i <= node.numberOfNodes && conversion(value) > conversion(node.key[i - 1])) {
-            //increment i
-            i++;
-        }
-        /* if the x node is an internal node, terminate the search unsuccessful or 
-         * recurse to search the appropriate subtree of node x.
-         */
-        // if the node is a is Leaf
-        if (node.isLeaf) {
-            // recursive call to search in the subtree of the node x
-            // check if the key k is found
-            if (i <= node.numberOfNodes && conversion(value) == conversion(node.key[i - 1])) {
-                // return true if the key k is found in the B Tree
-                node.key[i - 1] = null;
-                // Deleting and sifting
-                for(int j = i - 1; j < node.numberOfNodes - 1; j++){
-                    node.key[j] = node.key[j+1];
-                    if(j+1 == node.numberOfNodes - 1)
-                        node.numberOfNodes--;                    
-                }
-                return true;
-            }
-        } else {
-            return delete(node.children[i - 1], value);
-        }
-        // return false if the key k is not found in the B Tree
-        return false;
-    }
+    
     
     /**
      * To print the B-Tree
