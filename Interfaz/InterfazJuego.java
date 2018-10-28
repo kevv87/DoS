@@ -90,6 +90,7 @@ public class InterfazJuego extends Application {
 
 
         client.sendMessage("Start");
+        Logging.log("info","Iniciando juego");
         FXMLLoader inicio =  new FXMLLoader(getClass().getResource("PantallaJuego.fxml"));
         Parent padre = inicio.load();
         this.foo = (AnchorPane)inicio.getNamespace().get("paneljuego");
