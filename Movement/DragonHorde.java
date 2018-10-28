@@ -10,14 +10,14 @@ import javafx.scene.layout.AnchorPane;
 
 import java.util.LinkedList;
 import logic.AsignadorParametros;
+import utils.Nodo;
 
 public class DragonHorde{
     private int SpawningPointX = 1290;
     private int SpawningPointY = 0;
-    private int PosX = 1290;
+    private double PosX = 1290;
     private ArrayList<Dragon> Horde = new ArrayList<>();
-    
-    private volatile boolean exitDragonMov = false;
+    private boolean enemiesStop = false;
     /**
      * Constructor principal de la clase
      * @param pane Contenedor donde se pondran los dragones
@@ -37,7 +37,6 @@ public class DragonHorde{
                 columnas++;
                 dragonsPerColumn = total/columnas;
             }
-            System.out.println(columnas);
             for(int j = 0; j<columnas;j++){
             for (int i = 0; i<dragonsPerColumn; i++){
                 Actors.factories.dragons.Dragon newDragon;
@@ -66,15 +65,36 @@ public class DragonHorde{
         }
     }
 
-    public void moveHorde(){
-        for(int i=0; i<Horde.size(); i++){
-            Dragon TMP = Horde.get(i);
-            System.out.println("CANTIDAD: " + Horde.size());
-            System.out.println("ID: "+i+" Edad: " +Horde.get(i).getEdad());
-            TMP.setPosX(TMP.getPosX()-2);
-            TMP.setTranslateX(TMP.getPosX());
+    /**
+     * Constructor basado en una lista de dragones ya hecha
+     * @param dragons Lista de dragones hecha.
+     * */
+    public DragonHorde(Pane pane, utils.LinkedList<Dragon> dragons){
+        System.out.println(dragons.getTamanio());
+        Nodo aux = dragons.getInicio();
+        Dragon newDragon;
+        while(aux!=null){
+            newDragon = (Dragon)aux.getElemento();
+            Horde.add(newDragon);
+            newDragon.setTranslateX(newDragon.getPosX());
+            newDragon.setTranslateY(newDragon.getPosY());
+            pane.getChildren().add(newDragon);
+            aux = aux.getSiguiente();
         }
-        PosX = PosX-2;
+        AsignadorParametros asignador = new AsignadorParametros(Horde);
+        asignador.asignaEdad();
+    }
+
+    public void moveHorde(){
+        if(enemiesStop==false){
+            for(int i=0; i<Horde.size(); i++){
+                Dragon TMP = Horde.get(i);
+                TMP.setPosX(TMP.getPosX()-0.3);
+                TMP.setTranslateX(TMP.getPosX());
+            }
+            PosX = PosX-0.3;
+        }
+
     }
 
     public int getSpawningPointY() {
@@ -85,7 +105,7 @@ public class DragonHorde{
         SpawningPointY = spawningPointY;
     }
 
-    public int getPosX() {
+    public double getPosX() {
         return PosX;
     }
 
@@ -95,9 +115,11 @@ public class DragonHorde{
 
     public void setHorde(ArrayList<Dragon> Horde) {this.Horde=Horde; }
 
-    public boolean getExitDragonMov(){return exitDragonMov; }
+    public boolean isEnemiesStop() {
+        return enemiesStop;
+    }
 
-    public void setExitDragonMov(boolean exitDragonMov) { this.exitDragonMov = exitDragonMov; }
-
-
+    public void setEnemiesStop(boolean enemiesStop) {
+        this.enemiesStop = enemiesStop;
+    }
 }

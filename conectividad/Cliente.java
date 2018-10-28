@@ -18,6 +18,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+
+import Logger.Logging;
+
 import utils.LinkedList;
 import utils.Nodo;
 
@@ -27,19 +30,58 @@ import utils.Nodo;
  * Codigo de XML parsing tomado de: https://howtodoinjava.com/jaxb/write-object-to-xml/
  * @author Kevin Zeledon
  * */
-class Cliente {
+public class Cliente {
     private static final String url = "http://localhost:9080/Server1_war_exploded/Servlet";
 
     public Cliente(){
         
     }
 
+    public static void main(String[] args) throws UnsupportedEncodingException, JAXBException {
+        new Cliente().getDragons();
+    }
+
+
+    public void sendMessage(String message) throws JAXBException, UnsupportedEncodingException {
+
+        HttpURLConnection conn = null;
+        conn = get_connection(url, "POST");
+        conn.setRequestProperty("accept", "text/plain");
+
+        String payload = URLEncoder.encode("message","UTF-8") + "=" + URLEncoder.encode(message,"UTF-8");
+
+        send_requests(payload, conn);
+
+        get_response(conn);
+
+
+
+
+    }
+
+    public LinkedList<Dragon> getDragons() throws UnsupportedEncodingException, JAXBException {
+        HttpURLConnection conn = null;
+        conn = get_connection(url, "POST");
+        conn.setRequestProperty("accept", "text/plain");
+        String payload = URLEncoder.encode("message","UTF-8")+"="+URLEncoder.encode("getDragons","UTF-8");
+        send_requests(payload, conn);
+        String respuesta = get_response(conn);
+
+        LinkedList<DragonToSend> response = xmlToObject(respuesta);
+
+        Logging.log("info", "Nueva oleada de " + response.getTamanio() + " dragones.");
+
+
+        return DragonToSend_to_Dragon(response);
+    }
+
     public LinkedList<DragonToSend> sendList(LinkedList<Dragon> dragones){
 
+        HttpURLConnection conn = null;
+        conn = get_connection(url, "POST");
+        conn.setRequestProperty("accept", "text/plain");
+
         LinkedList<DragonToSend> lista_enviar = new LinkedList<>();
-
-
-
         Nodo aux = dragones.getInicio();
 
         while(aux!=null){
@@ -48,30 +90,13 @@ class Cliente {
         }
 
         try {
-            HttpURLConnection conn = null;
-
             String payload = URLEncoder.encode("dragon", "UTF-8") + "=" +
                     URLEncoder.encode(Objects.requireNonNull(jaxbObjectToXML(lista_enviar)), "UTF-8");
 
-
-            // POST, en caso de ocuparlo
-
             // Send the request
-            conn = get_connection(url, "POST");
-            conn.setRequestProperty("accept", "text/plain");
-            DataOutputStream out = new DataOutputStream(conn.getOutputStream());
+            send_requests(payload,conn);
 
-            out.writeBytes(payload);
-            out.flush();
-
-            String xml = "";
-            BufferedReader reader =
-                    new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String next = null;
-            while ((next = reader.readLine()) != null){
-                xml += next;
-            }
-            return xmlToObject(xml);
+            return xmlToObject(get_response(conn));
 
         }
         catch(IOException | JAXBException e) { System.err.println(e);return null; }
@@ -88,23 +113,11 @@ class Cliente {
 
 
 
-    private void send_requests(String data) {
+    private void send_requests(String payload, HttpURLConnection conn) {
         try {
-            HttpURLConnection conn = null;
-
-            String payload = URLEncoder.encode("dragon", "UTF-8") + "=" +
-                    URLEncoder.encode(data, "UTF-8");
-
-
-            // POST, en caso de ocuparlo
-
-            // Send the request
-            conn = get_connection(url, "POST");
-            conn.setRequestProperty("accept", "text/plain");
             DataOutputStream out = new DataOutputStream(conn.getOutputStream());
             out.writeBytes(payload);
             out.flush();
-            get_response(conn);
 
             /*
             // GET to test whether POST worked
@@ -115,7 +128,9 @@ class Cliente {
 
 
         }
-        catch(IOException | NullPointerException | JAXBException e) { System.err.println(e); }
+
+        catch(IOException | NullPointerException e) { System.err.println(e); }
+
     }
 
     private HttpURLConnection get_connection(String url_string, String verb) {
@@ -129,27 +144,18 @@ class Cliente {
         } catch(IOException e) { System.err.println(e); }
         return conn;
     }
-    private void get_response(HttpURLConnection conn) throws JAXBException {
+    private String get_response(HttpURLConnection conn) throws JAXBException {
         try {
             String xml = "";
             BufferedReader reader =
                     new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String next = null;
-            boolean add = true;
             while ((next = reader.readLine()) != null){
-                if(next.startsWith(" <string>")){
-                    add = true;
-                    next = next.substring(0,1);
-                }else if(next.startsWith("</string>")){
-                    add=true;
-                }
-                if(add) xml += next;
+                xml += next;
             }
-
-
-
+            return xml;
         }
-        catch(IOException e) { System.err.println(e); }
+        catch(IOException e) { System.err.println(e); return null;}
     }
 
     private static String jaxbObjectToXML(LinkedList<DragonToSend> dragon)
@@ -191,6 +197,20 @@ class Cliente {
 
         return result;
 
+    }
+
+    public LinkedList<Dragon> DragonToSend_to_Dragon(LinkedList<DragonToSend> dragonsToSend){
+        Nodo aux = dragonsToSend.getInicio();
+        LinkedList<Dragon> result = new LinkedList<>();
+
+        while(aux!=null){
+            
+            result.add(DragonFactory.getDragon((DragonToSend) aux.getElemento()));
+            aux = aux.getSiguiente();
+
+        }
+
+        return result;
     }
 
 }
