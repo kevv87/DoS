@@ -5,43 +5,47 @@
  */
 package utils;
 
-import Actors.factories.dragons.DragonToSend;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlList;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
+//import Actors.factories.dragons.DragonToSend;
+//import javax.xml.bind.annotation.XmlRootElement;
+//import javax.xml.bind.annotation.XmlSeeAlso;
+//import javax.xml.bind.annotation.XmlElement;
+//import javax.xml.bind.annotation.XmlList;
+//import javax.xml.bind.annotation.XmlRootElement;
+//import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
  * Clase encargada de la creación de un nodo genérico
- * @author Sebastián
+ * @author Sebastian
  * @param <T> Tipo de dato
  */
-@XmlRootElement
-@XmlSeeAlso(DragonToSend.class)
+
+//@XmlRootElement
+//@XmlSeeAlso(DragonToSend.class)
 public class Nodo<T> {  //Nodo generico para usar con distintos elementos
-    @XmlElement
+    //@XmlElement
     private T Elemento;
-    @XmlElement
+    //@XmlElement
     private Nodo Siguiente;
-    
+
     /**
      * Constructor
      * @param obj Objeto del tipo de dato establecido
-     */    
+     */
+
     public Nodo(T obj){
         Elemento=obj;
         Siguiente=null;
     }
 
     /**
-    * Dummy constuctor
-    */
+     * Dummy constuctor
+     */
+
     Nodo() {
         Elemento=null;
         Siguiente=null;
     }
-    
+
     //  GETTERS
     public T getElemento() {
         return Elemento;
@@ -50,7 +54,7 @@ public class Nodo<T> {  //Nodo generico para usar con distintos elementos
     public Nodo getSiguiente() {
         return Siguiente;
     }
-    
+
     //  SETTERS
     public void setElemento(T elemento) {
         this.Elemento = elemento;
@@ -59,6 +63,5 @@ public class Nodo<T> {  //Nodo generico para usar con distintos elementos
     public void setSiguiente(Nodo siguiente) {
         this.Siguiente = siguiente;
     }
-    
     
 }

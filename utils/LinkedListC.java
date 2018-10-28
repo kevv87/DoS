@@ -5,24 +5,10 @@
  */
 package utils;
 
-
-
-//import javax.xml.bind.annotation.XmlElement;
-//import javax.xml.bind.annotation.XmlRootElement;
-//import javax.xml.bind.annotation.XmlSeeAlso;
-import Actors.factories.dragons.Dragon;
-import Actors.factories.dragons.DragonToSend;
-
-import java.util.ArrayList;
-
-import Actors.factories.dragons.Dragon;
-import Actors.factories.dragons.DragonToSend;
-
-
-import javax.xml.bind.annotation.XmlElement;
+/**import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
-
+ */
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Spliterator;
@@ -33,21 +19,21 @@ import java.util.function.Consumer;
  * @author Sebastián
  */
 //@XmlRootElement
-public class LinkedList<T>{ //Lista para nodos genericos
+public class LinkedListC<T>{ //Lista para nodos genericos
 
     private Nodo<T> Inicio;
     private Nodo<T> Ultimo;
     private int Tamanio;
-    
+
     /**
      * Dummy Constructor
      */
-    public LinkedList(){    
+    public LinkedListC(){
         Inicio=null;
         Ultimo=null;
         Tamanio=0;
     }
-    
+
     /**
      * Anade un elemento al inicio de la lista
      * @param dato Objeto del tipo de dato establecido
@@ -62,7 +48,11 @@ public class LinkedList<T>{ //Lista para nodos genericos
         }
         Tamanio++;
     }
-    
+
+    public boolean isEmpty(){
+        return Inicio == null;
+    }
+
     /**
      * Anade un elemento al final de la lista
      * @param dato Objeto del tipo de dato establecido
@@ -85,7 +75,7 @@ public class LinkedList<T>{ //Lista para nodos genericos
      * Retorna true si un objeto pertenece a una lista
      * @param dato Objeto del tipo de dato establecido
      * @return True si dato se encuentra en la lista
-     */             
+     */
     public boolean isIn(T dato){
         boolean dentro=false;
         if(Inicio==null){
@@ -105,35 +95,9 @@ public class LinkedList<T>{ //Lista para nodos genericos
     }
 
     /**
-     *
-     * @return
-     */
-    public ArrayList recorrer(){
-        ArrayList lista = new ArrayList();
-        Nodo<T> act;
-        act = this.Inicio;
-        System.out.println(act);//Debug
-        T data = act.getElemento();
-        System.out.println(data);//Debug
-        while((String)data!=null){
-            System.out.println("Entre al ciclo, wao");//Debug
-            lista.add(data);
-            System.out.println(act);//Debug
-            if (act!=null&&act.getSiguiente()!=null){
-            act = act.getSiguiente();
-            data = act.getElemento();
-             }else{
-                data = null;
-            }
-            
-            System.out.println(data);//Debug
-        }
-        return lista;
-    }
-    /**
      * Elimina un dato de una lista
      * @param dato Objeto del tipo de dato establecido
-     */    
+     */
     public void eliminar(T dato){
         if(isIn(dato)){
             Nodo<T> aux = Inicio;
@@ -156,14 +120,30 @@ public class LinkedList<T>{ //Lista para nodos genericos
         }
     }
 
-    public void mostrar(){
-        Nodo aux = Inicio;
-        while(aux!=null){
-            System.out.println(((DragonToSend)aux.getElemento()).getTipo());
-            aux = aux.getSiguiente();
+    public Nodo<T> get(int referencia){
+        // Crea una copia de la lista.
+        int cont = 0;
+        Nodo<T> aux = Inicio;
+        // Bandera para indicar si el valor existe.
+        boolean encontrado = false;
+        // Recorre la lista hasta encontrar el elemento o hasta
+        // llegar al final de la lista.
+        while(cont <= referencia && encontrado != true){
+            // Consulta si el valor del nodo es igual al de referencia.
+            if (referencia == cont){
+                // Cambia el valor de la bandera.
+                encontrado = true;
+            }
+            else{
+                // Avanza al siguiente. nodo.
+                aux = aux.getSiguiente();
+                cont++;
+            }
         }
+        // Retorna el resultado de la bandera.
+        return aux;
     }
-    
+
 
     //GETTERS
     public Nodo<T> getInicio() {
@@ -174,10 +154,10 @@ public class LinkedList<T>{ //Lista para nodos genericos
         return Ultimo;
     }
 
-    public int getTamanio() {
+    public int size() {
         return Tamanio;
     }
-    
+
     //SETTERS
     public void setInicio(Nodo<T> inicio) {
         this.Inicio = inicio;
@@ -186,11 +166,11 @@ public class LinkedList<T>{ //Lista para nodos genericos
     public void setUltimo(Nodo<T> Ultimo) {
         this.Ultimo = Ultimo;
     }
-    
+
     public void setTamanio(int tamanio) {
         this.Tamanio = tamanio;
-    }    
-    
+    }
+
     public void eliminar(){
         Inicio = null;
         Tamanio = 0;

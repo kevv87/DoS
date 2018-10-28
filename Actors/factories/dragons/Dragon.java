@@ -5,6 +5,8 @@
  */
 package Actors.factories.dragons;
 
+import Actors.factories.DragonFactory;
+
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,13 +16,13 @@ import java.util.Random;
 
 import javafx.scene.shape.Rectangle;
 
-import javax.xml.bind.annotation.XmlTransient;
+//import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Clase base de cada dragon.
  * @author kevv87
  */
-public abstract class Dragon extends Pane{
+public class Dragon extends Pane{
     protected String name;
     protected int velocidad_recarga;
     protected int edad;
@@ -34,9 +36,24 @@ public abstract class Dragon extends Pane{
     protected int height;
     protected Image dragon = new Image(getClass().getResourceAsStream("Dragon.gif"));
     protected ImageView dragonIV = new ImageView(dragon);
+    public int id;
+    protected double movX;
+    protected double movY;
+    protected double posXfinal;
+    protected double posYfinal;
+    private boolean constantPosPerDragon = false;
 
 
- 
+    //GETTER
+
+
+    public double getPosXfinal() {
+        return posXfinal;
+    }
+
+    public double getPosYfinal() {
+        return posYfinal;
+    }
 
     public boolean isAlive() {
         return alive;
@@ -63,9 +80,6 @@ public abstract class Dragon extends Pane{
         return velocidad_recarga;
     }
 
-    public int getEdad() {
-        return edad;
-    }
 
     public int getResistencia() {
         return resistencia;
@@ -87,7 +101,18 @@ public abstract class Dragon extends Pane{
         return y;
     }
 
+    public double getMovX() {
+        return movX;
+    }
 
+    public double getMovY() {
+        return movY;
+    }
+
+    public boolean isConstantPosPerDragon() { return constantPosPerDragon; }
+
+
+    //SETTER
 
     public void setName(String name) {
         this.name = name;
@@ -95,10 +120,6 @@ public abstract class Dragon extends Pane{
 
     public void setVelocidad_recarga(int velocidad_recarga) {
         this.velocidad_recarga = velocidad_recarga;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
     }
 
     public void setResistencia(int resistencia) {
@@ -136,5 +157,45 @@ public abstract class Dragon extends Pane{
     public void setPosY(double y){
         this.y = y;
     }
+
+    public int getEdad() {return edad;}
+
+    public void setEdad(int edad){ this.edad = edad; }
+
+    public void setMovX(double movX) {
+        this.movX = movX;
+    }
+
+    public void setMovY(double movY) {
+        this.movY = movY;
+    }
+
+    public void setPosXfinal(double posXfinal) {
+        this.posXfinal = posXfinal;
+    }
+
+    public void setPosYfinal(double posYfinal) {
+        this.posYfinal = posYfinal;
+    }
+
+    public void setConstantPosPerDragon(boolean constantPosPerDragon) { this.constantPosPerDragon = constantPosPerDragon; }
+
+    public Dragon copy(Dragon dragon){
+        Dragon dragon1 = DragonFactory.getDragon("A",0, 0, "probe", null);
+        dragon1.edad = dragon.edad;
+        dragon1.name = dragon.name;
+        dragon1.velocidad_recarga = dragon.velocidad_recarga;
+        dragon1.resistencia = dragon.resistencia;
+        dragon1.tipo = dragon.tipo;
+        dragon1.padre = dragon.padre;
+        dragon1.x = dragon.x;
+        dragon1.y = dragon.y;
+        dragon1.width = dragon.width;
+        dragon1.height = dragon.height;
+
+
+        return dragon1;
+
+    };
 
 }

@@ -20,18 +20,20 @@ public class DragonA extends Dragon{
      * @param nombre Nombre
      * @param padre BolaFuego padre, null si no tiene
      */
-    public DragonA(double x, double y, String nombre, Dragon padre) {
+
+    public DragonA(double x, double y, String nombre, Dragon padre){
+        this.name = nombre;
         this.velocidad_recarga = 77;  // Podria estar en un rango de 77 a 100
         this.edad = 1; // Podria estar en un rango de 1 a 1000
         this.resistencia = 1;
         this.tipo = "A";
-
         this.x = x;
         this.y = y;
         dragonIV.setFitWidth(50);
         dragonIV.setFitHeight(50);
         ;
         getChildren().addAll(dragonIV);
-
+        id = 0;
     }
+
 }
