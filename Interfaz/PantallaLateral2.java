@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import static javafx.application.Application.launch;
+import javafx.scene.control.Label;
 import utils.LinkedList;
 /**
  *
@@ -26,6 +27,8 @@ import utils.LinkedList;
  */
 public class PantallaLateral2 extends Application {
     TextArea textarea;
+    Label layoutactual;
+    Label infodragon;
     Scene scene;
     /**
      * @throws java.io.IOException
@@ -35,23 +38,11 @@ public class PantallaLateral2 extends Application {
         FXMLLoader inicio =  new FXMLLoader(getClass().getResource("PantallaLateral2.fxml"));
         Parent hola = inicio.load();
         this.textarea = (TextArea)inicio.getNamespace().get("textarea");
+        this.layoutactual = (Label)inicio.getNamespace().get("layout_actual");
+        this.infodragon = (Label)inicio.getNamespace().get("info_dragon");
         this.scene = new Scene(hola);
-       
-
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
-        LinkedList prueba1 = new LinkedList();
-        prueba1.add("A1");
-        prueba1.add("A2");
-        prueba1.add("A3");
-        prueba1.add("A4");
-        prueba1.add("A5");
-        prueba1.add("A6");
-        prueba1.add("A7");
-        prueba1.add("A8");
-        prueba1.add("A9");
-        prueba1.add("B1");
-        mostrar_arbol(prueba1);
         primaryStage.show();
         sleep(10000);
         System.out.println("----------------------------------------");
@@ -66,6 +57,16 @@ public class PantallaLateral2 extends Application {
         prueba2.add("A9");
         prueba2.add("B1");
         mostrar_arbol(prueba2);
+        sleep(3000);
+        LinkedList prueba1 = new LinkedList();
+        prueba2.add("A1");
+        prueba2.add("A2");
+        prueba2.add("A3");
+        prueba2.add("A6");
+        prueba2.add("A7");
+        prueba2.add("A8");
+        prueba2.add("B1");
+        mostrar_arbol(prueba1);
     }
   
     public void mostrar_arbol(LinkedList lista){
@@ -73,6 +74,13 @@ public class PantallaLateral2 extends Application {
         TreeB.insertion(lista);
         this.textarea.setText(TreeB.print());
      
+    }
+    public void mostrar_layout(String a){
+        this.layoutactual.setText(a);
+    }
+    
+    public void mostrar_info(String b){
+        this.infodragon.setText(b);
     }
     public static void main(String[] args) {
       launch(args);
