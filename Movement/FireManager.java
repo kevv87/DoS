@@ -1,6 +1,9 @@
 package Movement;
 
 import Actors.factories.dragons.Dragon;
+
+import Interfaz.InterfazJuego;
+
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 import logic.AsignadorParametros;
@@ -51,6 +54,7 @@ public class FireManager {
                 boolean interseccion = fire.getBoundsInParent().intersects(enemy.getBoundsInParent());
                 if(interseccion){
 
+                    InterfazJuego.nextOrden();
                     if (idAlineacion%5 == 0) { // primer Caso de eliminacion
 
                         Enemies.getHorde().remove(enemy); //remover de ArrayList
@@ -107,6 +111,7 @@ public class FireManager {
                     }
 
                     else if (idAlineacion%5 == 2) { //tercer Caso de eliminacion
+
 
                         Enemies.getHorde().remove(enemy); //remover de ArrayList
                         remove(enemy);//remover enemigo del Pane
@@ -200,7 +205,11 @@ public class FireManager {
                         //Vuelve a correr el Thread del movimiento de la Horde
                         idAlineacion+=1;
                         return;
+
+
+
                     }
+
                 }
             }
         }

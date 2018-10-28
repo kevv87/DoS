@@ -2,6 +2,16 @@ package Movement;
 
 import Actors.factories.DragonFactory;
 import Actors.factories.dragons.Dragon;
+
+
+import Interfaz.Btree;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
+
 import javafx.scene.layout.Pane;
 import logic.AsignadorParametros;
 import java.util.LinkedList;
@@ -9,12 +19,25 @@ import utils.*;
 import java.util.ArrayList;
 
 import javafx.scene.layout.AnchorPane;
+
+
+
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import logic.AsignadorParametros;
+import sun.awt.image.ImageWatched;
+import utils.LinkedList;
+
 import utils.Nodo;
 
 public class DragonHorde{
     private int SpawningPointX = 1290;
+
     private int SpawningPointY = 20;
     private double PosX = 1290;
+    private TextArea textArea;
     private volatile boolean enemiesStop=false;
     private LinkedList<Dragon> Horde = new LinkedList<>();
 
@@ -74,6 +97,7 @@ public class DragonHorde{
             asignador.asignaEdad();
             asignador.asignaVelocidad();
             asignador.asignaPadres(Horde);
+
         }
     }
 
@@ -81,7 +105,29 @@ public class DragonHorde{
      * Constructor basado en una lista de dragones ya hecha
      * @param dragons Lista de dragones hecha.
      * */
-    public DragonHorde(Pane pane, utils.LinkedList<Dragon> dragons){
+    public DragonHorde(Pane pane, Label layoutactual, TextArea textArea, utils.LinkedList<Dragon> dragons){
+        this.textArea = textArea;
+        EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {87g
+            @Override
+            public void handle(MouseEvent e) {
+                Dragon dragonClicked = ((Dragon)(e.getSource()));
+                System.out.println("entered");
+                String padre;
+                if(dragonClicked.getPadre() != null){
+                    padre = dragonClicked.getPadre().getName();
+                }else{
+                    padre = "huerfano";
+                }
+                String data = "Dragon: "+dragonClicked.getName() +"\n"+
+                        "Edad: " + dragonClicked.getEdad() +"\n"+
+                        "Velocidad: " + dragonClicked.getVelocidad_recarga()+"\n"+
+                         "Padre: " + padre +"\n"+
+                        "Resistencia: " + dragonClicked.getResistencia() +"\n"+
+                        "Clase : "+ dragonClicked.getTipo();
+                layoutactual.setText(data);
+
+            }
+        };
         System.out.println(dragons.getTamanio());
         Nodo aux = dragons.getInicio();
         Dragon newDragon;
@@ -90,11 +136,16 @@ public class DragonHorde{
             Horde.add(newDragon);
             newDragon.setTranslateX(newDragon.getPosX());
             newDragon.setTranslateY(newDragon.getPosY());
+            newDragon.setOnMouseClicked(clickHandler);
             pane.getChildren().add(newDragon);
             aux = aux.getSiguiente();
         }
         AsignadorParametros asignador = new AsignadorParametros(Horde);
         asignador.asignaEdad();
+      asignador.asignaVelocidad();
+      asignador.asignaPadres();
+        asignador.asignaNombre();
+        mostrar_arbol(Horde);
     }
 
     public void moveHorde(){
@@ -120,7 +171,29 @@ public class DragonHorde{
     public int getColumnas(){ return columnas; }
 
 
+
     public int getDragonsPerColum() { return dragonsPerColum; }
+
+    public double getPosX() {
+        return PosX;
+    }
+
+    public void mostrar_arbol(java.util.ArrayList<Dragon> lista){
+        LinkedList<String> names = new LinkedList<>();
+        for(Dragon dragon:lista){
+            names.add(dragon.getName());
+        }
+        Btree TreeB = new Btree();
+        TreeB.insertion(names);
+        System.out.println(TreeB.print());
+        this.textArea.setText("\n\n\n\n"+TreeB.print());
+
+    }
+
+    public ArrayList<Dragon> getHorde() {
+        return Horde;
+    }
+
 
     public int getSpawningPointY() { return SpawningPointY; }
 

@@ -5,9 +5,12 @@
  */
 package Interfaz;
 
+import static Interfaz.InterfazInicio.player;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.sun.security.ntlm.NTLMException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,10 +38,13 @@ public class PantallaInicioController implements Initializable {
     }    
 
     @FXML
+
     private void mostrar_pant_juego(ActionEvent event) throws Exception {
+
         InterfazJuego accionar = new InterfazJuego();
+        player.stop();
+        accionar.start(new Stage());
         Stage cierre = (Stage) iniciar.getScene().getWindow();
-        accionar.start(cierre);
         cierre.close();
         
     }
