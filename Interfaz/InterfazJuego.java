@@ -27,6 +27,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import utils.LinkedList;
 
@@ -56,6 +58,10 @@ public class InterfazJuego extends Application {
         this.layoutactual = (Label)inicio.getNamespace().get("layout_actual");
         this.infodragon = (Label)inicio.getNamespace().get("info_dragon");
         this.scene = new Scene(hola);
+        Media media = new Media(getClass().getClassLoader().getResource("utils/PantallaJuego.mp3").toString());
+        MediaPlayer player = new MediaPlayer(media); 
+        player.setCycleCount(MediaPlayer.INDEFINITE);
+        player.play();
           newGame();
         AnimationTimer timer = new AnimationTimer() {
             @Override
