@@ -210,34 +210,25 @@ public class AsignadorParametros {
     }
 
     public void generarArregloVelocidades(){
+        int velocidad = 0;
         int cont = 0;
-        for(Dragon dragon: Horde){
-            if (dragon.getTipo().equals("A")){
-                int velocidad = random.nextInt(21);
-                while (velocidad == 0) {
-                    velocidad = random.nextInt(21);
+        int tope = Horde.size();
+
+        while (cont < tope){
+            velocidad = random.nextInt(101);
+
+            if (velocidad != 0){
+                boolean verificador = false;
+                for (int i = 0; i < cont+1; i++){
+                    if (arregloVelocidades[i]==velocidad){
+                        verificador = true;
+                    }
                 }
 
-                arregloVelocidades[cont]=velocidad;
-                cont++;
-            }
-
-            else if (dragon.getTipo().equals("B")){
-                int velocidad = random.nextInt(61);
-                while (velocidad == 0 || velocidad < 21) {
-                    velocidad = random.nextInt(61);
+                if (verificador == false){
+                    arregloVelocidades[cont] = velocidad;
+                    cont++;
                 }
-                arregloVelocidades[cont]=velocidad;
-                cont++;
-            }
-
-            else if ((dragon.getTipo().equals("C"))){
-                int velocidad = random.nextInt(101);
-                while (velocidad == 0 || velocidad < 61) {
-                    velocidad = random.nextInt(101);
-                }
-                arregloVelocidades[cont]=velocidad;
-                cont++;
             }
         }
 

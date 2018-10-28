@@ -104,7 +104,7 @@ public class DragonHorde{
                 TMP.setPosX(TMP.getPosX()-0.3);
                 TMP.setTranslateX(TMP.getPosX());
             }
-            PosX = PosX-2;
+            PosX = PosX-0.3;
         }
     }
 /*

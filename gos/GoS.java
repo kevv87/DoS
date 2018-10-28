@@ -126,8 +126,8 @@ public class GoS {
          System.out.println("Orden de elementos Add: " + ((LinkedList<Dragon>) cola).getFirst().id);
 
          */
-        System.out.println("implementacion de arbol \n");
-        Sorter.arbolB(listaDragon,listaDragon);
+        //System.out.println("implementacion de arbol \n");
+        //Sorter.arbolB(listaDragon,listaDragon);
 
     }
 }

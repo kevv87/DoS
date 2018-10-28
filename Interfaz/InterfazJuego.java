@@ -60,7 +60,7 @@ public class InterfazJuego extends Application {
 
 
     private ScrollingBG map = new ScrollingBG();
-    //int c = 0;
+    int c = 0;
     //Disparos
     private boolean fEnabled = true;
     private Timer playerT = new Timer();
@@ -95,7 +95,7 @@ public class InterfazJuego extends Application {
                     movePlayer();
                     Enemies.moveHorde();
 
-                    /**
+
                     if(Enemies.isEnemiesStop()==false){
                         Enemies.moveHorde();
                     }
@@ -107,9 +107,9 @@ public class InterfazJuego extends Application {
                             Enemies.setEnemiesStop(false);
                         }
                         c++;
-                        //SorterDisplayer.acomodoVisualSort2(Enemies,false);
+                        SorterDisplayer.acomodoVisualSort2(Enemies,false);
                     }
-                     */
+
 
                     fireManager.moveFire();
                 } catch (Exception e) {
@@ -174,7 +174,7 @@ public class InterfazJuego extends Application {
             Fire fire = new Fire(player.getPosX()+136, player.getPosY()+340);
             addToPane(fire);
             fireManager.getFriendlyFireList().add(fire);
-            playerT.scheduleAtFixedRate(enableFire, 0, 300);
+            playerT.scheduleAtFixedRate(enableFire, 1000, 400);
         }
     }
 

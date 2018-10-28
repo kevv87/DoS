@@ -2,8 +2,8 @@ package logic;
 
 import Actors.factories.DragonFactory;
 import Actors.factories.dragons.Dragon;
-import utils.ArbolBinario;
-import utils.NodoArbol;
+//import utils.ArbolBinario;
+//import utils.NodoArbol;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -35,148 +35,148 @@ public class Sorter {
         }
 
     }
-        public static Listas arbolB(LinkedList<Dragon> listaDragones, LinkedList<Dragon> listaDragonesCopia){
+    /**
+    public static Listas arbolB(LinkedList<Dragon> listaDragones, LinkedList<Dragon> listaDragonesCopia){
 
-            //LIST TO TREE both parameters
-            Queue<Dragon> colaDragones = new LinkedList<>();
-            ArbolBinario arbolBinario = new ArbolBinario();
-            Dragon padre = DragonFactory.getDragon("A",0,0,"A1",null);
-                //primer caso:
-            for (Dragon dragon : listaDragones){
-                if (dragon.getPadre() == null){
-                    padre = dragon;
+        //LIST TO TREE both parameters
+        Queue<Dragon> colaDragones = new LinkedList<>();
+        ArbolBinario arbolBinario = new ArbolBinario();
+        Dragon padre = DragonFactory.getDragon("A",0,0,"A1",null);
+        //primer caso:
+        for (Dragon dragon : listaDragones){
+            if (dragon.getPadre() == null){
+                padre = dragon;
+            }
+        }
+
+        colaDragones.add(padre);
+        listaDragones.remove(padre);
+        arbolBinario.insert(null,padre);
+        while (colaDragones.isEmpty()==false){
+
+            for (Dragon dragon: listaDragones){
+                if (dragon.getPadre()==((LinkedList<Dragon>) colaDragones).getFirst()){
+                    //localiza en el arbol al padre, e inserta el hijo
+                    NodoArbol nodoPadre = arbolBinario.iterativeSearch(((LinkedList<Dragon>) colaDragones).getFirst());
+                    arbolBinario.insert(nodoPadre,dragon);
+                    colaDragones.add(dragon);
                 }
             }
+            ((LinkedList<Dragon>) colaDragones).pop();
+        }
 
-            colaDragones.add(padre);
-            listaDragones.remove(padre);
-            arbolBinario.insert(null,padre);
-            while (colaDragones.isEmpty()==false){
+        //ARBOL A: RECORRE PRE-ORDEN TO LIST -> listaHorde
 
-                for (Dragon dragon: listaDragones){
-                    if (dragon.getPadre()==((LinkedList<Dragon>) colaDragones).getFirst()){
-                        //localiza en el arbol al padre, e inserta el hijo
-                        NodoArbol nodoPadre = arbolBinario.iterativeSearch(((LinkedList<Dragon>) colaDragones).getFirst());
-                        arbolBinario.insert(nodoPadre,dragon);
-                        colaDragones.add(dragon);
+
+        //ARBOL B: Asigna posiciones: copia de Enemies.getHorde
+
+
+        //RECORRE PRE-ORDEN TO LIST -> listaHordePos
+
+        arbolBinario.preorderPrint(arbolBinario.getRaiz());
+        return null;
+
+    }*/
+
+
+    public static LinkedList<Dragon> quickSort(LinkedList<Dragon> listaDragones){
+
+        int aleatorio = random.nextInt(10);
+
+        int tamanoListaDragones = listaDragones.size();
+        int[] arregloEdades = new int[tamanoListaDragones];
+        int cont = 0;
+        LinkedList<Dragon> nuevaLista = new LinkedList<>();
+
+        if (tamanoListaDragones > 0){
+            for (Dragon dragon: listaDragones){
+                arregloEdades[cont] = dragon.getEdad();
+                cont++;
+            }
+
+            //Ordenamiento Aleatorio por QuickSort
+
+            if (aleatorio % 2 == 0){
+                quicksortMenorMayor(arregloEdades,0, tamanoListaDragones-1);
+                System.out.println("QuickSort: Menor a mayor");
+            }
+
+            else if (aleatorio % 2 == 1){
+                quicksortMayorMenor(arregloEdades,0, tamanoListaDragones-1);
+                System.out.println("QuickSort: Mayor a menor");
+            }
+
+
+            //Nueva lista ordenada
+            cont = 0;
+            while (cont < tamanoListaDragones){
+                Dragon dragon1 = DragonFactory.getDragon("A",0, 0, "probe", null);
+                for (Dragon dragon : listaDragones) {
+                    if (dragon.getEdad()==arregloEdades[cont]){
+                        nuevaLista.add(dragon);
+                        break;
                     }
                 }
-                ((LinkedList<Dragon>) colaDragones).pop();
+                cont++;
             }
-
-            //ARBOL A: RECORRE PRE-ORDEN TO LIST -> listaHorde
-
-
-            //ARBOL B: Asigna posiciones: copia de Enemies.getHorde
-
-
-            //RECORRE PRE-ORDEN TO LIST -> listaHordePos
-
-            arbolBinario.preorderPrint(arbolBinario.getRaiz());
-            return null;
 
         }
 
+        return nuevaLista;
 
-        public static LinkedList<Dragon> quickSort(LinkedList<Dragon> listaDragones){
-
-            int aleatorio = random.nextInt(10);
-
-            int tamanoListaDragones = listaDragones.size();
-            int[] arregloEdades = new int[tamanoListaDragones];
-            int cont = 0;
-            LinkedList<Dragon> nuevaLista = new LinkedList<>();
-
-            if (tamanoListaDragones > 0){
-                for (Dragon dragon: listaDragones){
-                    arregloEdades[cont] = dragon.getEdad();
-                    cont++;
-                }
-
-                //Ordenamiento Aleatorio por QuickSort
-
-                if (aleatorio % 2 == 0){
-                    quicksortMenorMayor(arregloEdades,0, tamanoListaDragones-1);
-                    System.out.println("QuickSort: Menor a mayor");
-                }
-
-                else if (aleatorio % 2 == 1){
-                    quicksortMayorMenor(arregloEdades,0, tamanoListaDragones-1);
-                    System.out.println("QuickSort: Mayor a menor");
-                }
+    }
 
 
-                //Nueva lista ordenada
-                cont = 0;
-                while (cont < tamanoListaDragones){
-                    Dragon dragon1 = DragonFactory.getDragon("A",0, 0, "probe", null);
-                    for (Dragon dragon : listaDragones) {
-                        if (dragon.getEdad()==arregloEdades[cont]){
-                            nuevaLista.add(dragon);
-                            break;
-                        }
-                    }
-                    cont++;
-                }
+    /**
+     *
+     * @param listaDragones
+     * @return linkedList con dragones ordenados por edad mediante SelectionSort
+     */
+    public static LinkedList<Dragon> selectionSort(LinkedList<Dragon> listaDragones){
 
+        int aleatorio = random.nextInt(10);
+
+        int tamanoListaDragones = listaDragones.size();
+        int[] arregloEdades = new int[tamanoListaDragones];
+        int cont = 0;
+        LinkedList<Dragon> nuevaLista = new LinkedList<>();
+
+        if (tamanoListaDragones > 0){
+            for (Dragon dragon: listaDragones){
+                arregloEdades[cont] = dragon.getEdad();
+                cont++;
             }
 
-            return nuevaLista;
+            //Ordenamiento Aleatorio por SelectionSort
+
+            if (aleatorio % 2 == 0){
+                selectionSortAscendente(arregloEdades);
+                System.out.println("Selection: Menor a mayor");
+            }
+
+            else if (aleatorio % 2 == 1){
+                selectionSortDescendiente(arregloEdades);
+                System.out.println("Selection: Mayor a menor");
+            }
+
+
+            //Nueva lista ordenada
+            cont = 0;
+            while (cont < tamanoListaDragones){
+                for (Dragon dragon : listaDragones) {
+                    if (dragon.getEdad()==arregloEdades[cont]){
+                        nuevaLista.add(dragon);
+                        break;
+                    }
+                }
+                cont++;
+            }
 
         }
 
+        return nuevaLista;
 
-        /**
-         *
-         * @param listaDragones
-         * @return linkedList con dragones ordenados por edad mediante SelectionSort
-         */
-        public static LinkedList<Dragon> selectionSort(LinkedList<Dragon> listaDragones){
-
-            int aleatorio = random.nextInt(10);
-
-            int tamanoListaDragones = listaDragones.size();
-            int[] arregloEdades = new int[tamanoListaDragones];
-            int cont = 0;
-            LinkedList<Dragon> nuevaLista = new LinkedList<>();
-
-            if (tamanoListaDragones > 0){
-                for (Dragon dragon: listaDragones){
-                    arregloEdades[cont] = dragon.getEdad();
-                    cont++;
-                }
-
-                //Ordenamiento Aleatorio por SelectionSort
-
-                if (aleatorio % 2 == 0){
-                    selectionSortAscendente(arregloEdades);
-                    System.out.println("Selection: Menor a mayor");
-                }
-
-                else if (aleatorio % 2 == 1){
-                    selectionSortDescendiente(arregloEdades);
-                    System.out.println("Selection: Mayor a menor");
-                }
-
-
-                //Nueva lista ordenada
-                cont = 0;
-                while (cont < tamanoListaDragones){
-                    Dragon dragon1 = DragonFactory.getDragon("A",0, 0, "probe", null);
-                    for (Dragon dragon : listaDragones) {
-                        if (dragon.getEdad()==arregloEdades[cont]){
-                            nuevaLista.add(dragon);
-                            break;
-                        }
-                    }
-                    cont++;
-                }
-
-            }
-
-            return nuevaLista;
-
-        }
+    }
 
 
     /**
@@ -207,7 +207,7 @@ public class Sorter {
             }
 
             else if (aleatorio % 2 == 1){
-                selectionSortAscendente(arregloVelocidades);
+                insertionSortDescendente(arregloVelocidades);
                 System.out.println("Insertion: Mayor a menor");
             }
 
@@ -225,6 +225,8 @@ public class Sorter {
             }
         }
 
+
+
         return nuevaLista;
 
     }
@@ -232,62 +234,62 @@ public class Sorter {
 
 
 
-        //FUNCIONES SECUNDARIAS
+    //FUNCIONES SECUNDARIAS
 
-        /** Funcion que ejecuta Quicksort
-         * @param arr Arreglo de datos
-         * @param low numero menor a la izquierda del pivote
-         * @param high numero mayor a la derecha del pivote
-         */
-        private static void quicksortMenorMayor(int arr[], int low, int high)
+    /** Funcion que ejecuta Quicksort
+     * @param arr Arreglo de datos
+     * @param low numero menor a la izquierda del pivote
+     * @param high numero mayor a la derecha del pivote
+     */
+    private static void quicksortMenorMayor(int arr[], int low, int high)
+    {
+        if (low < high)
         {
-            if (low < high)
-            {
             /* pi is partitioning index, arr[pi] is
               now at right place */
-                int pi = partitionMenorMayor(arr, low, high);
+            int pi = partitionMenorMayor(arr, low, high);
 
-                // Recursively sort elements before
-                // partitionMenorMayor and after partitionMenorMayor
-                quicksortMenorMayor(arr, low, pi-1);
-                quicksortMenorMayor(arr, pi+1, high);
-            }
-
+            // Recursively sort elements before
+            // partitionMenorMayor and after partitionMenorMayor
+            quicksortMenorMayor(arr, low, pi-1);
+            quicksortMenorMayor(arr, pi+1, high);
         }
 
-        /** Toma como ultimo elemento como pivote,
-         lo coloca en la posicion correcta de una
-         manera ordenada, y coloca todos los numeros
-         menores que el pivote a la izquierda y los
-         mayores a la derecha
-         * @param arr Arreglo por ordenar
-         * @param low index del inicio
-         * @param high index del final
-         */
-        private static int partitionMenorMayor(int arr[], int low, int high)
+    }
+
+    /** Toma como ultimo elemento como pivote,
+     lo coloca en la posicion correcta de una
+     manera ordenada, y coloca todos los numeros
+     menores que el pivote a la izquierda y los
+     mayores a la derecha
+     * @param arr Arreglo por ordenar
+     * @param low index del inicio
+     * @param high index del final
+     */
+    private static int partitionMenorMayor(int arr[], int low, int high)
+    {
+        int pivot = arr[high];
+        int i = (low-1); // index of smaller element
+        for (int j=low; j<high; j++)
         {
-            int pivot = arr[high];
-            int i = (low-1); // index of smaller element
-            for (int j=low; j<high; j++)
+            // If current element is smaller than or
+            // equal to pivot
+            if (arr[j] <= pivot)
             {
-                // If current element is smaller than or
-                // equal to pivot
-                if (arr[j] <= pivot)
-                {
-                    i++;
-                    // swap arr[i] and arr[j]
-                    int temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
-                }
+                i++;
+                // swap arr[i] and arr[j]
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
             }
-
-            // swap arr[i+1] and arr[high] (or pivot)
-            int temp = arr[i+1];
-            arr[i+1] = arr[high];
-            arr[high] = temp;
-            return i+1;
         }
+
+        // swap arr[i+1] and arr[high] (or pivot)
+        int temp = arr[i+1];
+        arr[i+1] = arr[high];
+        arr[high] = temp;
+        return i+1;
+    }
 
     /** Funcion que ejecuta Quicksort
      * @param arr Arreglo de datos

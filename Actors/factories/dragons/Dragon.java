@@ -39,7 +39,21 @@ public class Dragon extends Pane{
     public int id;
     protected double movX;
     protected double movY;
+    protected double posXfinal;
+    protected double posYfinal;
     private boolean constantPosPerDragon = false;
+
+
+    //GETTER
+
+
+    public double getPosXfinal() {
+        return posXfinal;
+    }
+
+    public double getPosYfinal() {
+        return posYfinal;
+    }
 
     public boolean isAlive() {
         return alive;
@@ -97,6 +111,9 @@ public class Dragon extends Pane{
 
     public boolean isConstantPosPerDragon() { return constantPosPerDragon; }
 
+
+    //SETTER
+
     public void setName(String name) {
         this.name = name;
     }
@@ -151,6 +168,14 @@ public class Dragon extends Pane{
 
     public void setMovY(double movY) {
         this.movY = movY;
+    }
+
+    public void setPosXfinal(double posXfinal) {
+        this.posXfinal = posXfinal;
+    }
+
+    public void setPosYfinal(double posYfinal) {
+        this.posYfinal = posYfinal;
     }
 
     public void setConstantPosPerDragon(boolean constantPosPerDragon) { this.constantPosPerDragon = constantPosPerDragon; }

@@ -5,7 +5,7 @@ import Actors.factories.dragons.Dragon;
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 import logic.Sorter;
-import Interfaz.SorterDisplayer;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -46,6 +46,7 @@ public class FireManager {
             if (fire.getPosX() >= 1200){
                 remove(fire);
                 friendlyFireList.remove(fire);
+                return;
             }
 
             for(Dragon enemy:Enemies.getHorde()){
@@ -69,14 +70,14 @@ public class FireManager {
                             dragon.setConstantPosPerDragon(false);
                         }
 
-                        //Enemies.setEnemiesStop(true);
+                        Enemies.setEnemiesStop(true);
                         //SorterDisplayer.acomodoVisualSort2(Enemies,bool);
 
                         //Enemies.setEnemiesStop(false);
 
                         //Vuelve a correr el Thread del movimiento de la Horde
                         idAlineacion+=1;
-                        break;
+                        return;
                     }
 
                     else if (idAlineacion%3 == 1) { //segundo Caso de eliminacion insertionSort
@@ -97,12 +98,12 @@ public class FireManager {
                             dragon.setConstantPosPerDragon(false);
                         }
 
-                       // Enemies.setEnemiesStop(true);
+                        Enemies.setEnemiesStop(true);
                         //SorterDisplayer.acomodoVisualSort(Enemies,listaDragonPos,cont,bool);
 
                         //Vuelve a correr el Thread del movimiento de la Horde
                         idAlineacion+=1;
-                        break;
+                        return;
                     }
 
                     else if (idAlineacion%3 == 2) { //primer Caso de eliminacion
@@ -121,31 +122,27 @@ public class FireManager {
 
                         //Acomodo VISUAL
 
-                        boolean bool = false;
-                        int cont = 0;
 
-                       for (Dragon dragon : Enemies.getHorde()){
-                           dragon.setConstantPosPerDragon(false);
-                       }
-
-                        //Enemies.setEnemiesStop(true);
+                        for (Dragon dragon : Enemies.getHorde()){
+                            dragon.setConstantPosPerDragon(false);
+                        }
+                        
+                        Enemies.setEnemiesStop(true);
                         //SorterDisplayer.acomodoVisualSort(Enemies,listaDragonPos,cont,bool);
 
                         //Vuelve a correr el Thread del movimiento de la Horde
                         idAlineacion+=1;
-                        break;
+                        return;
                     }
                 }
             }
-            break;
         }
-        /**
+
 
         for (Fire fire : foeFireList) { // Movimiento de fuegos enemigos
             fire.setPosX(fire.getPosX() - 2);
             fire.setTranslateX(fire.getPosX());
         }
-         */
     }
 
     public LinkedList<Fire> getFriendlyFireList() {
@@ -162,5 +159,5 @@ public class FireManager {
     public static void remove(Fire fire){
         Platform.runLater(() -> pane.getChildren().remove(fire));
     }
-    
+
 }
