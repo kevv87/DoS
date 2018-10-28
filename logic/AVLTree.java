@@ -7,7 +7,13 @@ import java.util.LinkedList;
 public class AVLTree {
 
     private AVLNode root;
-    private LinkedList<Dragon> List;
+    private LinkedList<Dragon> List = new LinkedList<>();
+
+    public AVLTree(){
+        root = null;
+        LinkedList<Dragon> List = new LinkedList<>();
+    }
+
 
     public AVLTree(LinkedList<Dragon> enemies){
         for(int i=0; i<enemies.size(); i++){
@@ -34,16 +40,20 @@ public class AVLTree {
         root.setPosY(350);
     }
 
-    public void setPositions(AVLNode node, int lvl, int posY){
+    public void setPositions(AVLNode node, int lvl, int posY, Dragon xPos){
         if(node!=null){
-            node.getDragon().setPosX(root.getDragon().getPosX()+(lvl*76));
-            node.getDragon().setPosY(posY);
-            setPositions(node.getRight(), lvl+1, posY-(230/(lvl+1)));
-            setPositions(node.getLeft(), lvl+1, posY+(230/(lvl+1)));
+            node.getDragon().setPosXfinal(xPos.getPosX()+(lvl*76));
+            node.getDragon().setPosYfinal(posY);
+            setPositions(node.getRight(), lvl+1, posY-(130/(lvl+1)), xPos);
+            setPositions(node.getLeft(), lvl+1, posY+(130/(lvl+1)),xPos);
         }
     }
 
     public void arrangedPos(AVLNode node){
+
+        if (node == null){
+            return;}
+
         List.add(node.getDragon());
         if(node.getLeft()!=null){
             arrangedPos(node.getLeft());
@@ -55,6 +65,10 @@ public class AVLTree {
 
     public AVLNode getRoot() {
         return root;
+    }
+
+    public LinkedList<Dragon> getList() {
+        return List;
     }
 
     public void setRoot(AVLNode root) {

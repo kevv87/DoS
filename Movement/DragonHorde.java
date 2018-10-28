@@ -2,6 +2,8 @@ package Movement;
 
 import Actors.factories.DragonFactory;
 import Actors.factories.dragons.Dragon;
+
+
 import Interfaz.Btree;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -9,10 +11,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+
 import javafx.scene.layout.Pane;
+import logic.AsignadorParametros;
+import java.util.LinkedList;
+import utils.*;
 import java.util.ArrayList;
 
 import javafx.scene.layout.AnchorPane;
+
+
 
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -21,15 +29,23 @@ import javafx.stage.Stage;
 import logic.AsignadorParametros;
 import sun.awt.image.ImageWatched;
 import utils.LinkedList;
+
 import utils.Nodo;
 
 public class DragonHorde{
     private int SpawningPointX = 1290;
-    private int SpawningPointY = 0;
+
+    private int SpawningPointY = 20;
     private double PosX = 1290;
     private TextArea textArea;
-    private ArrayList<Dragon> Horde = new ArrayList<>();
-    private boolean enemiesStop = false;
+    private volatile boolean enemiesStop=false;
+    private LinkedList<Dragon> Horde = new LinkedList<>();
+
+    private volatile boolean exitDragonMov = false;
+    private int columnas = 0;
+    private int dragonsPerColum = 0;
+
+
     /**
      * Constructor principal de la clase
      * @param pane Contenedor donde se pondran los dragones
@@ -39,9 +55,11 @@ public class DragonHorde{
      * @param columnas Cantidad de columnas 
      * @param windowH Altura de la ventana de juego
      */
-    public DragonHorde(Pane pane,int A, int B, int C, int columnas, double windowH){
+
+    public DragonHorde(Pane pane, int A, int B, int C, int columnas, double windowH){
 
         if(Horde.isEmpty()) {
+
             int total = A+B+C;
             int dragonsPerColumn = total/columnas;
             System.out.println(windowH);
@@ -49,6 +67,9 @@ public class DragonHorde{
                 columnas++;
                 dragonsPerColumn = total/columnas;
             }
+            this.columnas = columnas;
+            this.dragonsPerColum = dragonsPerColumn;
+
             for(int j = 0; j<columnas;j++){
             for (int i = 0; i<dragonsPerColumn; i++){
                 Actors.factories.dragons.Dragon newDragon;
@@ -62,18 +83,20 @@ public class DragonHorde{
                     newDragon = DragonFactory.getDragon("C", SpawningPointX, SpawningPointY, "probe", null);
                     C--;
                 }
-                System.out.println(newDragon.getPosY());
+
                 Horde.add(newDragon);
                 SpawningPointY+=76;
                 newDragon.setTranslateX(newDragon.getPosX());
                 newDragon.setTranslateY(newDragon.getPosY());
                 pane.getChildren().add(newDragon);
             }
-            SpawningPointY=0;
+            SpawningPointY=20;
             SpawningPointX+=76; 
         }
             AsignadorParametros asignador = new AsignadorParametros(Horde);
             asignador.asignaEdad();
+            asignador.asignaVelocidad();
+            asignador.asignaPadres(Horde);
 
         }
     }
@@ -119,6 +142,8 @@ public class DragonHorde{
         }
         AsignadorParametros asignador = new AsignadorParametros(Horde);
         asignador.asignaEdad();
+      asignador.asignaVelocidad();
+      asignador.asignaPadres();
         asignador.asignaNombre();
         mostrar_arbol(Horde);
     }
@@ -132,16 +157,22 @@ public class DragonHorde{
             }
             PosX = PosX-0.3;
         }
-
     }
+/*
+    public LinkedList<Dragon> copyHorde(LinkedList<Dragon> dragonLinkedList){
+        LinkedList<Dragon> dragonLinkedListCopy = new LinkedList<>();
 
-    public int getSpawningPointY() {
-        return SpawningPointY;
-    }
+        for(Dragon dragon : dragonLinkedList){
+            dragonLinkedListCopy.add(dragon.copy(dragon));
+        }
+        return dragonLinkedListCopy;
+    }*/
 
-    public void setSpawningPointY(int spawningPointY) {
-        SpawningPointY = spawningPointY;
-    }
+    public int getColumnas(){ return columnas; }
+
+
+
+    public int getDragonsPerColum() { return dragonsPerColum; }
 
     public double getPosX() {
         return PosX;
@@ -163,13 +194,18 @@ public class DragonHorde{
         return Horde;
     }
 
-    public void setHorde(ArrayList<Dragon> Horde) {this.Horde=Horde; }
 
-    public boolean isEnemiesStop() {
-        return enemiesStop;
-    }
+    public int getSpawningPointY() { return SpawningPointY; }
 
-    public void setEnemiesStop(boolean enemiesStop) {
-        this.enemiesStop = enemiesStop;
-    }
+    public void setSpawningPointY(int spawningPointY) { SpawningPointY = spawningPointY; }
+
+    public double getPosX() { return PosX; }
+
+    public LinkedList<Dragon> getHorde() { return Horde; }
+
+    public void setHorde(LinkedList<Dragon> Horde) {this.Horde=Horde; }
+
+    public boolean isEnemiesStop() { return enemiesStop; }
+
+    public void setEnemiesStop(boolean enemiesStop) { this.enemiesStop = enemiesStop; }
 }

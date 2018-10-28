@@ -15,12 +15,15 @@ import java.io.IOException;
 import static java.lang.Thread.sleep;
 
 
+import java.sql.SQLOutput;
+
 import java.io.UnsupportedEncodingException;
+
 
 import java.util.HashMap;
 
-import conectividad.Cliente;
-import com.sun.security.ntlm.NTLMException;
+//import conectividad.Cliente;
+//import com.sun.security.ntlm.NTLMException;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -58,10 +61,15 @@ import javafx.stage.Stage;
 import utils.LinkedList;
 
 
+//import javax.xml.bind.JAXBException;
+
+
+
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.xml.bind.JAXBException;
+
+
 
 
 import Logger.Logging;
@@ -70,9 +78,9 @@ import javafx.stage.WindowEvent;
 
 
 /**
- *
  * @author Tomas
  */
+
 public class InterfazJuego extends Application {
     private  HashMap<KeyCode, Boolean> keys = new HashMap<>();
     TextArea textarea;
@@ -85,7 +93,10 @@ public class InterfazJuego extends Application {
     Hero player = new Hero();
     //Enemies
     DragonHorde Enemies;
+
+
     private ScrollingBG map = new ScrollingBG();
+    int c = 0;
     //Disparos
     private boolean fEnabled = true;
     private Timer playerT = new Timer();
@@ -102,20 +113,27 @@ public class InterfazJuego extends Application {
     };
 
     private static FireManager fireManager;
-    private Cliente client = new Cliente();
+    //private Cliente client = new Cliente();
     double width;
     double height;
+
+
+    public InterfazJuego() /** throws NTLMException*/ {
 
     private boolean pause_b = false;
     private static int ordenamiento = 0;
 
 
     public InterfazJuego() throws NTLMException {
+
     }
 
     @Override
 
     public void start(Stage primaryStage) throws Exception {
+
+
+        //client.sendMessage("Start");
 
         // Conexion con arduino
         Connection main = new Connection();
@@ -134,6 +152,7 @@ public class InterfazJuego extends Application {
 
         client.sendMessage("Start");
         Logging.log("info","Iniciando juego");
+
 
         FXMLLoader inicio =  new FXMLLoader(getClass().getResource("PantallaJuego.fxml"));
         Parent padre = inicio.load();
@@ -173,9 +192,25 @@ public class InterfazJuego extends Application {
                    }
                     movePlayer();
 
+                   
+
                     if(!pause_b){
-                        Enemies.moveHorde();
-                        fireManager.moveFire();
+                      if(Enemies.isEnemiesStop()==false){
+                          Enemies.moveHorde();
+                      }
+                      else{
+                          if (c >= 100)
+                          {
+                              System.out.println("Cvaz no tiene hambre");
+                              c=0;
+                              Enemies.setEnemiesStop(false);
+                          }
+                          c++;
+                          SorterDisplayer.acomodoVisualSort2(Enemies,false);
+                      }
+
+
+                      fireManager.moveFire();
                     }
 
                 } catch (Exception e) {
@@ -188,6 +223,7 @@ public class InterfazJuego extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 
 
     public void mostrar_layout(String a){
@@ -204,6 +240,7 @@ public class InterfazJuego extends Application {
 
 
     public void newGame() throws IOException, JAXBException {
+
         foo.getChildren().add(map.getBG1());
         foo.getChildren().add(map.getBG2());
         foo.getChildren().add(map.getBG3());
@@ -212,6 +249,7 @@ public class InterfazJuego extends Application {
 
 
         Enemies = new DragonHorde(foo, infodragon,textarea, cliente.getDragons());
+
 
         fireManager = new FireManager(foo, width, Enemies);
 
@@ -265,7 +303,9 @@ public class InterfazJuego extends Application {
             Fire fire = new Fire(player.getPosX()+136, player.getPosY()+340);
             addToPane(fire);
             fireManager.getFriendlyFireList().add(fire);
-            playerT.scheduleAtFixedRate(enableFire, 0, 400);
+
+            playerT.scheduleAtFixedRate(enableFire, 1000, 400);
+
         }
 
 
