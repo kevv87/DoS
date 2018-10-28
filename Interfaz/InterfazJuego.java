@@ -331,9 +331,9 @@ public class InterfazJuego extends Application {
                             break;
                         case 3:
                             if(dragon.getPadre() != null) {
-                                texto.setText("Nombre: " + dragon.getName() + ".Padre: " + dragon.getPadre().getName());
+                                texto.setText("N: " + dragon.getName() +"\n"+ "P: " + dragon.getPadre().getName());
                             } else{
-                                texto.setText("Huerfano");
+                                texto.setText("N: "+dragon.getName()+"\n"+"Huerfano");
                             }
                             texto.setY(76);
                             break;
