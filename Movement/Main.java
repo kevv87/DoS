@@ -118,7 +118,6 @@ public class Main extends Application{
                     FireManager.moveFire();
                 }
                 catch (Exception E){
-
                 }
             }
         }
@@ -150,7 +149,7 @@ public class Main extends Application{
     public static  void  main(String[] args){
         launch(args);
     }
-    
+
     public void addToPane(Fire toad){
         
         Platform.runLater(new Runnable(){

@@ -8,19 +8,23 @@ package utils;
 //import Actors.factories.dragons.DragonToSend;
 //import javax.xml.bind.annotation.XmlRootElement;
 //import javax.xml.bind.annotation.XmlSeeAlso;
-
-import Actors.factories.dragons.Dragon;
+//import javax.xml.bind.annotation.XmlElement;
+//import javax.xml.bind.annotation.XmlList;
+//import javax.xml.bind.annotation.XmlRootElement;
+//import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
  * Clase encargada de la creación de un nodo genérico
- * @author Sebastián
+ * @author Sebastian
  * @param <T> Tipo de dato
  */
 
 //@XmlRootElement
 //@XmlSeeAlso(DragonToSend.class)
 public class Nodo<T> {  //Nodo generico para usar con distintos elementos
+    //@XmlElement
     private T Elemento;
+    //@XmlElement
     private Nodo Siguiente;
 
     /**
@@ -46,7 +50,6 @@ public class Nodo<T> {  //Nodo generico para usar con distintos elementos
     public T getElemento() {
         return Elemento;
     }
-
     
     public Nodo getSiguiente() {
         return Siguiente;
@@ -60,7 +63,5 @@ public class Nodo<T> {  //Nodo generico para usar con distintos elementos
     public void setSiguiente(Nodo siguiente) {
         this.Siguiente = siguiente;
     }
-
-    
     
 }

@@ -28,27 +28,8 @@ public class DragonB extends Dragon{
         this.tipo = "B";
         this.x = x;
         this.y = y;
-        width = 76;
-        height = 76;
-        dragonIV.setViewport(new Rectangle2D(0,0, width, height));
+        dragonIV.setFitWidth(50);
+        dragonIV.setFitHeight(50);;
         getChildren().addAll(dragonIV);
-    }   
-    
-    public void moveX(int x){
-        boolean right = x>0;
-        for(int i = 0; i < Math.abs(x); i++){
-            if(right) this.setTranslateX(this.getTranslateX() +1);
-            else this.setTranslateX(this.getTranslateX() -1);
-        }
     }
-
-    public void moveY(int y){
-        boolean right = y>0;
-        for(int i = 0; i < Math.abs(y); i++){
-            if(right) this.setTranslateY(this.getTranslateY() +1);
-            else this.setTranslateY(this.getTranslateY() -1);
-        }
-        
-    }
-    
 }

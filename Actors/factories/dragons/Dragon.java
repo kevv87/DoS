@@ -22,7 +22,7 @@ import javafx.scene.shape.Rectangle;
  * Clase base de cada dragon.
  * @author kevv87
  */
-public abstract class Dragon extends Pane{
+public class Dragon extends Pane{
     protected String name;
     protected int velocidad_recarga;
     protected int edad;
@@ -37,8 +37,9 @@ public abstract class Dragon extends Pane{
     protected Image dragon = new Image(getClass().getResourceAsStream("Dragon.gif"));
     protected ImageView dragonIV = new ImageView(dragon);
     public int id;
-
- 
+    protected double movX;
+    protected double movY;
+    private boolean constantPosPerDragon = false;
 
     public boolean isAlive() {
         return alive;
@@ -86,7 +87,15 @@ public abstract class Dragon extends Pane{
         return y;
     }
 
+    public double getMovX() {
+        return movX;
+    }
 
+    public double getMovY() {
+        return movY;
+    }
+
+    public boolean isConstantPosPerDragon() { return constantPosPerDragon; }
 
     public void setName(String name) {
         this.name = name;
@@ -95,8 +104,6 @@ public abstract class Dragon extends Pane{
     public void setVelocidad_recarga(int velocidad_recarga) {
         this.velocidad_recarga = velocidad_recarga;
     }
-
-
 
     public void setResistencia(int resistencia) {
         this.resistencia = resistencia;
@@ -138,6 +145,16 @@ public abstract class Dragon extends Pane{
 
     public void setEdad(int edad){ this.edad = edad; }
 
+    public void setMovX(double movX) {
+        this.movX = movX;
+    }
+
+    public void setMovY(double movY) {
+        this.movY = movY;
+    }
+
+    public void setConstantPosPerDragon(boolean constantPosPerDragon) { this.constantPosPerDragon = constantPosPerDragon; }
+
     public Dragon copy(Dragon dragon){
         Dragon dragon1 = DragonFactory.getDragon("A",0, 0, "probe", null);
         dragon1.edad = dragon.edad;
@@ -150,6 +167,7 @@ public abstract class Dragon extends Pane{
         dragon1.y = dragon.y;
         dragon1.width = dragon.width;
         dragon1.height = dragon.height;
+
 
         return dragon1;
 

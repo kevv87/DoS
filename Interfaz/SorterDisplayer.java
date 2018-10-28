@@ -7,6 +7,8 @@ import java.util.LinkedList;
 
 public class SorterDisplayer {
 
+    static int boolCont = 0;
+
     public static void acomodoVisualSort(DragonHorde Enemies, LinkedList<Dragon> listaDragonPos, int cont, boolean bool) throws Exception {
         for (Dragon dragon : Enemies.getHorde()){
 
@@ -121,6 +123,7 @@ public class SorterDisplayer {
 
     public static void acomodoVisualSort2(DragonHorde Enemies, boolean bool) throws Exception {
 
+        boolCont = 0;
         double columna = 0;
         double fila = 0;
 
@@ -142,38 +145,44 @@ public class SorterDisplayer {
             double actualX = dragon.getPosX();
             double actualY = dragon.getPosY();
 
-            double movX = 0;
-            double movY = 0;
+
 
             //ASIGNA DIRECCION DE MOVIMIENTO PARA EL DRAGON
 
-            if ((limX - actualX)<0){
-                movX = (limX - actualX)/10;
+            if (dragon.isConstantPosPerDragon() == false){
+
+                if ((limX - actualX)<0){
+                    dragon.setMovX((limX - actualX)/100);
+                }
+
+                else if((limX - actualX) > 0){
+                    dragon.setMovX((limX - actualX)/100);
+                }
+
+                if ((limY - actualY)<0){
+                    dragon.setMovY((limY - actualY)/100);
+                }
+
+                else if((limY - actualY)> 0){
+                    dragon.setMovY((limY - actualY)/100);
+                }
+                dragon.setConstantPosPerDragon(true);
             }
 
-            else if((limX - actualX) > 0){
-                movX = (limX - actualX)/10;
-            }
-
-            if ((limY - actualY)<0){
-                movY = (limY - actualY)/10;
-            }
-
-            else if((limY - actualY)> 0){
-                movY = (limY - actualY)/10;
-            }
+            double movX = dragon.getMovX();
+            double movY = dragon.getMovY();
 
             if (limX != actualX || limY != actualY) {
 
                 if(movX < 0 && movY <= 0){
-                    while (!bool) {
-                        Thread.sleep(50);
                         if (limX >= dragon.getPosX() && limY >= dragon.getPosY()) {
                             dragon.setPosX(dragon.getPosX() + (limX - dragon.getPosX()));
                             dragon.setTranslateX(dragon.getPosX());
                             dragon.setPosY(dragon.getPosY() + (limY - dragon.getPosY()));
                             dragon.setTranslateY(dragon.getPosY());
                             bool = true;
+                            boolCont+=1;
+                            System.out.println("entreYSALÍ");
                         }
                         else{
                             dragon.setPosX(dragon.getPosX() + movX);
@@ -183,60 +192,55 @@ public class SorterDisplayer {
                         }
                     }
 
-                }
+
 
                 else if ( movX <= 0 && movY > 0){
-                    while (!bool) {
-                        Thread.sleep(50);
                         if (limX >= dragon.getPosX() && limY <= dragon.getPosY()) {
                             dragon.setPosX(dragon.getPosX() + (limX - dragon.getPosX()));
                             dragon.setTranslateX(dragon.getPosX());
                             dragon.setPosY(limY + (dragon.getPosY() - limY));
                             dragon.setTranslateY(dragon.getPosY());
                             bool = true;
+                            boolCont+=1;
                         } else {
                             dragon.setPosX(dragon.getPosX() + movX);
                             dragon.setTranslateX(dragon.getPosX());
                             dragon.setPosY(dragon.getPosY() + movY);
                             dragon.setTranslateY(dragon.getPosY());
                         }
-                    }
                 }
 
                 else if (movX >= 0 && movY < 0){
-                    while (!bool) {
-                        Thread.sleep(50);
                         if (limX <= dragon.getPosX() && limY >= dragon.getPosY()) {
                             dragon.setPosX(limX + (dragon.getPosX() - limX));
                             dragon.setTranslateX(dragon.getPosX());
                             dragon.setPosY(dragon.getPosY() + (limY - dragon.getPosY()));
                             dragon.setTranslateY(dragon.getPosY());
                             bool = true;
+                            boolCont +=1;
                         } else {
                             dragon.setPosX(dragon.getPosX() + movX);
                             dragon.setTranslateX(dragon.getPosX());
                             dragon.setPosY(dragon.getPosY() + movY);
                             dragon.setTranslateY(dragon.getPosY());
                         }
-                    }
                 }
 
                 else {
-                    while (!bool) {
-                        Thread.sleep(50);
                         if (limX <= dragon.getPosX() && limY <= dragon.getPosY()) {
                             dragon.setPosX(limX + (dragon.getPosX() - limX));
                             dragon.setTranslateX(dragon.getPosX());
                             dragon.setPosY(limY + (dragon.getPosY() - limY));
                             dragon.setTranslateY(dragon.getPosY());
                             bool = true;
+                            boolCont+=1;
                         } else {
                             dragon.setPosX(dragon.getPosX() + movX);
                             dragon.setTranslateX(dragon.getPosX());
                             dragon.setPosY(dragon.getPosY() + movY);
                             dragon.setTranslateY(dragon.getPosY());
                         }
-                    }
+
                 }
             }
             fila+=1;
