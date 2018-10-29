@@ -2,27 +2,19 @@ package conectividad;
 import Actors.factories.DragonFactory;
 import Actors.factories.dragons.Dragon;
 import Actors.factories.dragons.DragonToSend;
-
-import java.io.*;
-import java.util.List;
-import java.util.ArrayList;
-import java.net.URL;
-import java.net.HttpURLConnection;
-import java.net.URLEncoder;
-import java.net.MalformedURLException;
-import java.net.URLEncoder;
-import java.util.Objects;
+import Logger.Logging;
+import utils.LinkedList;
+import utils.Nodo;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-
-
-import Logger.Logging;
-
-import utils.LinkedList;
-import utils.Nodo;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Objects;
 
 /**
  * Clase encargada de manejar las peticiones con el servidor

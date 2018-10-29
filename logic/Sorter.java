@@ -3,7 +3,6 @@ package logic;
 import Actors.factories.DragonFactory;
 import Actors.factories.dragons.Dragon;
 import utils.ArbolBinario;
-import utils.NodoArbol;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -38,8 +37,7 @@ public class Sorter {
 
                     if (dragon.getPadre() == ((LinkedList<Dragon>) colaDragones).getFirst()) {
                         //localiza en el arbol al padre, e inserta el hijo
-                        NodoArbol nodoPadre = arbolBinario.iterativeSearch(((LinkedList<Dragon>) colaDragones).getFirst());
-                        arbolBinario.insert(nodoPadre, dragon);
+                        arbolBinario.insert(((LinkedList<Dragon>) colaDragones).getFirst(), dragon);
                         colaDragones.add(dragon);
                     }
                 }

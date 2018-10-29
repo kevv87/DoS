@@ -12,7 +12,7 @@ public class ArbolBinario {
     private NodoArbol temp = raiz;
     private LinkedList<Dragon> listaPreorden = new LinkedList<>();
     private LinkedList<Dragon> listaDragones = new LinkedList<>(); //Para el sorter (que no elimine del Enemies.getHorde() al padre
-
+    private int cont = 0;
     /**
      * Constructor por default
      */
@@ -104,21 +104,22 @@ public class ArbolBinario {
     }
 
     /**function to insert element in binary tree https://www.geeksforgeeks.org/insertion-in-a-binary-tree-in-level-order/ */
-    public void insert(NodoArbol temp, Dragon key)
+    public void insert(Dragon tmp, Dragon key)
     {
         if (raiz == null){
             raiz = new NodoArbol(key);
+            this.cont++;
         }
 
         else {
-
-            if (iterativeSearch(temp.getDragon()) != null){
-                if(temp.getHijoIzq()== null){
-                    temp.setHijoIzq(new NodoArbol(key));
+            NodoArbol temp1 = iterativeSearch(tmp);
+            if (temp1.getDragon() != null){
+                if(temp1.getHijoIzq()== null){
+                    temp1.setHijoIzq(new NodoArbol(key));
                 }
 
-                else if(temp.getHijoDer()== null){
-                    temp.setHijoDer(new NodoArbol(key));
+                else if(temp1.getHijoDer()== null){
+                    temp1.setHijoDer(new NodoArbol(key));
                 }
 
                 else{

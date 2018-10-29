@@ -149,7 +149,7 @@ public class FireManager {
                         remove(fire);//remover fuego del Pane
                         friendlyFireList.remove(fire); // Elimina de la lista fuegos
 
-                        //Acomodo por AVLTREE
+                        //Acomodo por ARBOL BINARIO
 
                         AsignadorParametros asignador = new AsignadorParametros(Enemies.getHorde());
                         asignador.asignaPadres(Enemies.getHorde());

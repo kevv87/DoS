@@ -6,71 +6,35 @@
 package Interfaz;
 
 import Actors.factories.dragons.Dragon;
-import Arduino.Connection;
 import Movement.*;
-
-import java.io.IOException;
-
-
-import static java.lang.Thread.sleep;
-
-
-import java.sql.SQLOutput;
-
-import java.io.UnsupportedEncodingException;
-
-
-import java.util.HashMap;
-
+import com.sun.security.ntlm.NTLMException;
 import conectividad.Cliente;
-import com.sun.security.ntlm.NTLMException;
-import com.sun.security.ntlm.NTLMException;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
-
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.fxml.*;
 import javafx.scene.Scene;
-
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-
-
-import javafx.scene.control.Button;
-
+import javafx.scene.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-
-import javafx.scene.control.Control;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import utils.LinkedList;
-
-
-//import javax.xml.bind.JAXBException;
-
-import java.util.Timer;
-import java.util.TimerTask;
-
-import Logger.Logging;
 import javafx.stage.WindowEvent;
 
 import javax.xml.bind.JAXBException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
+
+//import Arduino.Connection;
+
+//import javax.xml.bind.JAXBException;
 
 
 /**
@@ -102,7 +66,7 @@ public class InterfazJuego extends Application {
     private static String controlCommand = "n";
 
 
-    private Cliente cliente = new Cliente();
+    //private Cliente cliente = new Cliente();
 
     private TimerTask enableFire = new TimerTask() {
         @Override
@@ -131,9 +95,8 @@ public class InterfazJuego extends Application {
         //client.sendMessage("Start");
 
         // Conexion con arduino
-        Connection main = new Connection();
-        main.initialize();
-
+        //Connection main = new Connection();
+        //main.initialize();
 
 
         primaryStage.setOnCloseRequest((WindowEvent event1) -> {
@@ -144,11 +107,11 @@ public class InterfazJuego extends Application {
             }
         });
 
-
+        /**
         Cliente client =  new Cliente();
         client.sendMessage("Start");
         Logging.log("info","Iniciando juego");
-
+        */
 
         FXMLLoader inicio =  new FXMLLoader(getClass().getResource("PantallaJuego.fxml"));
         Parent padre = inicio.load();
@@ -255,8 +218,7 @@ public class InterfazJuego extends Application {
         vida2.toFront();
         vida3.toFront();
 
-
-        Enemies = new DragonHorde(foo,3,3,3,3,671);
+        Enemies = new DragonHorde(foo,10,10,10,3,671);
 
 
         fireManager = new FireManager(foo, width, Enemies);
