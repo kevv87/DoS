@@ -226,7 +226,7 @@ public class InterfazJuego extends Application {
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> {
             keys.put(event.getCode(), false);
-        });
+        }); //
 
     }
 //       _____________
