@@ -57,7 +57,7 @@
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
-                                    <Label fx:id="layout_actual" alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Layout Actual" textAlignment="CENTER" wrapText="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label fx:id="layout_actual" alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="-fx-font-family: 'Game of Thrones'" text="Layout Actual" textAlignment="CENTER" wrapText="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <textFill>
                                           <Color blue="0.624" green="0.624" red="0.624" fx:id="x21" />
                                        </textFill>
@@ -69,7 +69,7 @@
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="163.0" prefWidth="207.0">
                                  <children>
-                                    <Label fx:id="info_dragon" alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Información de Dragón" textAlignment="CENTER" wrapText="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label fx:id="info_dragon" alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="-fx-font-family: 'Game of Thrones'" text="InformaciOn de DragOn" textAlignment="CENTER" wrapText="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <textFill>
                                           <Color blue="0.624" green="0.624" red="0.624" fx:id="x211" />
                                        </textFill>
@@ -85,7 +85,7 @@
                   </AnchorPane>
                 <AnchorPane fx:id="panellateral2" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <TextArea fx:id="textarea" editable="false" layoutX="-18.0" layoutY="19.0" prefHeight="319.0" prefWidth="356.0" rotate="90.0" AnchorPane.rightAnchor="-19.0" />
+                        <TextArea fx:id="textarea" editable="false" layoutX="-18.0" layoutY="19.0" prefHeight="319.0" prefWidth="356.0" rotate="90.0" style="-fx-font-family: 'Game of Thrones'" AnchorPane.rightAnchor="-19.0" />
                      </children>
                   </AnchorPane>
               </items>

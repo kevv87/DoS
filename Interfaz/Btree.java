@@ -358,33 +358,33 @@ public class Btree {
             return 0;
         }else{
         if(nombre.contains("A")){
-            return 140*Integer.parseInt(nombre.substring(1));
+            return 1400*Integer.parseInt(nombre.substring(1));
         }else if(nombre.contains("B")){
-            return 130*Integer.parseInt(nombre.substring(1));
+            return 1300*Integer.parseInt(nombre.substring(1));
         }else if(nombre.contains("C")){
-            return 120*Integer.parseInt(nombre.substring(1));
+            return 1200*Integer.parseInt(nombre.substring(1));
         }else if(nombre.contains("D")){
-            return 110*Integer.parseInt(nombre.substring(1));
+            return 1100*Integer.parseInt(nombre.substring(1));
         }else if(nombre.contains("E")){
-            return 100*Integer.parseInt(nombre.substring(1));
+            return 1000*Integer.parseInt(nombre.substring(1));
         }else if(nombre.contains("F")){
-            return 90*Integer.parseInt(nombre.substring(1));
+            return 900*Integer.parseInt(nombre.substring(1));
         }else if(nombre.contains("G")){
-            return 80*Integer.parseInt(nombre.substring(1));
+            return 800*Integer.parseInt(nombre.substring(1));
         }else if(nombre.contains("H")){
-            return 70*Integer.parseInt(nombre.substring(1));
+            return 700*Integer.parseInt(nombre.substring(1));
         }else if(nombre.contains("I")){
-            return 60*Integer.parseInt(nombre.substring(1));
+            return 600*Integer.parseInt(nombre.substring(1));
         }else if(nombre.contains("J")){
-            return 50*Integer.parseInt(nombre.substring(1));
+            return 500*Integer.parseInt(nombre.substring(1));
         }else if(nombre.contains("K")){
-            return 40*Integer.parseInt(nombre.substring(1));
+            return 400*Integer.parseInt(nombre.substring(1));
         }else if(nombre.contains("L")){
-            return 30*Integer.parseInt(nombre.substring(1));
+            return 300*Integer.parseInt(nombre.substring(1));
         }else if(nombre.contains("M")){
-            return 20*Integer.parseInt(nombre.substring(1));
+            return 200*Integer.parseInt(nombre.substring(1));
         }else if(nombre.contains("N")){
-            return 10*Integer.parseInt(nombre.substring(1));
+            return 100*Integer.parseInt(nombre.substring(1));
         }else if(nombre.contains("O")){
             return 1*Integer.parseInt(nombre.substring(1));
         }else{

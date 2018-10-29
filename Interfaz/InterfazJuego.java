@@ -68,6 +68,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import Logger.Logging;
+import java.io.File;
+import java.io.FileInputStream;
+import javafx.scene.text.Font;
 import javafx.stage.WindowEvent;
 
 import javax.xml.bind.JAXBException;
@@ -154,8 +157,11 @@ public class InterfazJuego extends Application {
         Parent padre = inicio.load();
         this.foo = (AnchorPane)inicio.getNamespace().get("paneljuego");
         this.textarea = (TextArea)inicio.getNamespace().get("textarea");
+        this.textarea.setFont(Font.loadFont(InterfazJuego.class.getResource("Game of Thrones.ttf").toExternalForm(),16));
         this.layoutactual = (Label)inicio.getNamespace().get("layout_actual");
+        this.layoutactual.setFont(Font.loadFont(InterfazJuego.class.getResource("Game of Thrones.ttf").toExternalForm(),20));
         this.infodragon = (Label)inicio.getNamespace().get("info_dragon");
+        this.infodragon.setFont(Font.loadFont(InterfazJuego.class.getResource("Game of Thrones.ttf").toExternalForm(),18));
         this.vida1 = (ImageView)inicio.getNamespace().get("vida1");
         this.vida2 = (ImageView)inicio.getNamespace().get("vida2");
         this.vida3 = (ImageView)inicio.getNamespace().get("vida3");

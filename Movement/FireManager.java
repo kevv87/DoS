@@ -45,7 +45,7 @@ public class FireManager {
             fire.setTranslateX(fire.getPosX());
 
             if (fire.getPosX() >= 1200){
-                remove(fire);
+                pane.getChildren().remove(fire);
                 friendlyFireList.remove(fire);
                 return;
             }
@@ -53,7 +53,7 @@ public class FireManager {
             for(Dragon enemy:Enemies.getHorde()){
                 boolean interseccion = fire.getBoundsInParent().intersects(enemy.getBoundsInParent());
                 if(interseccion){
-
+                  if(enemy.getResistencia()==0){
                     InterfazJuego.nextOrden();
                     if (idAlineacion%5 == 0) { // primer Caso de eliminacion
 
@@ -148,6 +148,10 @@ public class FireManager {
                         remove(enemy);//remover enemigo del Pane
                         remove(fire);//remover fuego del Pane
                         friendlyFireList.remove(fire); // Elimina de la lista fuegos
+                    }
+                  }else{
+                      enemy.setResistencia(enemy.getResistencia()-1);
+                  }
 
                         //Acomodo por AVLTREE
 
@@ -212,7 +216,7 @@ public class FireManager {
 
                 }
             }
-        }
+        
 
 
         for (Fire fire : foeFireList) { // Movimiento de fuegos enemigos
