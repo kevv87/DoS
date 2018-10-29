@@ -1,15 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Actors.factories.dragons;
 
 
 import javafx.geometry.Rectangle2D;
 
 /**
- *
+ * Variacion de la clase Dragon de tipo B que posee caracteristicas propias
  * @author kevv87
  */
 public class DragonB extends Dragon{

@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Interfaz;
 
-import java.util.ArrayList;
 import utils.LinkedList;
-
-
-
 
 /**
  *
@@ -17,14 +9,7 @@ import utils.LinkedList;
  */
  /** This is the {@link btree.Btree} class. We define the necessary variables and methods that we need to build the {@link btree.Btree}
  data structure.
- This class contains the following methods:
- 1) The constructor of the B tree.
- 2) Insert Method.
- 3) Insert in None Full NodeBtree.
- 4) Split Child Method.
- 5) Delete Method.
- 6) Search Method.
-  7) Print Method.*/
+*/
 
 public class Btree {
     /**
@@ -211,46 +196,8 @@ public class Btree {
         // send the root x and the key k as an arguments to the the method search above
         return search(x, k);
     }
-
-    /**
-     * to delete a key in B-Tree, if the key is in a isLeaf node only
-     * @param k the value to be deleted.
-     * @return True if deleted, false otherwise.
-     */
-
-    /**
-     * The Delete Method
-     * There are three cases of the delete a key in the B Tree:
-     * 1) If the key k is in a node, and the node is a isLeaf, then delete the key k from the node.
-     * 2) If the key k is in a node, and the node is an internal node, then there are three possibilities:
-     *      "a. If the child y that precedes k in node x has at least t keys, then find the
-    predecessor k0 of k in the subtree rooted at y. Recursively delete k0, and
-    replace k by k0 in x. (We can find k0 and delete it in a single downward
-    pass.)
-    b. If y has fewer than t keys, then, symmetrically, examine the child ´ that
-    follows k in node x. If ´ has at least t keys, then find the successor k0 of k in
-    the subtree rooted at ´. Recursively delete k0, and replace k by k0 in x. (We
-    can find k0 and delete it in a single downward pass.)
-    children. Otherwise, if both y and ´ have only t  1 keys, merge k and all of ´ into y,
-    so that x loses both k and the pointer to ´, and y now contains 2t  1 keys.
-    Then free ´ and recursively delete k from y.
-     * 3) If the key k is not present in internal node x, determine the root x:ci of the
-    appropriate subtree that must contain k, if k is in the tree at all. If x:ci has
-    only t 1 keys, execute step 3a or 3b as necessary to guarantee that we descend
-    to a node containing at least t keys. Then finish by recursing on the appropriate
-    child of x.
-     *       a. If x:ci has only t-1 keys but has an immediate sibling with at least t keys,
-    give x:ci an extra key by moving a key from x down into x:ci, moving a
-    key from x:ci ’s immediate left or right sibling up into x, and moving the
-    appropriate child pointer from the sibling into x:ci .
-    b. If x:ci and both of x:ci ’s immediate siblings have t-1 keys, merge x:ci
-    with one sibling, which involves moving a key from x down into the new
-    merged node to become the median key for that node." (Source:Introduction to Algorithms third edition.)
-     * 
-     * In this project we will implemented the first case which if the key k is in a node, and the node
-     * is a isLeaf, then delete the key k from the node.
-     * The run time of the Delete algorithm is O(t log n).
-     * 
+  
+     /* 
      * @param node the node 
      * @param value the value the will be deleted
      * @return Ture if deleted, false otherwise.
@@ -269,50 +216,6 @@ public class Btree {
      */
     public String print() {
         // Call the printBtree Method to print the B-Tree
-        /*//...........................................................................................................................
-            for(int i = 0; i<=9; i++){
-                this.insert("A"+i);
-                System.out.println("A"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                this.insert("B"+i);
-                System.out.println("B"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                this.insert("C"+i);
-                System.out.println("C"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                this.insert("D"+i);
-                System.out.println("D"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                this.insert("E"+i);
-                System.out.println("E"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                this.insert("F"+i);
-                System.out.println("F"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                this.insert("G"+i);
-                System.out.println("G"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                this.insert("H"+i);
-                System.out.println("H"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                this.insert("I"+i);
-                System.out.println("I"+i);
-            }
-            for(int i = 0; i<=9; i++){
-                this.insert("J"+i);
-                System.out.println("J"+i);
-            }
-                this.insert("K0");
-                System.out.println("K0");
-            //...........................................................................................................................*/
         this.chain = "";
         printBtree(root, "");
         return this.chain;

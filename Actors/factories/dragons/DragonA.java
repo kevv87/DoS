@@ -8,7 +8,7 @@ package Actors.factories.dragons;
 import javafx.geometry.Rectangle2D;
 
 /**
- *
+ * Variacion de la clase Dragon de tipo A que posee caracteristicas propias
  * @author kevv87
  */
 public class DragonA extends Dragon{
@@ -31,7 +31,6 @@ public class DragonA extends Dragon{
         this.y = y;
         dragonIV.setFitWidth(50);
         dragonIV.setFitHeight(50);
-        ;
         getChildren().addAll(dragonIV);
         id = 0;
     }

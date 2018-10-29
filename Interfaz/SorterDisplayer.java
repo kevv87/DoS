@@ -8,7 +8,14 @@ import java.util.LinkedList;
 public class SorterDisplayer {
 
     static int boolCont = 0;
-
+/**
+ * Prueba Sorter Displayer
+ * @param Enemies horda de Dragones enemigos
+ * @param listaDragonPos lista de posiciones de los dragones de la horda
+ * @param cont contador
+ * @param bool booleano
+ * @throws Exception 
+ */
     public static void acomodoVisualSort(DragonHorde Enemies, LinkedList<Dragon> listaDragonPos, int cont, boolean bool) throws Exception {
         for (Dragon dragon : Enemies.getHorde()){
 
@@ -120,7 +127,12 @@ public class SorterDisplayer {
         }
     }
 
-
+/**
+ * Acomoda las hordas de dragones enemigos en la pantalla de juego
+ * @param Enemies horda de dragones enemigos
+ * @param bool booleano
+ * @throws Exception 
+ */
     public static void acomodoVisualSort2(DragonHorde Enemies, boolean bool) throws Exception {
 
         boolCont = 0;

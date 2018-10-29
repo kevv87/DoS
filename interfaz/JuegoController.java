@@ -12,7 +12,6 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import utils.LinkedList;
@@ -96,6 +95,7 @@ public class JuegoController implements Initializable {
 
 
     }
+    //Setter
     public void setWindow (Stage window){
             this.window = window;
         }

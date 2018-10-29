@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Interfaz;
 
 import javafx.application.Application;
@@ -13,28 +9,26 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-import java.io.File;
-
-
 /**
- *
+ * Pantalla de inicio
  * @author Tomás
  */
 public class InterfazInicio extends Application {
     static MediaPlayer player;
     @Override
+    /**
+     * Lanza la pantalla de inicio
+     */
     public void start(Stage stage) throws Exception {
         Parent inicio = FXMLLoader.load(getClass().getResource("PantallaInicio.fxml"));
         Scene iniciar = new Scene(inicio);
-        //Media media = new Media(getClass().getClassLoader().getResource("file:///utils/PantallaInicio.mp3").toString());
-        //this.player = new MediaPlayer(media);
-        //player.setCycleCount(MediaPlayer.INDEFINITE);
-        //player.play();
-        
+        Media media = new Media(getClass().getClassLoader().getResource("file:///utils/PantallaInicio.mp3").toString());
+        this.player = new MediaPlayer(media);
+        player.setCycleCount(MediaPlayer.INDEFINITE);
+        player.play();
         stage.setResizable(false); 
-         stage.setScene(iniciar);
-         stage.show();
-
+        stage.setScene(iniciar);
+        stage.show();
     }
 
     /**

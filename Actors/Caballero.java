@@ -1,5 +1,8 @@
 package Actors;
-
+/**
+ * Clase que controla el jugador
+ * @author Tomás
+ */
 public class Caballero {
 
     private double x;
@@ -16,7 +19,9 @@ public class Caballero {
         this.y = y;
         this.resistencia = 3;
     }
-
+    /**
+     * Sobrecarga del constructor
+     */
     public Caballero(){
         this.x = 0;
         this.y = 0;

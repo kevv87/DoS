@@ -45,7 +45,7 @@ public class FireManager {
             fire.setTranslateX(fire.getPosX());
 
             if (fire.getPosX() >= 1200){
-                pane.getChildren().remove(fire);
+                remove(fire);
                 friendlyFireList.remove(fire);
                 return;
             }
@@ -54,9 +54,7 @@ public class FireManager {
                 boolean interseccion = fire.getBoundsInParent().intersects(enemy.getBoundsInParent());
                 if(interseccion){
                   if(enemy.getResistencia()==0){
-                    InterfazJuego.nextOrden();
                     if (idAlineacion%5 == 0) { // primer Caso de eliminacion
-
                         Enemies.getHorde().remove(enemy); //remover de ArrayList
                         remove(enemy);//remover enemigo del Pane
                         remove(fire);//remover fuego del Pane

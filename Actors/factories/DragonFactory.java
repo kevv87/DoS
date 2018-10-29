@@ -9,7 +9,7 @@ import Actors.factories.dragons.*;
 
 /**
  * Clase encargada de generar los diferentes tipos de dragones, a peticion.
- * Implementa el patron de disenno "Factory"
+ * Implementa el patron de diseno "Factory"
  * @author kevv87
  */
 
@@ -19,7 +19,7 @@ public class DragonFactory {
      * Metodo encargado de generar dragones
      * @param type Tipo de dragon a generar, A, B o C
      * @param x Posicion del dragon en x en la pantalla
-     * @param y Posicion del dragon en y en la patanlla
+     * @param y Posicion del dragon en y en la pantalla
      * @param nombre Nombre del dragon a generar
      * @param padre BolaFuego padre del dragon a generar
      * @return BolaFuego generado
@@ -49,7 +49,11 @@ public class DragonFactory {
         return new DragonToSend(dragon.getName(),dragon.getVelocidad_recarga(),dragon.getEdad(),dragon.getResistencia(),dragon.getTipo(),DragonFactory.getDragon(dragon.getPadre()),dragon.getPosX(),dragon.getPosY(),dragon.getImage_url(),dragon.isAlive());
     }
 
-
+    /**
+     * Sobrecarga del metodo getDragon
+     * @param dragon Dragon que se desconvierte al enviarse
+     * @return Dragon que se utiliza en el funcionamiento interno del cliente y servidor
+     */
     public static Dragon getDragon(DragonToSend dragon){
         if(dragon == null){
             return null;

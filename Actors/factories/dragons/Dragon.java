@@ -1,22 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Actors.factories.dragons;
 
 import Actors.factories.DragonFactory;
-
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
-import java.util.Random;
-
-import javafx.scene.shape.Rectangle;
-
-//import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Clase base de cada dragon.
@@ -179,7 +167,11 @@ public class Dragon extends Pane{
     }
 
     public void setConstantPosPerDragon(boolean constantPosPerDragon) { this.constantPosPerDragon = constantPosPerDragon; }
-
+    /**
+     * Metodo que crea un Dragon igual al que se inserta como parametro
+     * @param dragon Dragon a copiar/duplicar
+     * @return Dragon con las mismas caracteristicas al que se inserto como parametro
+     */
     public Dragon copy(Dragon dragon){
         Dragon dragon1 = DragonFactory.getDragon("A",0, 0, "probe", null);
         dragon1.edad = dragon.edad;

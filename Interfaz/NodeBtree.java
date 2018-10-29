@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Interfaz;
 
-/**
- *
- * @author Tomás
- */
+package Interfaz;
 
 /**
  * This is the the class of {@link btree.Btree} NodeBtree. In the class, we declare and define the the variables that we

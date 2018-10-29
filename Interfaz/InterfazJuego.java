@@ -8,78 +8,40 @@ package Interfaz;
 import Actors.factories.dragons.Dragon;
 import Arduino.Connection;
 import Movement.*;
-
 import java.io.IOException;
-
-
-import static java.lang.Thread.sleep;
-
-
-import java.sql.SQLOutput;
-
 import java.io.UnsupportedEncodingException;
-
-
 import java.util.HashMap;
-
 import conectividad.Cliente;
-import com.sun.security.ntlm.NTLMException;
 import com.sun.security.ntlm.NTLMException;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
-
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-
-
-import javafx.scene.control.Button;
-
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-
-import javafx.scene.control.Control;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import utils.LinkedList;
-
-
-//import javax.xml.bind.JAXBException;
-
 import java.util.Timer;
 import java.util.TimerTask;
-
 import Logger.Logging;
-import java.io.File;
-import java.io.FileInputStream;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.stage.WindowEvent;
-
 import javax.xml.bind.JAXBException;
 
 
 /**
- * @author Tomas
+ * Pantalla de juego
+ * @author Tomás
  */
-
 public class InterfazJuego extends Application {
     private  HashMap<KeyCode, Boolean> keys = new HashMap<>();
     TextArea textarea;
@@ -95,18 +57,13 @@ public class InterfazJuego extends Application {
     Hero player = new Hero();
     //Enemies
     DragonHorde Enemies;
-
-
     private ScrollingBG map = new ScrollingBG();
     int c = 0;  // Columna weon
     //Disparos
     private boolean fEnabled = true;
     private Timer playerT = new Timer();
     private static String controlCommand = "n";
-
-
     private Cliente cliente = new Cliente();
-
     private TimerTask enableFire = new TimerTask() {
         @Override
         public void run() {
@@ -118,27 +75,17 @@ public class InterfazJuego extends Application {
     //private Cliente client = new Cliente();
     double width;
     double height;
-
-
     private boolean pause_b = false;
     private static int ordenamiento = -1;
 
-
-
-
     @Override
-
+/**
+ * Lanza la pantalla de juego
+ */
     public void start(Stage primaryStage) throws Exception {
-
-
-        //client.sendMessage("Start");
-
         // Conexion con arduino
         Connection main = new Connection();
         main.initialize();
-
-
-
         primaryStage.setOnCloseRequest((WindowEvent event1) -> {
             try {
                 finish();
@@ -147,11 +94,9 @@ public class InterfazJuego extends Application {
             }
         });
 
-
         Cliente client =  new Cliente();
         client.sendMessage("Start");
         Logging.log("info","Iniciando juego");
-
 
         FXMLLoader inicio =  new FXMLLoader(getClass().getResource("PantallaJuego.fxml"));
         Parent padre = inicio.load();
@@ -166,16 +111,17 @@ public class InterfazJuego extends Application {
         this.vida2 = (ImageView)inicio.getNamespace().get("vida2");
         this.vida3 = (ImageView)inicio.getNamespace().get("vida3");
         this.scene = new Scene(padre);
-        
-        /*
         Media media = new Media(getClass().getClassLoader().getResource("utils/PantallaJuego.mp3").toString());
         MediaPlayer player = new MediaPlayer(media); 
         player.setCycleCount(MediaPlayer.INDEFINITE);
-        player.play();*/
+        player.play();
           newGame();
 
         AnimationTimer timer = new AnimationTimer() {
             @Override
+            /**
+             * Muestra el layout actual
+             */
             public void handle(long now) {
                 try {
                    switch(ordenamiento){
@@ -183,13 +129,13 @@ public class InterfazJuego extends Application {
                            mostrar_layout("No ordenado");
                            break;
                        case 0:
-                           mostrar_layout("Linked List por edades");
+                           mostrar_layout("Selection sort por edades");
                            break;
                        case 1:
-                           mostrar_layout("Linked list por velocidad");
+                           mostrar_layout("Insertion sort por velocidad");
                            break;
                        case 2:
-                           mostrar_layout("Linked list por edades");
+                           mostrar_layout("QuickSort por edades");
                            break;
                        case 3:
                            mostrar_layout("Arbol binario por familias");
@@ -199,8 +145,6 @@ public class InterfazJuego extends Application {
                            break;
                    }
                     movePlayer();
-
-                   
 
                     if(!pause_b){
                       if(Enemies.isEnemiesStop()==false){
@@ -217,7 +161,6 @@ public class InterfazJuego extends Application {
                           SorterDisplayer.acomodoVisualSort2(Enemies,false);
                       }
 
-
                       fireManager.moveFire();
                     }
 
@@ -232,21 +175,27 @@ public class InterfazJuego extends Application {
         primaryStage.show();
     }
 
-
-
+    /**
+     * Muestra el layout actual
+     * @param a texto para mostrar en el espacio correspondiente al layout actual
+     */
     public void mostrar_layout(String a){
         this.layoutactual.setText(a);
     }
     
+    /**
+     * Muestra la informacion propia de un dragon en especifico
+     * @param b texto para mostrar en el espacio correspondiente a la informacion propia de un dragon
+     */
     public void mostrar_info(String b){
         this.infodragon.setText(b);
     }
+    
     /**
-     *
+     * Inserta en pantalla todos los elementos necesarios para el desarrollo del juego
      * @throws IOException
+     * @throws JAXBException 
      */
-
-
     public void newGame() throws IOException, JAXBException {
         
         foo.getChildren().add(map.getBG1());
@@ -261,9 +210,7 @@ public class InterfazJuego extends Application {
         vida2.toFront();
         vida3.toFront();
 
-
         Enemies = new DragonHorde(foo,3,3,3,3,671);
-
 
         fireManager = new FireManager(foo, width, Enemies);
 
@@ -273,12 +220,20 @@ public class InterfazJuego extends Application {
         });
 
     }
-//       _____________
-    //______/Hero control
+
+//Hero control
+    /**
+     * Muestra si una tecla determinada esta siendo oprimida
+     * @param key tecla oprimida
+     * @return booleano
+     */
     public boolean isPressed(KeyCode key){
         return keys.getOrDefault(key, false);
     }
-
+    /**
+     * Mueve el personaje por la pantalla de juego
+     * @throws InterruptedException 
+     */
     public void movePlayer() throws InterruptedException {
         String command = InterfazJuego.getControlCommand();
 
@@ -321,8 +276,6 @@ public class InterfazJuego extends Application {
 
         }
 
-
-
         if (isPressed(KeyCode.P)) {
             //System.out.println("P");
             pause_b = !pause_b;
@@ -362,20 +315,13 @@ public class InterfazJuego extends Application {
                     dragon.getChildren().addAll(texto);
                 }
 
-                //enemyMovement.suspend();
-                //fireMovement.suspend();
             } else {
                 for(Dragon dragon:Enemies.getHorde()){
                     dragon.getChildren().remove(dragon.getChildren().size()-1);
                 }
-                //enemyMovement.resume();
-                //fireMovement.resume();
             }
             Thread.sleep(100);
-
         }
-
-
 
         //Control
         if(command.equals("l")){
@@ -402,9 +348,12 @@ public class InterfazJuego extends Application {
         }
 
         setControlCommand("n");
-
     }
-
+    
+    /**
+     * Anade un disparo a la pantalla de juego
+     * @param toad disparo
+     */
     public void addToPane(Fire toad){
 
         Platform.runLater(new Runnable(){
@@ -423,31 +372,31 @@ public class InterfazJuego extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
+ 
+    //Setter & Getter 
     public static String getControlCommand() {
         return controlCommand;
     }
-
+    
+    /**
+     * 
+     * @param controlCommand 
+     */
     public static void setControlCommand(String controlCommand) {
         InterfazJuego.controlCommand = controlCommand;
     }
 
 
     /**
-     * Finaliza el juego
-     * */
+     * Informa y registra la finalizacion del juego
+     * @throws JAXBException
+     * @throws UnsupportedEncodingException
+     * @throws NTLMException 
+     */
     public static void finish() throws JAXBException, UnsupportedEncodingException, NTLMException {
         Cliente client = new Cliente();
         client.sendMessage("end");
         Logger.Logging.log("info","Juego terminado");
         System.exit(0);
     }
-
-
-    public static void nextOrden(){
-        ordenamiento = (ordenamiento+1)%5;
-    }
-
-
-
 }

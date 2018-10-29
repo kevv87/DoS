@@ -18,7 +18,7 @@ import javafx.scene.text.Font;
 
 /**
  * FXML Controller class
- *
+ *Controlador de la pantalla de juego
  * @author Tomás
  */
 public class PantallaJuegoController implements Initializable {
