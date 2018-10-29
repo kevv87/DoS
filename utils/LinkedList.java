@@ -33,6 +33,7 @@ import java.util.function.Consumer;
  * @author Sebastián
  */
 @XmlRootElement
+@XmlSeeAlso(Nodo.class)
 public class LinkedList<T>{ //Lista para nodos genericos
 
     private Nodo<T> Inicio;

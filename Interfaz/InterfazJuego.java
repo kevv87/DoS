@@ -245,7 +245,6 @@ public class InterfazJuego extends Application {
 
 
         Enemies = new DragonHorde(foo, infodragon,textarea, cliente.getDragons());
-        System.out.println(Enemies.getHorde().size());
 
 
         fireManager = new FireManager(foo, width, Enemies);
