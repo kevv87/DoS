@@ -8,7 +8,6 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -45,11 +44,9 @@
       <items>
         <AnchorPane fx:id="paneljuego" prefHeight="600.0" prefWidth="800.0">
                <children>
-                  <ImageView fitHeight="719.0" fitWidth="1039.0" layoutX="114.0" layoutY="89.0" pickOnBounds="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <image>
-                        <Image url="@../Movement/background.jpg" />
-                     </image>
-                  </ImageView>
+                  <ImageView fx:id="vida1" fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="655.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="vida2" fitHeight="50.0" fitWidth="50.0" layoutX="64.0" layoutY="655.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="vida3" fitHeight="50.0" fitWidth="50.0" layoutX="114.0" layoutY="655.0" pickOnBounds="true" preserveRatio="true" />
                </children>
         </AnchorPane>
             <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
@@ -60,7 +57,7 @@
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
-                                    <Label fx:id="layout_actual" alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Lateral 1" textAlignment="CENTER" wrapText="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label fx:id="layout_actual" alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Layout Actual" textAlignment="CENTER" wrapText="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <textFill>
                                           <Color blue="0.624" green="0.624" red="0.624" fx:id="x21" />
                                        </textFill>
@@ -72,7 +69,7 @@
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="163.0" prefWidth="207.0">
                                  <children>
-                                    <Label fx:id="info_dragon" alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Lateral 2" textAlignment="CENTER" wrapText="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label fx:id="info_dragon" alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Información de Dragón" textAlignment="CENTER" wrapText="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <textFill>
                                           <Color blue="0.624" green="0.624" red="0.624" fx:id="x211" />
                                        </textFill>

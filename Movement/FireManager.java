@@ -11,6 +11,7 @@ import conectividad.Cliente;
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
+import logic.AVLTree;
 import logic.AsignadorParametros;
 import logic.PositionManager;
 import logic.Sorter;
@@ -82,6 +83,7 @@ public class FireManager {
                         remove(fire);//remover fuego del Pane
                         friendlyFireList.remove(fire); // Elimina de la lista fuegos
 
+                        /*
                         //Acomodo por SelectionSort
                         LinkedList<Dragon> listaordenada = mineToYours(new Cliente().sendList(yoursToMine(Enemies.getHorde()),"selection"));
                         LinkedList<Dragon> listaenemigos = Enemies.getHorde();
@@ -96,9 +98,9 @@ public class FireManager {
                                 }
                             }
                             cont++;
-                        }
+                        }*/
 
-                        Enemies.setHorde(nuevalista);
+                        Enemies.setHorde(sorter.selectionSort(Enemies.getHorde()));
 
                         //Acomodo VISUAL
 
@@ -126,6 +128,7 @@ public class FireManager {
                         friendlyFireList.remove(fire); // Elimina de la lista fuegos
 
                         //Acomodo por Insertion
+                        /*
                         LinkedList<Dragon> listaordenada = mineToYours(new Cliente().sendList(yoursToMine(Enemies.getHorde()),"insertion"));
                         LinkedList<Dragon> listaenemigos = Enemies.getHorde();
                         LinkedList<Dragon> nuevalista = new LinkedList<>();
@@ -140,11 +143,12 @@ public class FireManager {
                             }
                             cont++;
                         }
-
-                        Enemies.setHorde(nuevalista);
+*/
+                        Enemies.setHorde(Sorter.insertionSort(Enemies.getHorde()));
 
 
                         //Acomodo VISUAL
+
 
 
                         for (Dragon dragon : Enemies.getHorde()){
@@ -169,6 +173,7 @@ public class FireManager {
                         friendlyFireList.remove(fire); // Elimina de la lista fuegos
 
                         //Acomodo por Insertion
+                         /*
                         LinkedList<Dragon> listaordenada = mineToYours(new Cliente().sendList(yoursToMine(Enemies.getHorde()),"quick"));
                         LinkedList<Dragon> listaenemigos = Enemies.getHorde();
                         LinkedList<Dragon> nuevalista = new LinkedList<>();
@@ -182,11 +187,11 @@ public class FireManager {
                                 }
                             }
                             cont++;
-                        }
+                        }*/
 
 
                         //Acomodo por QUICKSORT
-                        Enemies.setHorde(nuevalista);
+                        Enemies.setHorde(sorter.quickSort(Enemies.getHorde()));
 
                         //Enemies.setExitDragonMov(true);
 
@@ -216,12 +221,13 @@ public class FireManager {
                         remove(fire);//remover fuego del Pane
                         friendlyFireList.remove(fire); // Elimina de la lista fuegos
 
-                        //Acomodo por AVLTREE
+                        //Acomodo por ARBOL BINARIO
 
                         AsignadorParametros asignador = new AsignadorParametros(Enemies.getHorde());
                         asignador.asignaPadres(Enemies.getHorde());
 
                         //Acomodo por Insertion
+                        /*
                         LinkedList<Dragon> listaordenada = mineToYours(new Cliente().sendList(yoursToMine(Enemies.getHorde()),"binario"));
                         LinkedList<Dragon> listaenemigos = Enemies.getHorde();
                         LinkedList<Dragon> nuevalista = new LinkedList<>();
@@ -235,9 +241,9 @@ public class FireManager {
                                 }
                             }
                             cont++;
-                        }
+                        }*/
 
-                        Enemies.setHorde(nuevalista);
+                        Enemies.setHorde(Sorter.arbolBinario(Enemies.getHorde()));
 
                         //Enemies.setExitDragonMov(true);
 
@@ -265,7 +271,7 @@ public class FireManager {
                         friendlyFireList.remove(fire); // Elimina de la lista fuegos
 
                         //Acomodo por AVLTREE
-
+                        /*
                         AsignadorParametros asignador = new AsignadorParametros(Enemies.getHorde());
                         asignador.asignaPadres(Enemies.getHorde());
 
@@ -282,9 +288,9 @@ public class FireManager {
                                 }
                             }
                             cont++;
-                        }
+                        }*/
 
-                        Enemies.setHorde(nuevalista);
+                        Enemies.setHorde(Sorter.AVLTree(Enemies.getHorde()));
 
                         //Enemies.setExitDragonMov(true);
 

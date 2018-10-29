@@ -6,71 +6,35 @@
 package Interfaz;
 
 import Actors.factories.dragons.Dragon;
-import Arduino.Connection;
 import Movement.*;
-
-import java.io.IOException;
-
-
-import static java.lang.Thread.sleep;
-
-
-import java.sql.SQLOutput;
-
-import java.io.UnsupportedEncodingException;
-
-
-import java.util.HashMap;
-
+import com.sun.security.ntlm.NTLMException;
 import conectividad.Cliente;
-import com.sun.security.ntlm.NTLMException;
-import com.sun.security.ntlm.NTLMException;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
-
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.fxml.*;
 import javafx.scene.Scene;
-
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-
-
-import javafx.scene.control.Button;
-
+import javafx.scene.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-
-import javafx.scene.control.Control;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import utils.LinkedList;
-
-
-//import javax.xml.bind.JAXBException;
-
-import java.util.Timer;
-import java.util.TimerTask;
-
-import Logger.Logging;
 import javafx.stage.WindowEvent;
 
 import javax.xml.bind.JAXBException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
+
+//import Arduino.Connection;
+
+//import javax.xml.bind.JAXBException;
 
 
 /**
@@ -83,6 +47,9 @@ public class InterfazJuego extends Application {
     Label layoutactual;
     Label infodragon;
     Scene scene;
+    ImageView vida1;
+    ImageView vida2;
+    ImageView vida3;
     @FXML
     AnchorPane foo;
     //Player
@@ -99,7 +66,7 @@ public class InterfazJuego extends Application {
     private static String controlCommand = "n";
 
 
-    private Cliente cliente = new Cliente();
+    //private Cliente cliente = new Cliente();
 
     private TimerTask enableFire = new TimerTask() {
         @Override
@@ -116,8 +83,7 @@ public class InterfazJuego extends Application {
 
     private boolean pause_b = false;
     private static int ordenamiento = -1;
-
-
+    private Cliente cliente = new Cliente();
 
 
     @Override
@@ -128,9 +94,8 @@ public class InterfazJuego extends Application {
         //client.sendMessage("Start");
 
         // Conexion con arduino
-        Connection main = new Connection();
-        main.initialize();
-
+        //Connection main = new Connection();
+        //main.initialize();
 
 
         primaryStage.setOnCloseRequest((WindowEvent event1) -> {
@@ -141,20 +106,23 @@ public class InterfazJuego extends Application {
             }
         });
 
-
+        /**
         Cliente client =  new Cliente();
         client.sendMessage("Start");
         Logging.log("info","Iniciando juego");
-
+        */
 
         FXMLLoader inicio =  new FXMLLoader(getClass().getResource("PantallaJuego.fxml"));
         Parent padre = inicio.load();
         this.foo = (AnchorPane)inicio.getNamespace().get("paneljuego");
-
         this.textarea = (TextArea)inicio.getNamespace().get("textarea");
         this.layoutactual = (Label)inicio.getNamespace().get("layout_actual");
         this.infodragon = (Label)inicio.getNamespace().get("info_dragon");
+        this.vida1 = (ImageView)inicio.getNamespace().get("vida1");
+        this.vida2 = (ImageView)inicio.getNamespace().get("vida2");
+        this.vida3 = (ImageView)inicio.getNamespace().get("vida3");
         this.scene = new Scene(padre);
+        
         /*
         Media media = new Media(getClass().getClassLoader().getResource("utils/PantallaJuego.mp3").toString());
         MediaPlayer player = new MediaPlayer(media); 
@@ -236,15 +204,23 @@ public class InterfazJuego extends Application {
 
 
     public void newGame() throws IOException, JAXBException {
-
+        
         foo.getChildren().add(map.getBG1());
         foo.getChildren().add(map.getBG2());
         foo.getChildren().add(map.getBG3());
         player.setTranslateY(250);
         foo.getChildren().add(player);
+        vida1.setImage(new Image(getClass().getResourceAsStream("Heart.png")));
+        vida2.setImage(new Image(getClass().getResourceAsStream("Heart.png")));
+        vida3.setImage(new Image(getClass().getResourceAsStream("Heart.png")));
+        vida1.toFront();
+        vida2.toFront();
+        vida3.toFront();
+
 
 
         Enemies = new DragonHorde(foo, infodragon,textarea, cliente.getDragons());
+
 
 
         fireManager = new FireManager(foo, width, Enemies, textarea);
@@ -252,7 +228,7 @@ public class InterfazJuego extends Application {
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> {
             keys.put(event.getCode(), false);
-        });
+        }); //
 
     }
 //       _____________
