@@ -75,7 +75,7 @@ public class Cliente {
         return DragonToSend_to_Dragon(response);
     }
 
-    public LinkedList<DragonToSend> sendList(LinkedList<Dragon> dragones){
+    public LinkedList<DragonToSend> sendList(LinkedList<Dragon> dragones, String ordenamiento){
 
         HttpURLConnection conn = null;
         conn = get_connection(url, "POST");
@@ -91,7 +91,8 @@ public class Cliente {
 
         try {
             String payload = URLEncoder.encode("dragon", "UTF-8") + "=" +
-                    URLEncoder.encode(Objects.requireNonNull(jaxbObjectToXML(lista_enviar)), "UTF-8");
+                    URLEncoder.encode(Objects.requireNonNull(jaxbObjectToXML(lista_enviar)), "UTF-8")+"&"+
+                    URLEncoder.encode("orden", "UTF-8") +"="+ URLEncoder.encode(ordenamiento, "UTF-8");
 
             // Send the request
             send_requests(payload,conn);

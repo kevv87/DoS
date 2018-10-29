@@ -15,7 +15,7 @@ public class NodoArbol {
      * Constructor por default
      */
     public NodoArbol(){
-        this.dragon = DragonFactory.getDragon("A",0,0,"A1",null);
+        this.dragon = DragonFactory.getDragon("A",0,0,"A1",null,1 );
         padre = null;
         hijoDer = null;
         hijoIzq = null;

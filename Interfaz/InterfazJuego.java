@@ -247,7 +247,7 @@ public class InterfazJuego extends Application {
         Enemies = new DragonHorde(foo, infodragon,textarea, cliente.getDragons());
 
 
-        fireManager = new FireManager(foo, width, Enemies);
+        fireManager = new FireManager(foo, width, Enemies, textarea);
 
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> {
@@ -299,7 +299,12 @@ public class InterfazJuego extends Application {
             Fire fire = new Fire(player.getPosX()+136, player.getPosY()+340);
             addToPane(fire);
             fireManager.getFriendlyFireList().add(fire);
-            playerT.scheduleAtFixedRate(enableFire, 1000, 400);
+
+            try {
+                playerT.scheduleAtFixedRate(enableFire, 1000, 400);
+            }catch(Exception e){
+
+            }
 
         }
 

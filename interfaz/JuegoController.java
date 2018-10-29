@@ -74,13 +74,13 @@ public class JuegoController implements Initializable {
             x = xo;
             for (j = 0; j < columnas; j++) {
                 if (cantidadA != 0) {
-                    nuevoDragon = DragonFactory.getDragon("A", x, y, "NombrePrueba", null);
+                    nuevoDragon = DragonFactory.getDragon("A", x, y, "NombrePrueba", null, 1);
                     cantidadA--;
                 } else if (cantidadB != 0) {
-                    nuevoDragon = DragonFactory.getDragon("B", x, y, "NombrePrueba", null);
+                    nuevoDragon = DragonFactory.getDragon("B", x, y, "NombrePrueba", null, 1);
                     cantidadB--;
                 } else if (cantidadC != 0) {
-                    nuevoDragon = DragonFactory.getDragon("C", x, y, "NombrePrueba", null);
+                    nuevoDragon = DragonFactory.getDragon("C", x, y, "NombrePrueba", null, 1);
                     cantidadC--;
                 } else {
                     System.out.println("Error");

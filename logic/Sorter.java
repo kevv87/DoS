@@ -17,7 +17,7 @@ public class Sorter {
         //LIST TO TREE both parameters
         Queue<Dragon> colaDragones = new LinkedList<>();
         ArbolBinario arbolBinario = new ArbolBinario();
-        Dragon padre = DragonFactory.getDragon("A",0,0,"A1",null);
+        Dragon padre = DragonFactory.getDragon("A",0,0,"A1",null, 1);
 
 
         //primer caso:
@@ -108,7 +108,7 @@ public class Sorter {
             //Nueva lista ordenada
             cont = 0;
             while (cont < tamanoListaDragones){
-                Dragon dragon1 = DragonFactory.getDragon("A",0, 0, "probe", null);
+                Dragon dragon1 = DragonFactory.getDragon("A",0, 0, "probe", null, 1);
                 for (Dragon dragon : listaDragones) {
                     if (dragon.getEdad()==arregloEdades[cont]){
                         nuevaLista.add(dragon);

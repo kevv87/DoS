@@ -24,14 +24,28 @@ public class DragonFactory {
      * @param padre BolaFuego padre del dragon a generar
      * @return BolaFuego generado
      */
-    public static Dragon getDragon(String type, double x, double y, String nombre, Dragon padre){
+    public static Dragon getDragon(String type, double x, double y, String nombre, Dragon padre, int edad){
         switch(type){
             case "A":
-                return new DragonA(x,y,nombre,padre);
+                return new DragonA(x,y,nombre,padre, edad);
             case "B":
-                return new DragonB(x,y,nombre,padre);
+                return new DragonB(x,y,nombre,padre, edad);
             case "C":
-                return new DragonC(x,y,nombre,padre);
+                return new DragonC(x,y,nombre,padre, edad);
+            default:
+                return null;
+        }
+    }
+
+
+     public static Dragon getDragon(String type, double x, double y, String nombre, Dragon padre, int edad, int velocidad){
+        switch(type){
+            case "A":
+                return new DragonA(x,y,nombre,padre, edad, velocidad);
+            case "B":
+                return new DragonB(x,y,nombre,padre, edad, velocidad);
+            case "C":
+                return new DragonC(x,y,nombre,padre, edad, velocidad);
             default:
                 return null;
         }
@@ -54,7 +68,7 @@ public class DragonFactory {
         if(dragon == null){
             return null;
         }
-        return getDragon(dragon.getTipo(), dragon.getX(), dragon.getY(), dragon.getName(), getDragon(dragon.getPadre()));
+        return getDragon(dragon.getTipo(), dragon.getX(), dragon.getY(), dragon.getName(), getDragon(dragon.getPadre()), dragon.getEdad(), dragon.getVelocidad_recarga());
     }
     
 }

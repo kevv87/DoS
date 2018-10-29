@@ -21,11 +21,24 @@ public class DragonB extends Dragon{
      * @param nombre Nombre
      * @param padre BolaFuego padre, null si no tiene
      */
-    public DragonB(double x, double y, String nombre, Dragon padre){
+    public DragonB(double x, double y, String nombre, Dragon padre, int edad){
         this.velocidad_recarga = 44;  // Podria estar en un rango de 44 a 76
         this.edad = 201; // Podria estar en un rango de 201 a 700
         this.resistencia = 2;
         this.tipo = "B";
+        this.x = x;
+        this.y = y;
+        dragonIV.setFitWidth(50);
+        dragonIV.setFitHeight(50);;
+        getChildren().addAll(dragonIV);
+    }
+    public DragonB(double x, double y, String nombre, Dragon padre, int edad, int velocidad){
+        this.velocidad_recarga = 44;  // Podria estar en un rango de 44 a 76
+        this.edad = edad; // Podria estar en un rango de 201 a 700
+        this.resistencia = 2;
+        this.padre = padre;
+        this.tipo = "B";
+        this.velocidad_recarga = velocidad;
         this.x = x;
         this.y = y;
         dragonIV.setFitWidth(50);

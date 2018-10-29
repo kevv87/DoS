@@ -38,7 +38,7 @@ public class DragonHorde{
     private double PosX = 1290;
     private TextArea textArea;
     private volatile boolean enemiesStop=false;
-    private LinkedList<Dragon> Horde = new LinkedList<>();
+    public static LinkedList<Dragon> Horde = new LinkedList<>();
 
     private volatile boolean exitDragonMov = false;
     private int columnas = 0;
@@ -73,13 +73,13 @@ public class DragonHorde{
             for (int i = 0; i<dragonsPerColumn; i++){
                 Actors.factories.dragons.Dragon newDragon;
                 if(A!=0){ //sobre escribe newDragon
-                    newDragon = DragonFactory.getDragon("A", SpawningPointX, SpawningPointY, "probe", null);
+                    newDragon = DragonFactory.getDragon("A", SpawningPointX, SpawningPointY, "probe", null, 1);
                     A--;
                 }else if(B!=0){
-                    newDragon = DragonFactory.getDragon("B", SpawningPointX, SpawningPointY, "probe", null);
+                    newDragon = DragonFactory.getDragon("B", SpawningPointX, SpawningPointY, "probe", null, 1);
                     B--;
                 }else{
-                    newDragon = DragonFactory.getDragon("C", SpawningPointX, SpawningPointY, "probe", null);
+                    newDragon = DragonFactory.getDragon("C", SpawningPointX, SpawningPointY, "probe", null,1);
                     C--;
                 }
 

@@ -181,7 +181,7 @@ public class Dragon extends Pane{
     public void setConstantPosPerDragon(boolean constantPosPerDragon) { this.constantPosPerDragon = constantPosPerDragon; }
 
     public Dragon copy(Dragon dragon){
-        Dragon dragon1 = DragonFactory.getDragon("A",0, 0, "probe", null);
+        Dragon dragon1 = DragonFactory.getDragon("A",0, 0, "probe", null, 1);
         dragon1.edad = dragon.edad;
         dragon1.name = dragon.name;
         dragon1.velocidad_recarga = dragon.velocidad_recarga;
