@@ -83,6 +83,9 @@ public class InterfazJuego extends Application {
     Label layoutactual;
     Label infodragon;
     Scene scene;
+    ImageView vida1;
+    ImageView vida2;
+    ImageView vida3;
     @FXML
     AnchorPane foo;
     //Player
@@ -150,11 +153,14 @@ public class InterfazJuego extends Application {
         FXMLLoader inicio =  new FXMLLoader(getClass().getResource("PantallaJuego.fxml"));
         Parent padre = inicio.load();
         this.foo = (AnchorPane)inicio.getNamespace().get("paneljuego");
-
         this.textarea = (TextArea)inicio.getNamespace().get("textarea");
         this.layoutactual = (Label)inicio.getNamespace().get("layout_actual");
         this.infodragon = (Label)inicio.getNamespace().get("info_dragon");
+        this.vida1 = (ImageView)inicio.getNamespace().get("vida1");
+        this.vida2 = (ImageView)inicio.getNamespace().get("vida2");
+        this.vida3 = (ImageView)inicio.getNamespace().get("vida3");
         this.scene = new Scene(padre);
+        
         /*
         Media media = new Media(getClass().getClassLoader().getResource("utils/PantallaJuego.mp3").toString());
         MediaPlayer player = new MediaPlayer(media); 
@@ -236,16 +242,21 @@ public class InterfazJuego extends Application {
 
 
     public void newGame() throws IOException, JAXBException {
-
+        
         foo.getChildren().add(map.getBG1());
         foo.getChildren().add(map.getBG2());
         foo.getChildren().add(map.getBG3());
         player.setTranslateY(250);
         foo.getChildren().add(player);
+        vida1.setImage(new Image(getClass().getResourceAsStream("Heart.png")));
+        vida2.setImage(new Image(getClass().getResourceAsStream("Heart.png")));
+        vida3.setImage(new Image(getClass().getResourceAsStream("Heart.png")));
+        vida1.toFront();
+        vida2.toFront();
+        vida3.toFront();
 
 
-        Enemies = new DragonHorde(foo, infodragon,textarea, cliente.getDragons());
-        System.out.println(Enemies.getHorde().size());
+        Enemies = new DragonHorde(foo,3,3,3,3,671);
 
 
         fireManager = new FireManager(foo, width, Enemies);

@@ -11,13 +11,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-
-//import static jdk.nashorn.internal.objects.NativeDebug.getClass;
-
-
 
 /**
  * FXML Controller class
@@ -28,6 +25,12 @@ public class PantallaJuegoController implements Initializable {
 
     @FXML
     private AnchorPane paneljuego;
+    @FXML
+    private ImageView vida1;
+    @FXML
+    private ImageView vida2;
+    @FXML
+    private ImageView vida3;
     @FXML
     private AnchorPane panellateral1;
     @FXML
