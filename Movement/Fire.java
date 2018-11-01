@@ -31,11 +31,6 @@ public class Fire extends Pane{
         getChildren().addAll(pepaIV);
     }
     
-    public void move(){
-        x = x+2;
-        setTranslateX(x);
-    }
-    
     public double getPosX(){
         return x;
     }

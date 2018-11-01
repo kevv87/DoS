@@ -8,44 +8,17 @@ import java.util.Queue;
 public class ArbolBinario {
 
     private NodoArbol raiz;
-    private int nElementos = 0;
-    private NodoArbol temp = raiz;
     private LinkedList<Dragon> listaPreorden = new LinkedList<>();
-    private LinkedList<Dragon> listaDragones = new LinkedList<>(); //Para el sorter (que no elimine del Enemies.getHorde() al padre
+
 
     /**
      * Constructor por default
      */
     public ArbolBinario(){
         this.raiz = null;
-        this.nElementos = 0;
-        this.temp = raiz;
     }
 
-    /**
-     * Constructor
-     * @param raiz
-     */
-    public ArbolBinario(NodoArbol raiz){
-        this.raiz = raiz;
-        this.nElementos = 0;
-        this.temp = raiz;
-    }
 
-    public void preorderPrint(NodoArbol node)
-    {
-        if (node == null)
-            return;
-
-        /* first print data of node */
-        System.out.print(node.getDragon().id+ " ");
-
-        /* then recur on left sutree */
-        preorderPrint(node.getHijoIzq());
-
-        /* now recur on right subtree */
-        preorderPrint(node.getHijoDer());
-    }
 
     public void setPositions(NodoArbol node, int lvl, int posY, Dragon xPos){
         if(node!=null) {
@@ -135,47 +108,15 @@ public class ArbolBinario {
 
     }
 
-
-    /**
-    public void vaciar() {
-        raiz = null;
-    }
-
-    public void add(Integer value) {
-        if (value < this.value) {
-            if (left != null) {
-                left.add(value);
-            } else {
-                left = new Node(value);
-            }
-        } else {
-            if (right != null) {
-                right.add(value);
-            } else {
-                right = new Node(value);
-            }
-        }
-    }*/
-
     //SETTERS AND GETTERS
 
     public NodoArbol getRaiz() {
         return raiz;
     }
 
-    public void setRaiz(NodoArbol raiz) {
-        this.raiz = raiz;
-    }
 
     public LinkedList<Dragon> getListaPreorden() {
         return listaPreorden;
     }
 
-    public LinkedList<Dragon> getListaDragones() {
-        return listaDragones;
-    }
-
-    public void setListaDragones(LinkedList<Dragon> listaDragones) {
-        this.listaDragones = listaDragones;
-    }
 }

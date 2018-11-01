@@ -6,7 +6,6 @@
 package Interfaz;
 
 import Actors.factories.dragons.Dragon;
-import Arduino.Connection;
 import Movement.*;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -84,12 +83,12 @@ public class InterfazJuego extends Application {
  */
     public void start(Stage primaryStage) throws Exception {
         // Conexion con arduino
-        Connection main = new Connection();
-        main.initialize();
+       // Connection main = new Connection();
+        //main.initialize();
         primaryStage.setOnCloseRequest((WindowEvent event1) -> {
             try {
                 finish();
-            } catch (JAXBException | UnsupportedEncodingException | NTLMException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });
@@ -111,10 +110,10 @@ public class InterfazJuego extends Application {
         this.vida2 = (ImageView)inicio.getNamespace().get("vida2");
         this.vida3 = (ImageView)inicio.getNamespace().get("vida3");
         this.scene = new Scene(padre);
-        Media media = new Media(getClass().getClassLoader().getResource("utils/PantallaJuego.mp3").toString());
-        MediaPlayer player = new MediaPlayer(media); 
-        player.setCycleCount(MediaPlayer.INDEFINITE);
-        player.play();
+  //      Media media = new Media(getClass().getClassLoader().getResource("utils/PantallaJuego.mp3").toString());
+//        MediaPlayer player = new MediaPlayer(media);
+    //    player.setCycleCount(MediaPlayer.INDEFINITE);
+     //   player.play();
           newGame();
 
         AnimationTimer timer = new AnimationTimer() {
@@ -230,6 +229,183 @@ public class InterfazJuego extends Application {
     public boolean isPressed(KeyCode key){
         return keys.getOrDefault(key, false);
     }
+
+    public HashMap<KeyCode, Boolean> getKeys() {
+        return keys;
+    }
+
+    public void setKeys(HashMap<KeyCode, Boolean> keys) {
+        this.keys = keys;
+    }
+
+    public TextArea getTextarea() {
+        return textarea;
+    }
+
+    public void setTextarea(TextArea textarea) {
+        this.textarea = textarea;
+    }
+
+    public Label getLayoutactual() {
+        return layoutactual;
+    }
+
+    public void setLayoutactual(Label layoutactual) {
+        this.layoutactual = layoutactual;
+    }
+
+    public Label getInfodragon() {
+        return infodragon;
+    }
+
+    public void setInfodragon(Label infodragon) {
+        this.infodragon = infodragon;
+    }
+
+    public Scene getScene() {
+        return scene;
+    }
+
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+
+    public ImageView getVida1() {
+        return vida1;
+    }
+
+    public void setVida1(ImageView vida1) {
+        this.vida1 = vida1;
+    }
+
+    public ImageView getVida2() {
+        return vida2;
+    }
+
+    public void setVida2(ImageView vida2) {
+        this.vida2 = vida2;
+    }
+
+    public ImageView getVida3() {
+        return vida3;
+    }
+
+    public void setVida3(ImageView vida3) {
+        this.vida3 = vida3;
+    }
+
+    public AnchorPane getFoo() {
+        return foo;
+    }
+
+    public void setFoo(AnchorPane foo) {
+        this.foo = foo;
+    }
+
+    public Hero getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Hero player) {
+        this.player = player;
+    }
+
+    public DragonHorde getEnemies() {
+        return Enemies;
+    }
+
+    public void setEnemies(DragonHorde enemies) {
+        Enemies = enemies;
+    }
+
+    public ScrollingBG getMap() {
+        return map;
+    }
+
+    public void setMap(ScrollingBG map) {
+        this.map = map;
+    }
+
+    public int getC() {
+        return c;
+    }
+
+    public void setC(int c) {
+        this.c = c;
+    }
+
+    public boolean isfEnabled() {
+        return fEnabled;
+    }
+
+    public void setfEnabled(boolean fEnabled) {
+        this.fEnabled = fEnabled;
+    }
+
+    public Timer getPlayerT() {
+        return playerT;
+    }
+
+    public void setPlayerT(Timer playerT) {
+        this.playerT = playerT;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public TimerTask getEnableFire() {
+        return enableFire;
+    }
+
+    public void setEnableFire(TimerTask enableFire) {
+        this.enableFire = enableFire;
+    }
+
+    public static FireManager getFireManager() {
+        return fireManager;
+    }
+
+    public static void setFireManager(FireManager fireManager) {
+        InterfazJuego.fireManager = fireManager;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public boolean isPause_b() {
+        return pause_b;
+    }
+
+    public void setPause_b(boolean pause_b) {
+        this.pause_b = pause_b;
+    }
+
+    public static int getOrdenamiento() {
+        return ordenamiento;
+    }
+
+    public static void setOrdenamiento(int ordenamiento) {
+        InterfazJuego.ordenamiento = ordenamiento;
+    }
+
     /**
      * Mueve el personaje por la pantalla de juego
      * @throws InterruptedException 
@@ -393,7 +569,7 @@ public class InterfazJuego extends Application {
      * @throws UnsupportedEncodingException
      * @throws NTLMException 
      */
-    public static void finish() throws JAXBException, UnsupportedEncodingException, NTLMException {
+    public static void finish() throws Exception {
         Cliente client = new Cliente();
         client.sendMessage("end");
         Logger.Logging.log("info","Juego terminado");

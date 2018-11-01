@@ -32,7 +32,7 @@ public class NodeBtree {
      * The constructor of the node class
      * The node can have at most 3 keys. We have 4 references for each node, and assign the node to be isLeaf.
      */
-    NodeBtree() {
+    public NodeBtree() {
         key = new String[3];             // The node can have at most 3 keys
         children = new NodeBtree[4];       // We have 4 references for each node
         isLeaf = true;                  // assign the node to be Leaf.

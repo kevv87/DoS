@@ -38,7 +38,7 @@ public class FireManager {
 
     }
 
-    public static void moveFire () throws Exception {
+    public static void moveFire (){
 
         for (Fire fire : friendlyFireList) { // movimiento de fuegos amigos
             fire.setPosX(fire.getPosX() + 2);

@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="easymock-4.0.1-javadoc">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/easymock-4.0.1/easymock-4.0.1-samples.jar!/" />
+      <root url="jar://$PROJECT_DIR$/easymock-4.0.1/easymock-4.0.1-tests.jar!/" />
+      <root url="jar://$PROJECT_DIR$/easymock-4.0.1/easymock-4.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/easymock-4.0.1/original-easymock-4.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/easymock-4.0.1/easymock-4.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/easymock-4.0.1/easymock-4.0.1-samples.jar!/" />
+      <root url="jar://$PROJECT_DIR$/easymock-4.0.1/easymock-4.0.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/easymock-4.0.1/easymock-4.0.1-tests.jar!/" />
+      <root url="jar://$PROJECT_DIR$/easymock-4.0.1/original-easymock-4.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

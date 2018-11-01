@@ -38,7 +38,12 @@ public class Cliente {
     }
 
     public static void main(String[] args) throws UnsupportedEncodingException, JAXBException {
-        new Cliente().getDragons();
+
+        Dragon dragon = DragonFactory.getDragon("A",0,0,"nom", null);
+        LinkedList<DragonToSend> lista = new LinkedList<>();
+        lista.add(DragonFactory.getDragon(dragon));
+        System.out.println(jaxbObjectToXML(lista));
+
     }
 
 
@@ -59,7 +64,7 @@ public class Cliente {
 
     }
 
-    public LinkedList<Dragon> getDragons() throws UnsupportedEncodingException, JAXBException {
+    public LinkedList<Dragon> getDragons() throws Exception {
         HttpURLConnection conn = null;
         conn = get_connection(url, "POST");
         conn.setRequestProperty("accept", "text/plain");
@@ -161,7 +166,7 @@ public class Cliente {
         catch(IOException e) { System.err.println(e); return null;}
     }
 
-    private static String jaxbObjectToXML(LinkedList<DragonToSend> dragon)
+    public static String jaxbObjectToXML(LinkedList<DragonToSend> dragon)
     {
         try
         {
@@ -215,5 +220,8 @@ public class Cliente {
 
         return result;
     }
+
+
+
 
 }

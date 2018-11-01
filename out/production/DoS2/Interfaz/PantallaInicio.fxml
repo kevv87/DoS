@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaz.PantallaInicioController">
+   <children>
+      <ImageView fitHeight="125.0" fitWidth="1228.0" layoutX="56.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Titulo.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="iniciar" alignment="CENTER" layoutX="536.0" layoutY="494.0" mnemonicParsing="false" onAction="#mostrar_pant_juego" prefHeight="111.0" prefWidth="197.0" text="Iniciar" textAlignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

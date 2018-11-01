@@ -71,6 +71,21 @@ public class AVLTree {
         return List;
     }
 
+    public LinkedList<Dragon> toList(){
+        return toListaux(new LinkedList<Dragon>(),root);
+    }
+
+    private LinkedList<Dragon> toListaux(LinkedList<Dragon> result, AVLNode node){
+        if(node == null){
+            return result;
+        }else{
+            result.add(node.getDragon());
+            toListaux(result, node.getLeft());
+            toListaux(result, node.getRight());
+        }
+        return result;
+    }
+
     public void setRoot(AVLNode root) {
         this.root = root;
     }
